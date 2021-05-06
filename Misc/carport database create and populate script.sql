@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `carport` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+﻿CREATE DATABASE  IF NOT EXISTS `carport` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `carport`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
@@ -118,6 +118,8 @@ CREATE TABLE `orders` (
   `Status` varchar(10) NOT NULL,
   `Carport_length` int NOT NULL,
   `Carport_width` int NOT NULL,
+  `Shed_length` int,
+  `Shed_width` int,
   PRIMARY KEY (`Order_id`),
   UNIQUE KEY `Order_id_UNIQUE` (`Order_id`),
   KEY `fk_Orders_Users1_idx` (`User_id`),
