@@ -1,6 +1,7 @@
 package web.commands;
 
 import business.entities.User;
+import business.exceptions.DatabaseConnectionException;
 import business.services.UserFacade;
 import business.exceptions.UserException;
 
@@ -39,6 +40,11 @@ public class LoginCommand extends CommandUnprotectedPage
         catch (UserException ex)
         {
             request.setAttribute("error", "Wrong username or password!");
+            return "loginpage";
+        }
+        catch (DatabaseConnectionException ex)
+        {
+            request.setAttribute("error", "Database connection failed");
             return "loginpage";
         }
     }
