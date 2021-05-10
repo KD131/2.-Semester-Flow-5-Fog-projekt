@@ -24,7 +24,6 @@
 
 
             <c:if test="${sessionScope.role == 'employee' }">
-                 <p class="text-center" style="font-size: medium">Her er hvad du kan, siden du er logget ind som Administrator:</p>
                  <p class="text-center mt-5"><a href="fc/employeepage">Administrator Side</a>
              </c:if>
 
@@ -32,13 +31,14 @@
 
 
              <c:if test="${sessionScope.role == 'customer' }">
-                <p class="text-center" style="font-size: medium">Her er hvad du kan, siden du er logget ind som Kunde:</p>
+                <p class="text-center" style="font-size: large">Bestil en carport:</p>
             <form action="${pageContext.request.contextPath}/fc/submitorder" method="post">
                 <div class="text-center mt-4">
                     <label for="carportWidth">Carport bredde:</label>
                 </div>
-                <div class="text-center custom-select">
-                    <select name="carportWidth" id="carportWidth">
+                <div class="text-center">
+                    <select name="carportLength" id="carportWidth">
+                        <option value="noShed">Vælg bredde</option>
                         <c:forEach var="var" begin="240" end="750" step="30">
                             <option value="${var}">${var} cm</option>
                         </c:forEach>
@@ -49,6 +49,7 @@
                 </div>
                 <div class="text-center">
                     <select name="carportLength" id="carportLength">
+                        <option value="noShed">Vælg længde</option>
                         <c:forEach var="var" begin="240" end="780" step="30">
                             <option value="${var}">${var} cm</option>
                         </c:forEach>
@@ -70,6 +71,7 @@
                 </div>
                 <div class="text-center">
                     <select name="shedWidth" id="shedWidth">
+                        <option value="noShed">Ønsker ikke skur</option>
                         <c:forEach var="var" begin="210" end="720" step="30">
                             <option value="${var}">${var} cm</option>
                         </c:forEach>
@@ -81,6 +83,7 @@
                 </div>
                 <div class="text-center">
                     <select name="shedLength" id="shedLength">
+                        <option value="noShed">Ønsker ikke skur</option>
                         <c:forEach var="var" begin="150" end="690" step="30">
                             <option value="${var}">${var} cm</option>
                         </c:forEach>
@@ -99,6 +102,5 @@
             </c:if>
 
         </div>
-
     </jsp:body>
 </t:genericpage>
