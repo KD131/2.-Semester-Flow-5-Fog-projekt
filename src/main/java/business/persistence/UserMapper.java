@@ -1,5 +1,6 @@
 package business.persistence;
 
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.entities.User;
 
@@ -42,11 +43,11 @@ public class UserMapper
         }
     }
 
-    public User login(String email, String password) throws UserException
+    public User login(String email, String password) throws UserException, DatabaseConnectionException
     {
         try (Connection connection = database.connect())
         {
-            String sql = "SELECT id, role FROM users WHERE email=? AND password=?";
+            String sql = "SELECT User_id, Role FROM users WHERE Email=? AND Password=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
@@ -55,8 +56,8 @@ public class UserMapper
                 ResultSet rs = ps.executeQuery();
                 if (rs.next())
                 {
-                    String role = rs.getString("role");
-                    int id = rs.getInt("id");
+                    String role = rs.getString("Role");
+                    int id = rs.getInt("User_id");
                     User user = new User(email, password, role);
                     user.setId(id);
                     return user;
@@ -72,7 +73,7 @@ public class UserMapper
         }
         catch (SQLException ex)
         {
-            throw new UserException("Connection to database could not be established");
+            throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
 

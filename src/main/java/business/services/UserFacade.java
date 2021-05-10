@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.User;
+import business.exceptions.DatabaseConnectionException;
 import business.persistence.Database;
 import business.persistence.UserMapper;
 import business.exceptions.UserException;
@@ -14,7 +15,7 @@ public class UserFacade
         userMapper = new UserMapper(database);
     }
 
-    public User login(String email, String password) throws UserException
+    public User login(String email, String password) throws UserException, DatabaseConnectionException
     {
         return userMapper.login(email, password);
     }

@@ -1,6 +1,7 @@
 package business.persistence;
 
 import business.entities.User;
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +55,8 @@ public class UserMapperTest {
     }
 
     @Test
-    public void testLogin01() throws UserException {
+    public void testLogin01() throws UserException, DatabaseConnectionException
+    {
         // Can we log in
         User user = userMapper.login( "jens@somewhere.com", "jensen" );
         assertTrue( user != null );
@@ -69,14 +71,16 @@ public class UserMapperTest {
     }
 
     @Test
-    public void testLogin03() throws UserException {
+    public void testLogin03() throws UserException, DatabaseConnectionException
+    {
         // Jens is supposed to be a customer
         User user = userMapper.login( "jens@somewhere.com", "jensen" );
         assertEquals( "customer", user.getRole() );
     }
 
     @Test
-    public void testCreateUser01() throws UserException {
+    public void testCreateUser01() throws UserException, DatabaseConnectionException
+    {
         // Can we create a new user - Notice, if login fails, this will fail
         // but so would login01, so this is OK
         User original = new User( "king@kong.com", "uhahvorhemmeligt", "konge" );
