@@ -4,13 +4,13 @@
 
 <t:genericpage>
     <jsp:attribute name="header">
-         Demo Page for Employee Roles
+         Carport Admin Profil
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>Hello ${sessionScope.email} </h1>
-        <p><a href="${pageContext.request.contextPath}/fc/showallorders" class="btn btn-primary">Alle ordrer</a></p>
-
+        <h1>Hej ${sessionScope.email}!</h1>
+        <p>Klik <a href="${pageContext.request.contextPath}/fc/showallorders">her</a> for at se en oversigt over bestillinger.</p>
     </jsp:body>
+
 </t:genericpage>
