@@ -4,13 +4,14 @@
 
 <t:genericpage>
     <jsp:attribute name="header">
-         Demo Page for Employee Roles
+         Carport Admin Profil
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
-    <jsp:body>
-        <h1>Hello ${sessionScope.email} </h1>
-        You are now logged in as a EMPLOYEE of our wonderful site.
 
+    <jsp:body>
+        <h1>Hej ${sessionScope.email}!</h1>
+        <p>Klik *her* for at se en oversigt over bestillinger.</p>
     </jsp:body>
+
 </t:genericpage>

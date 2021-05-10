@@ -14,23 +14,23 @@
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="email">Email</label>
                     <div class="col-sm-4">
-                        <input id="email" class="form-control" type="text" name="email" value="${param.email}" placeholder="Enter a valid email">
+                        <input id="email" class="form-control" type="text" name="email" value="${param.email}" placeholder="Insæt din email">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="password1">Password</label>
                     <div class="col-sm-4">
-                        <input id="password1" class="form-control" type="password" name="password1"  value="${param.password1}"  placeholder="Enter your password">
+                        <input id="password1" class="form-control" type="password" name="password1"  value="${param.password1}"  placeholder="Insæt dit password">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="password2">Password</label>
                     <div class="col-sm-4">
-                        <input id="password2" class="form-control" type="password" name="password2" value="${param.password2}"  placeholder="Repeat the password">
+                        <input id="password2" class="form-control" type="password" name="password2" value="${param.password2}"  placeholder="Gentag dit password">
                     </div>
                 </div>
 
-                <input class="btn btn-primary" type="submit" type="submit" value="Submit">
+                <input class="btn btn-primary" type="submit" value="Submit">
             </form>
 
             <c:if test="${requestScope.error != null }">

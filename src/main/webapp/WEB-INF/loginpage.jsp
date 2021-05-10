@@ -34,7 +34,7 @@
                 <c:if test="${not empty param.msg}">
                     <p style="font-size: large">${param.msg}</p>
                 </c:if>
-                <button class="btn btn-primary" type="submit" value="Login">Sign in</button>
+                <button class="btn btn-primary" type="submit" value="Login">Log På</button>
             </form>
 
 
