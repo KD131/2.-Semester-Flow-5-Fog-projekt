@@ -49,7 +49,7 @@ public class SubmitOrderCommand extends CommandProtectedPage
             }
             catch (NumberFormatException ex)
             {
-                request.setAttribute("error", "Du har indtasted forkert input, dumme menneske.");
+                request.setAttribute("error", "Du har indtasted forkert input!");
                 return "index";
             }
             Order order = new Order(user, carportLength, carportWidth, shedLength, shedWidth);
