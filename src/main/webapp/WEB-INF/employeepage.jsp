@@ -12,5 +12,7 @@
         <h1>Hello ${sessionScope.email} </h1>
         You are now logged in as a EMPLOYEE of our wonderful site.
 
+
+
     </jsp:body>
 </t:genericpage>

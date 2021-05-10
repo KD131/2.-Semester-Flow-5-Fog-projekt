@@ -18,4 +18,22 @@ public class OrderFacade
     {
         orderMapper.insertOrder(order);
     }
+
+    public void confirmOrder(int OrderID) throws UserException
+    {
+        orderMapper.confirmOrder(OrderID);
+    }
+
+    public void unconfirmOrder(int OrderID) throws UserException
+    {
+        orderMapper.unconfirmOrder(OrderID);
+    }
+
+
+    public void deleteOrder(int OrderID) throws UserException
+    {
+        orderMapper.deleteOrder(OrderID);
+    }
+
+
 }

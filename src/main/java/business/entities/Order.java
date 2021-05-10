@@ -2,6 +2,7 @@ package business.entities;
 
 public class Order
 {
+    int orderID;
     double total;
     double profitMargin;
     String status;
@@ -81,4 +82,7 @@ public class Order
     {
         return shedWidth;
     }
+
+    public int getOrderID() { return orderID;}
+
 }
