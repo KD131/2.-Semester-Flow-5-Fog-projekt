@@ -18,7 +18,6 @@
                         <th>Ordre ID</th>
                         <th>Email</th>
                         <th>Total</th>
-                        <th>Profit margen</th>
                         <th>Status</th>
                         <th>Dato</th>
                         <th>Carport længde</th>
@@ -34,7 +33,6 @@
                             <td>${order.orderId}</td>
                             <td>${order.email}</td>
                             <td>${order.total}</td>
-                            <td>${order.profitMargin}</td>
                             <td>${order.status}</td>
                             <td>${order.date}</td>
                             <td>${order.carportLength}</td>
