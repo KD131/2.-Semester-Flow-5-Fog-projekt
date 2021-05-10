@@ -39,12 +39,15 @@ public class OrderFacade
     {
         orderMapper.deleteOrder(OrderID);
     }
-
-
     
     public List<OrderListing> getAllOrders() throws DatabaseConnectionException, UserException
     {
         return orderMapper.getAllOrders();
+    }
+
+    public List<OrderListing> getOrdersByUserId(int userId) throws DatabaseConnectionException, UserException
+    {
+        return orderMapper.getOrdersByUserId(userId);
     }
 
 }
