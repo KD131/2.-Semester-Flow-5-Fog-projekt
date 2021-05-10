@@ -15,21 +15,19 @@
     <jsp:body>
 
         <div>
-            <h2>Our Cool Site</h2>
+            <h2>Carport Projekt</h2>
 
             <div style="margin-top: 3em;margin-bottom: 3em;">
-                Main page for this 2. semester start project used at cphbusiness.dk
+                Forsiden til gruppe C5's Carport Projekt
             </div>
 
             <c:if test="${sessionScope.role == 'employee' }">
-                <p style="font-size: larger">This is what you can do,
-                    since your are logged in as an employee</p>
-                 <p><a href="fc/employeepage">Employee Page</a>
+                <p style="font-size: larger">Her er hvad du kan, siden du er logget ind som Administrator</p>
+                 <p><a href="fc/employeepage">Administrator Side</a>
              </c:if>
 
              <c:if test="${sessionScope.role == 'customer' }">
-                <p style="font-size: larger">This is what you can do, since your
-                    are logged in as a customer</p>
+                <p style="font-size: larger">Her er hvad du kan, siden du er logget ind som Kunde</p>
             <form action="${pageContext.request.contextPath}/fc/submitorder" method="post">
                 <label for="carportWidth">Carport bredde:</label>
                 <select name="carportWidth" id="carportWidth">
@@ -48,7 +46,7 @@
                 <p>Vil du have skur til?</p>
                 <input type="radio" id="yes" name="shed" value="yes">
                 <label for="yes">Ja</label>
-                <input type="radio" id="no" name="shed" value ="no">
+                <input type="radio" id="no" name="shed" value ="no" checked="checked">
                 <label for="no">Nej</label>
 
                 <br/>
@@ -75,7 +73,7 @@
             <c:if test="${requestScope.error != null}">
                 <p style="color:red">${requestScope.error}</p>
             </c:if>
-                <p><a href="fc/customerpage">Customer Page</a>
+                <p><a href="fc/customerpage">Kunde Side</a>
             </c:if>
 
         </div>
