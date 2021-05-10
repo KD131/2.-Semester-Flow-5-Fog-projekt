@@ -26,6 +26,7 @@
                         <th>Skur længde</th>
                         <th>Skur bredde</th>
                         <th>Stykliste</th>
+                        <th>Slet ordre</th>
                     </tr>
                     </thead>
                     <c:forEach var="order" items="${requestScope.orderListings}">
@@ -41,6 +42,12 @@
                             <td>${order.shedLength}</td>
                             <td>${order.shedWidth}</td>
                             <td><a href="#">IKKE LAVET</a></td>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
+                                    <input type="hidden" name="orderId" value="${order.orderId}">
+                                    <input type="submit" class="btn btn-danger" value="Slet ordre">
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
