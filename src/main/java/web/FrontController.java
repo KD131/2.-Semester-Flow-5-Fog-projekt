@@ -1,5 +1,6 @@
 package web;
 
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.persistence.Database;
 import web.commands.*;
@@ -68,7 +69,7 @@ public class FrontController extends HttpServlet
 
             request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
         }
-        catch (UnsupportedEncodingException | UserException ex)
+        catch (UnsupportedEncodingException | UserException | DatabaseConnectionException ex)
         {
             request.setAttribute("problem", ex.getMessage());
             Logger.getLogger("web").log(Level.SEVERE, ex.getMessage(), ex);

@@ -1,9 +1,13 @@
 package business.services;
 
 import business.entities.Order;
+import business.entities.OrderListing;
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.persistence.Database;
 import business.persistence.OrderMapper;
+
+import java.util.List;
 
 public class OrderFacade
 {
@@ -18,6 +22,7 @@ public class OrderFacade
     {
         orderMapper.insertOrder(order);
     }
+
 
     public void confirmOrder(int OrderID) throws UserException
     {
@@ -35,5 +40,11 @@ public class OrderFacade
         orderMapper.deleteOrder(OrderID);
     }
 
+
+    
+    public List<OrderListing> getAllOrders() throws DatabaseConnectionException, UserException
+    {
+        return orderMapper.getAllOrders();
+    }
 
 }

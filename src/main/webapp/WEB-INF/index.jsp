@@ -15,67 +15,87 @@
     <jsp:body>
 
         <div>
-            <h2>Our Cool Site</h2>
+            <h2 class="text-center">Carport Projekt</h2>
 
             <div style="margin-top: 3em;margin-bottom: 3em;">
-                Main page for this 2. semester start project used at cphbusiness.dk
+                <p class="text-center">Forside til Gruppe C5's Carport Projekt</p>
             </div>
 
+
+
             <c:if test="${sessionScope.role == 'employee' }">
-                <p style="font-size: larger">This is what you can do,
-                    since your are logged in as an employee</p>
-                 <p><a href="fc/employeepage">Employee Page</a>
+                 <p class="text-center" style="font-size: medium">Her er hvad du kan, siden du er logget ind som Administrator:</p>
+                 <p class="text-center mt-5"><a href="fc/employeepage">Administrator Side</a>
              </c:if>
 
+
+
+
              <c:if test="${sessionScope.role == 'customer' }">
-                <p style="font-size: larger">This is what you can do, since your
-                    are logged in as a customer</p>
+                <p class="text-center" style="font-size: medium">Her er hvad du kan, siden du er logget ind som Kunde:</p>
             <form action="${pageContext.request.contextPath}/fc/submitorder" method="post">
-                <label for="carportWidth">Carport bredde:</label>
-                <select name="carportWidth" id="carportWidth">
-                    <c:forEach var="var" begin="240" end="750" step="30">
-                        <option value="${var}">${var} cm</option>
-                    </c:forEach>
-                </select>
+                <div class="text-center mt-4">
+                    <label for="carportWidth">Carport bredde:</label>
+                </div>
+                <div class="text-center custom-select">
+                    <select name="carportWidth" id="carportWidth">
+                        <c:forEach var="var" begin="240" end="750" step="30">
+                            <option value="${var}">${var} cm</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="text-center mt-2">
+                    <label for="carportLength">Carport længde:</label>
+                </div>
+                <div class="text-center">
+                    <select name="carportLength" id="carportLength">
+                        <c:forEach var="var" begin="240" end="780" step="30">
+                            <option value="${var}">${var} cm</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-                <label for="carportLength">Carport længde:</label>
-                <select name="carportLength" id="carportLength">
-                    <c:forEach var="var" begin="240" end="780" step="30">
-                        <option value="${var}">${var} cm</option>
-                    </c:forEach>
-                </select>
+                <div class="text-center mt-4">
+                    <p>Vil du have skur til?</p>
+                    <div class="mt-0">
+                        <input type="radio" id="yes" name="shed" value="yes">
+                        <label for="yes">Ja</label>
+                        <input type="radio" id="no" name="shed" value ="no" checked="checked">
+                        <label for="no">Nej</label>
+                    </div>
+                </div>
 
-                <p>Vil du have skur til?</p>
-                <input type="radio" id="yes" name="shed" value="yes">
-                <label for="yes">Ja</label>
-                <input type="radio" id="no" name="shed" value ="no">
-                <label for="no">Nej</label>
+                <div class="text-center mt-4">
+                    <label for="shedWidth">Skur bredde:</label>
+                </div>
+                <div class="text-center">
+                    <select name="shedWidth" id="shedWidth">
+                        <c:forEach var="var" begin="210" end="720" step="30">
+                            <option value="${var}">${var} cm</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-                <br/>
+                <div class="text-center mt-2">
+                    <label for="shedLength">Skur længde:</label>
+                </div>
+                <div class="text-center">
+                    <select name="shedLength" id="shedLength">
+                        <c:forEach var="var" begin="150" end="690" step="30">
+                            <option value="${var}">${var} cm</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-                <label for="shedWidth">Skur bredde:</label>
-                <select name="shedWidth" id="shedWidth">
-                    <option value="noShed">ingen skur tak</option>
-                    <c:forEach var="var" begin="210" end="720" step="30">
-                        <option value="${var}">${var} cm</option>
-                    </c:forEach>
-                </select>
-
-                <label for="shedLength">Skur længde:</label>
-                <select name="shedLength" id="shedLength">
-                    <option value="noShed">ingen skur tak</option>
-                    <c:forEach var="var" begin="150" end="690" step="30">
-                        <option value="${var}">${var} cm</option>
-                    </c:forEach>
-                </select>
-
-
-                <input type="submit" value="Send ordre">
+                <div class="text-center mt-4">
+                    <input type="submit" value="Send ordre">
+                </div>
             </form>
+
             <c:if test="${requestScope.error != null}">
                 <p style="color:red">${requestScope.error}</p>
             </c:if>
-                <p><a href="fc/customerpage">Customer Page</a>
+                <p class="text-center mt-5"><a href="fc/customerpage">Kunde Side</a>
             </c:if>
 
         </div>

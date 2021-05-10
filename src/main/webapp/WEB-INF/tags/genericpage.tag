@@ -63,7 +63,8 @@
     </c:if>
 </header>
 
-<div id="body" class="container" style="min-height: 20vh;">
+<div id="body" class="container text-center" style="min-height: 20vh;">
+    <img src="${pageContext.request.contextPath}/Images/header.png" class="img-fluid mb-4"/>
     <jsp:doBody/>
 </div>
 

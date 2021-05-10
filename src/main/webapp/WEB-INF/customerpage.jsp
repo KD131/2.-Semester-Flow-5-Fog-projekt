@@ -4,15 +4,14 @@
 
 <t:genericpage>
     <jsp:attribute name="header">
-         Demo Page for Customer Roles
+         Carport Kunde Profil
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
 
     <jsp:body>
-        <h1>Hello ${sessionScope.email} </h1>
-        You are now logged in as a Customer of our wonderful site.
-        Role: ${sessionScope.role}
+        <h1 class="text-center">Hej ${sessionScope.email}!</h1><br/><br/>
+        <p class="text-center">Hop til <a href="${pageContext.request.contextPath}">forsiden</a> for at bestille en carport!</p>
     </jsp:body>
 
 </t:genericpage>

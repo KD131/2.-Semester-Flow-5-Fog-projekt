@@ -20,18 +20,18 @@ public class ConfirmOrderCommand extends CommandProtectedPage
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
     {
-        int OrderID;
+        int orderID;
 
         try
         {
-              OrderID = Integer.parseInt(request.getParameter("orderID"));
+              orderID = Integer.parseInt(request.getParameter("orderID"));
         }
         catch (NumberFormatException ex)
         {
             request.setAttribute("Error", "Wrong input");
             return "index";
         }
-        orderFacade.confirmOrder(OrderID);
+        orderFacade.confirmOrder(orderID);
         return "index";
     }
 }

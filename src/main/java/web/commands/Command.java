@@ -1,5 +1,6 @@
 package web.commands;
 
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.persistence.Database;
 
@@ -29,9 +30,13 @@ public abstract class Command
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
         commands.put("submitorder", new SubmitOrderCommand("index", "customer"));
+
         commands.put("confirmorder", new ConfirmOrderCommand("index", "employee"));
         commands.put("unconfirmorder", new UnconfirmOrderCommand("index", "employee"));
         commands.put("deleteorder", new DeleteOrderCommand("index", "employee"));
+
+
+        commands.put("showallorders", new ShowAllOrdersCommand("showallorderspage", "employee"));
 
     }
 
@@ -54,6 +59,6 @@ public abstract class Command
     public abstract String execute(
             HttpServletRequest request,
             HttpServletResponse response)
-            throws UserException;
+            throws UserException, DatabaseConnectionException;
 
 }

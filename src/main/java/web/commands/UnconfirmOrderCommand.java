@@ -21,7 +21,7 @@ public class UnconfirmOrderCommand extends CommandProtectedPage
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
     {
         int orderID;
-        Order order = (Order) request.getSession().getAttribute("orderID");
+
 
         try
         {
@@ -32,7 +32,7 @@ public class UnconfirmOrderCommand extends CommandProtectedPage
             request.setAttribute("Error", "Wrong input");
             return "index";
         }
-        orderFacade.unconfirmOrder(order);
+        orderFacade.unconfirmOrder(orderID);
         return "index";
     }
 }
