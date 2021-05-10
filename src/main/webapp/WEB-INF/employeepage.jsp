@@ -8,10 +8,9 @@
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
-
     <jsp:body>
         <h1>Hej ${sessionScope.email}!</h1>
-        <p>Klik *her* for at se en oversigt over bestillinger.</p>
+        <p>Klik <a href="${pageContext.request.contextPath}/fc/showallorders">her</a> for at se en oversigt over bestillinger.</p>
     </jsp:body>
 
 </t:genericpage>
