@@ -44,9 +44,18 @@
                             <td><a href="#">IKKE LAVET</a></td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
-                                    <input type="hidden" name="orderId" value="${order.orderId}">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
                                     <input type="submit" class="btn btn-danger" value="Slet ordre">
                                 </form>
+                                <form action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
+                                    <input type="submit" class="btn btn-danger" value="Confirm ordre">
+                                </form>
+                                <form action="${pageContext.request.contextPath}/fc/unconfirmorder" method="post">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
+                                    <input type="submit" class="btn btn-danger" value="Unconfirm ordre">
+                                </form>
+
                             </td>
                         </tr>
                     </c:forEach>
