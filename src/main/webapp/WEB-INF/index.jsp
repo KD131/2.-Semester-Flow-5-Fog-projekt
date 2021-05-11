@@ -22,12 +22,9 @@
             </div>
 
 
-
             <c:if test="${sessionScope.role == 'employee' }">
                  <p class="text-center mt-5"><a href="${pageContext.request.contextPath}/fc/employeepage">Administrator Side</a>
              </c:if>
-
-
 
 
              <c:if test="${sessionScope.role == 'customer' }">
