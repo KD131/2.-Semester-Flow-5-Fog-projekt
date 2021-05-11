@@ -37,10 +37,33 @@
                             <td>${order.profitMargin}</td>
                             <td>${order.status}</td>
                             <td>${order.date}</td>
-                            <td>${order.carportLength}</td>
-                            <td>${order.carportWidth}</td>
-                            <td>${order.shedLength}</td>
-                            <td>${order.shedWidth}</td>
+                            <td><select name="carportLength" id="carportLength">
+                                <option value="${order.carportLength}"> ${order.carportLength} cm</option>
+                                <c:forEach var="var" begin="240" end="780" step="30">
+                                    <option value="${var}">${var} cm</option>
+                                </c:forEach>
+                            </select></td>
+                            <td><select name="carportWidth" id="carportWidth">
+                                <option value="${order.carportWidth}"> ${order.carportWidth} cm </option>
+                                <c:forEach var="var" begin="240" end="750" step="30">
+                                    <option value="${var}">${var} cm</option>
+                                </c:forEach>
+                            </select></td>
+
+
+                            <td><select name="shedLength" id="shedLength">
+                                <option value="${order.shedLength}"> ${order.shedLength} cm</option>
+                                <c:forEach var="var" begin="150" end="690" step="30">
+                                <option value="${var}">${var} cm </option>
+                                </c:forEach>
+                            </td>
+
+                            <td><select name="shedWidth" id="shedWidth">
+                                <option value="${order.shedWidth}"> ${order.shedWidth} cm </option>
+                                <c:forEach var="var" begin="150" end="720" step ="30">
+                                    <option value="${var}">${var} cm</option>
+                                </c:forEach>
+                            </td>
                             <td><a href="#">IKKE LAVET</a></td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
@@ -55,7 +78,10 @@
                                     <input type="hidden" name="orderID" value="${order.orderId}">
                                     <input type="submit" class="btn btn-danger" value="Unconfirm ordre">
                                 </form>
-
+                                <form action="${pageContext.request.contextPath}/fc/updatedimensions" method="post">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
+                                    <input type="submit" class="btn btn-danger" value="Update dimensions">
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>

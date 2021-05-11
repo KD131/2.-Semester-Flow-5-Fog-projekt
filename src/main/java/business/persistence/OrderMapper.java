@@ -69,6 +69,26 @@ public class OrderMapper {
         }
     }
 
+    public void updateDimensions(int OrderID, int carportLength, int carportWidth, int shedLength, int shedWidth) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "UPDATE orders SET Carport_length = ?, Carport_width = ?, Shed_length = ?, Shed_width = ? Where Order_id =?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, carportLength);
+                ps.setInt(2, carportWidth);
+                ps.setInt(3, shedLength);
+                ps.setInt(4, shedWidth);
+                ps.setInt(5, OrderID);
+
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+
     public void deleteOrder(int OrderID) throws UserException {
         try (Connection connection = database.connect()) {
              String sql = "DELETE FROM orders WHERE Order_id = ?";
@@ -162,6 +182,7 @@ public class OrderMapper {
             throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
+
 
 }
 

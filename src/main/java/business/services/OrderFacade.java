@@ -34,6 +34,10 @@ public class OrderFacade
         orderMapper.unconfirmOrder(OrderID);
     }
 
+    public void updateDimensions(int OrderID, int carportLength, int carportWidth, int shedLength, int shedWidth) throws UserException
+    {
+        orderMapper.updateDimensions(OrderID, carportLength, carportWidth, shedLength, shedWidth);
+    }
 
     public void deleteOrder(int OrderID) throws UserException
     {
