@@ -21,13 +21,13 @@
                 <p class="text-center">Forside til Gruppe C5's Carport Projekt</p>
             </div>
 
-
+            <!-- Employee frontpage -->
             <c:if test="${sessionScope.role == 'employee' }">
                  <p class="text-center mt-5"><a href="${pageContext.request.contextPath}/fc/employeepage">Administrator Side</a>
-             </c:if>
+            </c:if>
 
-
-             <c:if test="${sessionScope.role == 'customer' }">
+             <!-- Customer frontpage -->
+            <c:if test="${sessionScope.role == 'customer' }">
                 <p class="text-center" style="font-size: large">Bestil en carport:</p>
             <form action="${pageContext.request.contextPath}/fc/submitorder" method="post">
                 <div class="text-center mt-4">

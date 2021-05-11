@@ -13,7 +13,7 @@
         <h1 class="text-center">Hej ${sessionScope.email}!</h1><br/><br/>
         <p class="text-center">Hop til <a href="${pageContext.request.contextPath}">forsiden</a> for at bestille en carport!</p>
         <br/>
-        <p class="text-center">Hop <a href="${pageContext.request.contextPath}/fc/showordersbyid">her hen</a> for at se dine bestillinger!</p>
+        <p class="text-center">Hop <a href="${pageContext.request.contextPath}/fc/showcustomerorderspage">her hen</a> for at se dine bestillinger!</p>
     </jsp:body>
 
 </t:genericpage>

@@ -33,12 +33,22 @@
         <c:if test="${addHomeLink == null }">
             <a class="p-2 text-dark" href="<%=request.getContextPath()%>">Startside</a>
         </c:if>
-        <c:if test="${sessionScope.user != null }">
-            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/show${sessionScope.user.role}orderspage">Ordre</a>
+
+        <!-- Checks role of user after checking that user is not null -->
+        <c:if test="${sessionScope.user != null}">
+            <!-- Employee navigation bar -->
+            <c:if test="${sessionScope.user.role == 'employee' }">
+                <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/showallorderspage">Alle Ordre</a>
+                <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Min Profil</a>
+            </c:if>
+
+            <!-- Customer navigation bar -->
+            <c:if test="${sessionScope.user.role == 'customer' }">
+                <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/showcustomerorderspage">Mine Ordre</a>
+                <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Min Profil</a>
+            </c:if>
         </c:if>
-        <c:if test="${sessionScope.user != null }">
-            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Profil</a>
-        </c:if>
+
         <a class="p-2 text-dark" href="#">About</a>
     </nav>
 
