@@ -33,8 +33,12 @@
         <c:if test="${addHomeLink == null }">
             <a class="p-2 text-dark" href="<%=request.getContextPath()%>">Home</a>
         </c:if>
-        <a class="p-2 text-dark" href="#">Orders</a>
-        <a class="p-2 text-dark" href="#">Profile</a>
+        <c:if test="${sessionScope.user != null }">
+            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/show${sessionScope.user.role}orderspage">Orders</a>
+        </c:if>
+        <c:if test="${sessionScope.user != null }">
+            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Profile</a>
+        </c:if>
         <a class="p-2 text-dark" href="#">About</a>
     </nav>
 
