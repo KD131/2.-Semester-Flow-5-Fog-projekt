@@ -22,12 +22,9 @@
             </div>
 
 
-
             <c:if test="${sessionScope.role == 'employee' }">
                  <p class="text-center mt-5"><a href="${pageContext.request.contextPath}/fc/employeepage">Administrator Side</a>
              </c:if>
-
-
 
 
              <c:if test="${sessionScope.role == 'customer' }">
@@ -37,7 +34,7 @@
                     <label for="carportWidth">Carport bredde:</label>
                 </div>
                 <div class="text-center">
-                    <select name="carportLength" id="carportWidth">
+                    <select name="carportWidth" id="carportWidth">
                         <option value="noShed">Vælg bredde</option>
                         <c:forEach var="var" begin="240" end="750" step="30">
                             <option value="${var}">${var} cm</option>
