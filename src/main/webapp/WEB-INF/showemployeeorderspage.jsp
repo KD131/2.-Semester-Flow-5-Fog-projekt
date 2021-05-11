@@ -22,7 +22,7 @@
                         <th>Status</th>
                         <th>Dato</th>
                         <th>Carport længde</th>
-                        <th>Carport Bredde</th>
+                        <th>Carport bredde</th>
                         <th>Skur længde</th>
                         <th>Skur bredde</th>
                         <th>Stykliste</th>

@@ -31,13 +31,13 @@
     </div>
     <nav class="my-2 my-md-0 me-md-3">
         <c:if test="${addHomeLink == null }">
-            <a class="p-2 text-dark" href="<%=request.getContextPath()%>">Home</a>
+            <a class="p-2 text-dark" href="<%=request.getContextPath()%>">Startside</a>
         </c:if>
         <c:if test="${sessionScope.user != null }">
-            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/show${sessionScope.user.role}orderspage">Orders</a>
+            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/show${sessionScope.user.role}orderspage">Ordre</a>
         </c:if>
         <c:if test="${sessionScope.user != null }">
-            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Profile</a>
+            <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Profil</a>
         </c:if>
         <a class="p-2 text-dark" href="#">About</a>
     </nav>

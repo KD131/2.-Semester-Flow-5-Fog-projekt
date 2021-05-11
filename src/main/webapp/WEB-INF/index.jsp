@@ -34,13 +34,14 @@
                     <label for="carportWidth">Carport bredde:</label>
                 </div>
                 <div class="text-center">
-                    <select name="carportWidth" id="carportWidth">
+                    <select id="carportWidth">
                         <option value="noShed">Vælg bredde</option>
                         <c:forEach var="var" begin="240" end="750" step="30">
                             <option value="${var}">${var} cm</option>
                         </c:forEach>
                     </select>
                 </div>
+
                 <div class="text-center mt-2">
                     <label for="carportLength">Carport længde:</label>
                 </div>

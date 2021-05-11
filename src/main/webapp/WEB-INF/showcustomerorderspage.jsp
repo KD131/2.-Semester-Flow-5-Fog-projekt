@@ -9,7 +9,7 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>All customer orders</h1>
+        <h1>Alle ordre for: ${sessionScope.user.email}</h1>
         <c:choose>
             <c:when test="${not empty requestScope.orderListings}">
                 <table class="table table-striped table-hover">
@@ -21,7 +21,7 @@
                         <th>Status</th>
                         <th>Dato</th>
                         <th>Carport længde</th>
-                        <th>Carport Bredde</th>
+                        <th>Carport bredde</th>
                         <th>Skur længde</th>
                         <th>Skur bredde</th>
 
