@@ -35,8 +35,8 @@ public abstract class Command
         commands.put("unconfirmorder", new UnconfirmOrderCommand("index", "employee"));
         commands.put("deleteorder", new DeleteOrderCommand("index", "employee"));
 
-
         commands.put("showallorders", new ShowAllOrdersCommand("showallorderspage", "employee"));
+        commands.put("showordersbyid", new ShowOrdersByIdCommand("showordersbyidpage", "customer"));
 
     }
 

@@ -24,7 +24,7 @@
 
 
             <c:if test="${sessionScope.role == 'employee' }">
-                 <p class="text-center mt-5"><a href="fc/employeepage">Administrator Side</a>
+                 <p class="text-center mt-5"><a href="${pageContext.request.contextPath}/fc/employeepage">Administrator Side</a>
              </c:if>
 
 
@@ -98,7 +98,7 @@
             <c:if test="${requestScope.error != null}">
                 <p style="color:red">${requestScope.error}</p>
             </c:if>
-                <p class="text-center mt-5"><a href="fc/customerpage">Kunde Side</a>
+                <p class="text-center mt-5"><a href="${pageContext.request.contextPath}/fc/customerpage">Kunde Side</a>
             </c:if>
 
         </div>

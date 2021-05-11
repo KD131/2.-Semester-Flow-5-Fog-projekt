@@ -15,9 +15,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+<<<<<<< HEAD
 
       <module name="bmi" options="-endorseddirs &quot;C:\Users\libom\OneDrive\2. sem\2.-Semester-Flow-5-Fog-projekt\target/endorsed&quot;" />
 
+=======
+      <module name="bmi" options="-endorseddirs &quot;C:\Users\nickl\Desktop\2. Semester Projekt\2.-Semester-Flow-5-Fog-projekt\target/endorsed&quot;" />
+>>>>>>> 210d257cf3032c00d28c594977ee9c395d177412
     </option>
   </component>
 </project>
