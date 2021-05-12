@@ -33,20 +33,21 @@
                 <div class="text-center mt-4">
                     <label for="carportWidth">Carport bredde:</label>
                 </div>
-                <div class="text-center">
-                    <select name="carportWidth" id="carportWidth">
+                <div class="form-group">
+                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                            name="carportWidth" id="carportWidth">
                         <option value="noShed">Vælg bredde</option>
                         <c:forEach var="var" begin="240" end="750" step="30">
                             <option value="${var}">${var} cm</option>
                         </c:forEach>
                     </select>
                 </div>
-
                 <div class="text-center mt-2">
                     <label for="carportLength">Carport længde:</label>
                 </div>
-                <div class="text-center">
-                    <select name="carportLength" id="carportLength">
+                <div class="form-group">
+                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                            name="carportLength" id="carportLength">
                         <option value="noShed">Vælg længde</option>
                         <c:forEach var="var" begin="240" end="780" step="30">
                             <option value="${var}">${var} cm</option>
@@ -67,8 +68,9 @@
                 <div class="text-center mt-4">
                     <label for="shedWidth">Skur bredde:</label>
                 </div>
-                <div class="text-center">
-                    <select name="shedWidth" id="shedWidth">
+                <div class="form-group">
+                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                            name="shedWidth" id="shedWidth">
                         <option value="noShed">Ønsker ikke skur</option>
                         <c:forEach var="var" begin="210" end="720" step="30">
                             <option value="${var}">${var} cm</option>
@@ -79,8 +81,9 @@
                 <div class="text-center mt-2">
                     <label for="shedLength">Skur længde:</label>
                 </div>
-                <div class="text-center">
-                    <select name="shedLength" id="shedLength">
+                <div class="form-group">
+                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                            name="shedLength" id="shedLength">
                         <option value="noShed">Ønsker ikke skur</option>
                         <c:forEach var="var" begin="150" end="690" step="30">
                             <option value="${var}">${var} cm</option>

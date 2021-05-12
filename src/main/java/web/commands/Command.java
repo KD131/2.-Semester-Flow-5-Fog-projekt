@@ -37,8 +37,8 @@ public abstract class Command
 
         commands.put("updatedimensions", new UpdateDimensionsCommand("index", "employee"));
 
-        commands.put("showallorders", new ShowAllOrdersCommand("showallorderspage", "employee"));
-        commands.put("showcustomerorders", new ShowOrdersByIdCommand("showcustomerorderspage", "customer"));
+        commands.put("showallorderspage", new ShowAllOrdersCommand("showallorderspage", "employee"));
+        commands.put("showcustomerorderspage", new ShowOrdersByIdCommand("showcustomerorderspage", "customer"));
 
     }
 
