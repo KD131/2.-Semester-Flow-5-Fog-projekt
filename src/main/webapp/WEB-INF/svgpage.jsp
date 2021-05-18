@@ -16,6 +16,7 @@
 
             <h2>Tegning</h2>
             <p>Her indsættes en tegning:</p>
+<%--                ${sessionScope.order.orderID}--%>
                 ${requestScope.svgdrawing}
 
 

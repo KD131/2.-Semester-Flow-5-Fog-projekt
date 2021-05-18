@@ -47,17 +47,28 @@ public class ShowSVGCommand  extends CommandProtectedPage {
 
 
         SVG svg = new SVG(0, 0, outerViewBoxStr, 100, 100 );
-        SVG innerSVG = new SVG(30, 0, innerViewBoxStr, 100, 100);
+        SVG innerSVG = new SVG(30, 0, outerViewBoxStr, 100, 100);
         svg.addDevsTemplate();
         svg.addStyleTemplate();
 
+        String carportLengthStr = String.valueOf(carportLength);
+        String carportWidthStr = String.valueOf(carportWidth);
+
+
+        String yAxisMid = String.valueOf(carportWidth/2);
+        String xAxisMid = String.valueOf(outerSVGWidth/2);
+        String yAxisMax = String.valueOf(carportWidth+30);
+//
+//        String yTransformString = "translate(0, 0) rotate(-90)";
+
 
         svg.addArrow(15,0,15,carportWidth);
-        svg.addArrow(30,carportWidth, 30+carportLength, carportWidth);
+        svg.addText( 0, 0, "small", "translate(10,"+ yAxisMid +") rotate(-90)",carportWidthStr + " cm");
 
+        svg.addArrow(30,15+carportWidth, 30+carportLength, 15+carportWidth);
+        svg.addText( 0, 0, "small", "translate("+ xAxisMid +", " + yAxisMax+")",carportLengthStr + " cm");
 
         double sparDistance = 55;
-        int sparAmount = (int) (carportLength/sparDistance) + 1;
         double xFrontHang = sparDistance*2;
         double xBackHang = sparDistance*0.5;
         double xTotalHang = xBackHang + xFrontHang;
@@ -66,15 +77,35 @@ public class ShowSVGCommand  extends CommandProtectedPage {
         double constructionLength = carportLength-xTotalHang;
         double constructionWidth = carportWidth-yTotalHang;
 
-        for (int x = 0; x < sparAmount; x++)
+
+        //midlertidige
+        double stolpeTykkelse = 9.7;
+        double spærbredde = 5;
+        double remTykkelse = 5;
+        int sparAmount = (int) (carportLength/sparDistance);
+
+        // tegner ende spær
+        for (int x = 0; x < 2; x++)
         {
-                innerSVG.addRect(x*sparDistance,0,carportWidth,5/*spær bredde*/);
+                innerSVG.addRect(x*(carportLength-spærbredde),0,carportWidth,spærbredde);
+        }
+        // tegner mellem spær
+        for (int x = 0; x < sparAmount-1; x++)
+        {
+                innerSVG.addRect(sparDistance + x*(carportLength/sparAmount),0,carportWidth,5/*spær bredde*/);
         }
 
+        //tegner rem
+        for (int x = 0; x < 2; x++)
+        {
+                innerSVG.addRect(0, (stolpeTykkelse-remTykkelse)/2 + ySideHang+x*constructionWidth, remTykkelse,carportLength);
+        }
+
+        //tegner stolper
         for (int y = 0; y < 2; y++)
         {
             for (int x = 0; x < 3; x++) {
-                innerSVG.addRect(xFrontHang+(x*constructionLength/2), ySideHang+(y*constructionWidth), 9.7, 9.7);
+                innerSVG.addRect(xFrontHang+(x*constructionLength/2), ySideHang+(y*constructionWidth), 9.7/*stolpe dimensioner*/, 9.7/*stolpe dimensioner*/);
             }
         }
 

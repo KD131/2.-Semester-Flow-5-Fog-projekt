@@ -49,6 +49,8 @@ public class SVG {
     private final String arrowTemplate = "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\"\n" +
             "style=\"stroke: #006600; marker-start: url(#beginArrow); marker-end: url(#endArrow);\" />";
 
+    private final String textTemplate = "<text x=\"%d\" y=\"%d\" text-anchor=\"middle\" class=\"%s\" transform=\"%s\">%s</text>";
+
     public SVG(int x, int y, String viewBox, int width, int height)
     {
         this.x = x;
@@ -58,6 +60,11 @@ public class SVG {
         this.height = height;
         svg.append(String.format(headerTemplate, height, width, viewBox, x, y ));
 
+    }
+
+    public void addText(int x, int y, String tClass, String transform, String text)
+    {
+        svg.append(String.format(textTemplate, x, y, tClass, transform, text));
     }
 
     public void addStyleTemplate(){
@@ -82,6 +89,7 @@ public class SVG {
 //    {
 //        svg.append(String.format(rectTemplate, x, y, height, width));
 //    }
+
 
     public void addSvg(SVG innerSVG)
     {
