@@ -1,5 +1,7 @@
 package business.services;
 
+import java.util.Locale;
+
 public class SVG {
 
     StringBuilder svg = new StringBuilder();
@@ -9,6 +11,7 @@ public class SVG {
     private String viewBox;
     private int width;
     private int height;
+    private Locale l = Locale.ENGLISH;
 
 
     private final String headerTemplate = "<svg " +
@@ -58,36 +61,36 @@ public class SVG {
         this.viewBox = viewBox;
         this.width = width;
         this.height = height;
-        svg.append(String.format(headerTemplate, height, width, viewBox, x, y ));
+        svg.append(String.format(l, headerTemplate, height, width, viewBox, x, y ));
 
     }
 
     public void addText(int x, int y, String tClass, String transform, String text)
     {
-        svg.append(String.format(textTemplate, x, y, tClass, transform, text));
+        svg.append(String.format(l, textTemplate, x, y, tClass, transform, text));
     }
 
     public void addStyleTemplate(){
-        svg.append(String.format(styleTemplate));
+        svg.append(String.format(l, styleTemplate));
     }
 
     public void addDevsTemplate(){
-        svg.append(String.format(devsTemplate));
+        svg.append(String.format(l, devsTemplate));
     }
 
     public void addArrow(int x1, int y1, int x2, int y2)
     {
-        svg.append(String.format(arrowTemplate,x1,y1,x2,y2));
+        svg.append(String.format(l, arrowTemplate,x1,y1,x2,y2));
     }
 
     public void addRect(double x, double y, double height, double width)
     {
-        svg.append(String.format(rectTemplate, x, y, height, width));
+        svg.append(String.format(l, rectTemplate, x, y, height, width));
     }
 
 //    public void addLine(double x1, double y1, double x2, double y2 )
 //    {
-//        svg.append(String.format(rectTemplate, x, y, height, width));
+//        svg.append(String.format(l, rectTemplate, x, y, height, width));
 //    }
 
 
