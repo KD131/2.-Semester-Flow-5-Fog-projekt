@@ -6,11 +6,11 @@ import business.services.SVG;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ShowSVGCommand  extends CommandProtectedPage {
+public class ShowSVGCommand  extends CommandUnprotectedPage {
 
-    public ShowSVGCommand(String pageToShow, String role)
+    public ShowSVGCommand(String pageToShow)
     {
-        super(pageToShow, role);
+        super(pageToShow);
     }
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
@@ -106,6 +106,8 @@ public class ShowSVGCommand  extends CommandProtectedPage {
                 innerSVG.addRect(xFrontHang+(x*constructionLength/2), ySideHang+(y*constructionWidth), 9.7/*stolpe dimensioner*/, 9.7/*stolpe dimensioner*/);
             }
         }
+
+        innerSVG.endTag();
 
         svg.addSvg(innerSVG);
         request.setAttribute("svgdrawing", svg.toString());
