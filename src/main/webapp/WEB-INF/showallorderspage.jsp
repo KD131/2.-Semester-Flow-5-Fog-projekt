@@ -77,7 +77,7 @@
                                             value="${var}">${var} cm
                                     </option>
                                     </c:forEach>
-                            </td>
+                                </select></td>
 
                             <td>
                                 <select form="update${status.count}" name="shedWidth" id="shedWidth">
@@ -95,7 +95,7 @@
                                             value="${var}">${var} cm
                                     </option>
                                     </c:forEach>
-                            </td>
+                                </select></td>
                             <td><a href="#">IKKE LAVET</a></td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
@@ -110,10 +110,11 @@
                                     <input type="hidden" name="orderID" value="${order.orderId}">
                                     <input type="submit" class="btn btn-danger" value="Unconfirm ordre">
                                 </form>
-                                <form id="update${status.count}"
-                                      action="${pageContext.request.contextPath}/fc/updatedimensions" method="post">
+
+                                <form id="update${status.count}" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" class="btn btn-danger" value="Update dimensions">
+                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/updatedimensions" class="btn btn-danger" value="Update dimensions">
+                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/showsvg" class="btn btn-danger" value="Show svg drawing">
                                 </form>
                             </td>
                         </tr>
