@@ -14,13 +14,11 @@
 
     <jsp:body>
 
-        <div>
             <h2>Tegning</h2>
-
             <p>Her indsættes en tegning:</p>
-
                 ${requestScope.svgdrawing}
-        </div>
+
+
 
     </jsp:body>
 </t:genericpage>
