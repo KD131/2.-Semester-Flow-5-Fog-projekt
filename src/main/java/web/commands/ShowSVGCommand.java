@@ -107,7 +107,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
             }
         }
 
-        innerSVG.endTag();
+        innerSVG.endTag(); //necessary to wrap up the inner SVG
 
         svg.addSvg(innerSVG);
         request.setAttribute("svgdrawing", svg.toString());
