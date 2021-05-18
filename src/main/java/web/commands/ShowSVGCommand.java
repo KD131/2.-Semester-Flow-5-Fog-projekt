@@ -58,8 +58,6 @@ public class ShowSVGCommand  extends CommandProtectedPage {
         String yAxisMid = String.valueOf(carportWidth/2);
         String xAxisMid = String.valueOf(outerSVGWidth/2);
         String yAxisMax = String.valueOf(carportWidth+30);
-//
-//        String yTransformString = "translate(0, 0) rotate(-90)";
 
 
         svg.addArrow(15,0,15,carportWidth);
