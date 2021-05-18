@@ -41,30 +41,24 @@ public class ShowSVGCommand  extends CommandProtectedPage {
 
         String outerSVGWidthStr = String.valueOf(outerSVGWidth);
         String outerSVGHeightStr = String.valueOf(outerSVGHeight);
+
         String outerViewBoxStr = "0 0 " + outerSVGWidthStr + " " + outerSVGHeightStr;
+        String innerViewBoxStr = "0 0 " + carportWidth + " " + carportLength;
 
-        int widthRatio = (int)(((double)carportLength/(double)outerSVGWidth)*(double)carportLength);
 
-        System.out.println(widthRatio);
-        int heightRatio = (int)(((double)carportWidth/(double)outerSVGHeight)*(double)carportWidth);
-
-        String widthRatioStr = String.valueOf(widthRatio);
-        String heightRatioStr = String.valueOf(heightRatio);
-        String innerViewBoxStr = "0 0 " + widthRatioStr + " " + heightRatioStr;
-        System.out.println(innerViewBoxStr);
-        SVG svg = new SVG(50, 50, outerViewBoxStr, 100, 100 );
+        SVG svg = new SVG(0, 0, outerViewBoxStr, 100, 100 );
         SVG innerSVG = new SVG(30, 0, innerViewBoxStr, 100, 100);
         svg.addDevsTemplate();
         svg.addStyleTemplate();
 
 
-        svg.addArrow(0,0,0,carportWidth);
-        svg.addArrow(30,carportWidth+15, 30+carportLength, carportWidth+15);
+        svg.addArrow(15,0,15,carportWidth);
+        svg.addArrow(30,carportWidth, 30+carportLength, carportWidth);
 
 
         double sparDistance = 55;
-        int sparAmount = (int) (carportLength/sparDistance);
-        double xFrontHang = sparDistance*2.5;
+        int sparAmount = (int) (carportLength/sparDistance) + 1;
+        double xFrontHang = sparDistance*2;
         double xBackHang = sparDistance*0.5;
         double xTotalHang = xBackHang + xFrontHang;
         double ySideHang = 35;
@@ -75,7 +69,6 @@ public class ShowSVGCommand  extends CommandProtectedPage {
         for (int x = 0; x < sparAmount; x++)
         {
                 innerSVG.addRect(x*sparDistance,0,carportWidth,5/*spær bredde*/);
-
         }
 
         for (int y = 0; y < 2; y++)
@@ -88,8 +81,6 @@ public class ShowSVGCommand  extends CommandProtectedPage {
         svg.addSvg(innerSVG);
         request.setAttribute("svgdrawing", svg.toString());
         return pageToShow;
-
-
 
     }
 }
