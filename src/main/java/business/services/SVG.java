@@ -93,7 +93,7 @@ public class SVG {
 
     public void addSvg(SVG innerSVG)
     {
-        svg.append(innerSVG.toString());
+        svg.append(innerSVG.toString() +"/svg>");
     }
 
     @Override
