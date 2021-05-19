@@ -23,6 +23,7 @@
                         <th>Længde</th>
                         <th>Bredde</th>
                         <th>Højde</th>
+                        <th>Funktion</th>
                         <th>Rediger</th>
                     </tr>
                     </thead>
@@ -36,6 +37,7 @@
                             <td>${material.length}</td>
                             <td>${material.width}</td>
                             <td>${material.height}</td>
+                            <td>${material.functionality}</td>
                             <td><a href="#">IKKE LAVET</a></td>
                         </tr>
                     </c:forEach>

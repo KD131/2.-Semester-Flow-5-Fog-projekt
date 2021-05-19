@@ -9,8 +9,9 @@ public class Material {
     int length;
     int width;
     int height;
+    String functionality;
 
-    public Material(int materialID, String name, String unit, double buyPricePerUnit, double pricePerUnit, int length, int width, int height) {
+    public Material(int materialID, String name, String unit, double buyPricePerUnit, double pricePerUnit, int length, int width, int height, String functionality) {
         this.materialID = materialID;
         this.name = name;
         this.unit = unit;
@@ -19,6 +20,7 @@ public class Material {
         this.length = length;
         this.width = width;
         this.height = height;
+        this.functionality = functionality;
     }
 
     public int getMaterialID() {
@@ -83,5 +85,13 @@ public class Material {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public String getFunctionality() {
+        return functionality;
+    }
+
+    public void setFunctionality(String functionality) {
+        this.functionality = functionality;
     }
 }

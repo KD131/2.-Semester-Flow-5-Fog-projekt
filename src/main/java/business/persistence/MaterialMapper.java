@@ -20,7 +20,7 @@ public class MaterialMapper {
     {
         try (Connection connection = database.connect())
         {
-            String sql = "SELECT * FROM carport.materials";
+            String sql = "SELECT * FROM carport.materials m LEFT JOIN material_functionalities mf USING (material_id) ORDER BY material_id";
 
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
@@ -36,8 +36,9 @@ public class MaterialMapper {
                     int length = rs.getInt("length");
                     int width = rs.getInt("width");
                     int height = rs.getInt("height");
+                    String functionality = rs.getString("functionality");
 
-                    materialsList.add(new Material(materialID,name,unit,buyPricePerUnit,pricePerUnit,length,width,height));
+                    materialsList.add(new Material(materialID,name,unit,buyPricePerUnit,pricePerUnit,length,width,height,functionality));
                 }
                 return materialsList;
             }
