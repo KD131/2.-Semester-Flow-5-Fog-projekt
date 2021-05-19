@@ -96,7 +96,7 @@
                                     </option>
                                     </c:forEach>
                                 </select></td>
-                            <td><a href="#">IKKE LAVET</a></td>
+                            <td><a href="${pageContext.request.contextPath}/fc/materialslist">IKKE LAVET</a></td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">

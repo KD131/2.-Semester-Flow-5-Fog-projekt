@@ -39,6 +39,7 @@
             <!-- Employee navigation bar -->
             <c:if test="${sessionScope.user.role == 'employee' }">
                 <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/showallorderspage">Alle Ordre</a>
+                <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/materialslist">Alle Materialer</a>
                 <a class="p-2 text-dark" href="<%=request.getContextPath()%>/fc/${sessionScope.user.role}page">Min Profil</a>
             </c:if>
 

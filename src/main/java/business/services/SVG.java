@@ -107,10 +107,6 @@ public class SVG {
         svg.append(innerSVG.toString());
     }
 
-    public void endTag(){
-        svg.append("</svg>");
-    }
-
     @Override
     public String toString()
     {
