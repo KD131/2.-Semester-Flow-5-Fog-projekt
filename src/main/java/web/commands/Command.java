@@ -31,11 +31,11 @@ public abstract class Command
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
         commands.put("submitorder", new SubmitOrderCommand("index", "customer"));
 
-        commands.put("confirmorder", new ConfirmOrderCommand("index", "employee"));
-        commands.put("unconfirmorder", new UnconfirmOrderCommand("index", "employee"));
-        commands.put("deleteorder", new DeleteOrderCommand("index", "employee"));
+        commands.put("confirmorder", new ConfirmOrderCommand("showallorderspage", "employee"));
+        commands.put("unconfirmorder", new UnconfirmOrderCommand("showallorderspage", "employee"));
+        commands.put("deleteorder", new DeleteOrderCommand("showallorderspage", "employee"));
 
-        commands.put("updatedimensions", new UpdateDimensionsCommand("index", "employee"));
+        commands.put("updatedimensions", new UpdateDimensionsCommand("showallorderspage", "employee"));
 
         commands.put("showallorderspage", new ShowAllOrdersCommand("showallorderspage", "employee"));
         commands.put("showcustomerorderspage", new ShowOrdersByIdCommand("showcustomerorderspage", "customer"));

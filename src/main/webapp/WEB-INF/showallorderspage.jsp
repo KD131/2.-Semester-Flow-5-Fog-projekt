@@ -10,6 +10,11 @@
     </jsp:attribute>
     <jsp:body>
         <h1>All customer orders</h1>
+
+        <c:if test="${requestScope.error != null}">
+            <p style="color:red">${requestScope.error}</p>
+        </c:if>
+
         <c:choose>
             <c:when test="${not empty requestScope.orderListings}">
                 <table class="table table-striped table-hover">

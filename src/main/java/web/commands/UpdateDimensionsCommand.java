@@ -38,9 +38,11 @@ public class UpdateDimensionsCommand extends CommandProtectedPage {
         catch (NumberFormatException ex)
         {
             request.setAttribute("Error", "Wrong Input");
-            return "index";
+            return pageToShow;
         }
         orderFacade.updateDimensions(orderID, carportLength, carportWidth, shedLength, shedWidth);
-        return "index";
+    
+        request.setAttribute("orderListings", orderFacade.getAllOrders());
+        return pageToShow;
     }
 }
