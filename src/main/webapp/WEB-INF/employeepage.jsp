@@ -12,6 +12,7 @@
 
         <h1>Hej ${sessionScope.email}!</h1>
         <p>Klik <a href="${pageContext.request.contextPath}/fc/showallorderspage">her</a> for at se en oversigt over bestillinger.</p>
+        <a href="${pageContext.request.contextPath}/fc/materialslist">Liste of alle materialer.</a>
 
     </jsp:body>
 
