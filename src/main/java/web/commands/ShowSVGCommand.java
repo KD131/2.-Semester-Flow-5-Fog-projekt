@@ -12,6 +12,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
     {
         super(pageToShow);
     }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
     {
@@ -20,7 +21,6 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         int carportWidth;
         int shedLength;
         int shedWidth;
-
 
         try
         {
@@ -106,8 +106,6 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                 innerSVG.addRect(xFrontHang+(x*constructionLength/2), ySideHang+(y*constructionWidth), 9.7/*stolpe dimensioner*/, 9.7/*stolpe dimensioner*/);
             }
         }
-
-        innerSVG.endTag(); //necessary to wrap up the inner SVG
 
         svg.addSvg(innerSVG);
         request.setAttribute("svgdrawing", svg.toString());

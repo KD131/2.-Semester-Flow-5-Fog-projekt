@@ -1,10 +1,10 @@
 ﻿CREATE DATABASE  IF NOT EXISTS `carport` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `carport`;
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: carport
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,6 +18,56 @@ USE `carport`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `functionalities`
+--
+
+DROP TABLE IF EXISTS `functionalities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `functionalities` (
+  `functionality` varchar(10) NOT NULL,
+  PRIMARY KEY (`functionality`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `functionalities`
+--
+
+LOCK TABLES `functionalities` WRITE;
+/*!40000 ALTER TABLE `functionalities` DISABLE KEYS */;
+INSERT INTO `functionalities` VALUES ('overstern'),('rem'),('spær'),('stolpe'),('tagplade'),('understern'),('vandbrædt');
+/*!40000 ALTER TABLE `functionalities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `material_functionalities`
+--
+
+DROP TABLE IF EXISTS `material_functionalities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `material_functionalities` (
+  `material_id` int NOT NULL,
+  `functionality` varchar(10) NOT NULL,
+  PRIMARY KEY (`material_id`,`functionality`),
+  KEY `fk_material_functionalities_functionalities1_idx` (`functionality`),
+  CONSTRAINT `fk_material_functionalities_functionalities1` FOREIGN KEY (`functionality`) REFERENCES `functionalities` (`functionality`),
+  CONSTRAINT `fk_material_functionalities_materials1` FOREIGN KEY (`material_id`) REFERENCES `materials` (`Material_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `material_functionalities`
+--
+
+LOCK TABLES `material_functionalities` WRITE;
+/*!40000 ALTER TABLE `material_functionalities` DISABLE KEYS */;
+INSERT INTO `material_functionalities` VALUES (3,'overstern'),(4,'overstern'),(1,'understern'),(2,'understern');
+/*!40000 ALTER TABLE `material_functionalities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `materials`
 --
 
@@ -27,7 +77,7 @@ DROP TABLE IF EXISTS `materials`;
 CREATE TABLE `materials` (
   `Material_id` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
-  ` Unit` varchar(10) NOT NULL,
+  `Unit` varchar(10) NOT NULL,
   `Buy_price_per_unit` double NOT NULL,
   `Price_per_unit` double NOT NULL,
   `Length` int NOT NULL,
@@ -35,8 +85,8 @@ CREATE TABLE `materials` (
   `Height` int NOT NULL,
   PRIMARY KEY (`Material_id`),
   UNIQUE KEY `Material_id_UNIQUE` (`Material_id`),
-  KEY `fk_Materials_Unit1_idx` (` Unit`),
-  CONSTRAINT `fk_Materials_Unit1` FOREIGN KEY (` Unit`) REFERENCES `unit` (`Unit`)
+  KEY `fk_Materials_Unit1_idx` (`Unit`),
+  CONSTRAINT `fk_Materials_Unit1` FOREIGN KEY (`Unit`) REFERENCES `unit` (`Unit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,7 +120,7 @@ CREATE TABLE `order_status` (
 
 LOCK TABLES `order_status` WRITE;
 /*!40000 ALTER TABLE `order_status` DISABLE KEYS */;
-INSERT INTO `order_status` VALUES ('Afsluttet'),('Bestilt'),('Betalt');
+INSERT INTO `order_status` VALUES ('Afsluttet'),('Bestilt'),('Betalt'),('Godkendt');
 /*!40000 ALTER TABLE `order_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,22 +161,22 @@ DROP TABLE IF EXISTS `orders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
   `Order_id` int NOT NULL AUTO_INCREMENT,
-  `Total` double NOT NULL DEFAULT 0,
+  `Total` double DEFAULT NULL,
   `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Profit_margin` double NOT NULL DEFAULT 0,
+  `Profit_margin` double DEFAULT NULL,
   `User_id` int NOT NULL,
   `Status` varchar(10) NOT NULL,
   `Carport_length` int NOT NULL,
   `Carport_width` int NOT NULL,
-  `Shed_length` int NOT NULL DEFAULT 0,
-  `Shed_width` int NOT NULL DEFAULT 0,
+  `Shed_length` int DEFAULT NULL,
+  `Shed_width` int DEFAULT NULL,
   PRIMARY KEY (`Order_id`),
   UNIQUE KEY `Order_id_UNIQUE` (`Order_id`),
   KEY `fk_Orders_Users1_idx` (`User_id`),
   KEY `fk_Orders_Order_status1_idx` (`Status`),
   CONSTRAINT `fk_Orders_Order_status1` FOREIGN KEY (`Status`) REFERENCES `order_status` (`Status`),
   CONSTRAINT `fk_Orders_Users1` FOREIGN KEY (`User_id`) REFERENCES `users` (`User_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +185,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,NULL,'2021-05-07 09:40:40',NULL,1,'Godkendt',240,240,450,450),(2,NULL,'2021-05-07 09:41:31',NULL,1,'Bestilt',630,630,270,240),(3,NULL,'2021-05-10 09:19:08',NULL,1,'Bestilt',510,510,0,0),(4,NULL,'2021-05-10 09:19:56',NULL,1,'Bestilt',360,240,0,150),(6,NULL,'2021-05-11 08:42:24',NULL,1,'Bestilt',540,360,0,0),(7,NULL,'2021-05-11 08:42:31',NULL,1,'Bestilt',780,750,690,690),(8,NULL,'2021-05-11 21:19:38',NULL,1,'Bestilt',600,540,0,0),(9,NULL,'2021-05-18 08:26:51',NULL,1,'Bestilt',600,390,240,540),(10,NULL,'2021-05-18 08:27:02',NULL,1,'Bestilt',660,570,0,0);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-05 15:20:52
+-- Dump completed on 2021-05-19 15:05:32
