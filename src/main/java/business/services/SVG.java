@@ -92,6 +92,18 @@ public class SVG {
         svg.append(String.format(l, rectTemplate, x, y, height, width));
     }
 
+    // SEUDO CODE FOR DRAWING DIFFERENT SPECIFIC MATERIALS
+
+    private final String sternTemplate =  "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke: black; fill: white\" />";
+
+    public void addStern(double x, double y, double height, double width)
+    {
+        svg.append((String.format(l, sternTemplate,x, y, height, width)));
+    }
+
+    // SEUDE CODE FOR DRAWING DIFFERENT SPECIFIC COMPONENTS
+
+
     public void addLine(int x1, int y1, int x2, int y2 )
     {
         svg.append(String.format(l, lineTemplate, x, y, height, width));
@@ -104,11 +116,7 @@ public class SVG {
 
     public void addSvg(SVG innerSVG)
     {
-        svg.append(innerSVG.toString() +"/svg>");
-    }
-
-    public void endTag(){
-        svg.append("</svg>");
+        svg.append(innerSVG.toString());
     }
 
     @Override
