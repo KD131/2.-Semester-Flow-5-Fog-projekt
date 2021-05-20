@@ -1,26 +1,34 @@
 package web.commands;
 
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
+import business.services.MaterialFacade;
+import business.services.MaterialsCalculator;
 import business.services.SVG;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.DecimalFormat;
 
 public class ShowSVGCommand  extends CommandUnprotectedPage {
+
+
 
     public ShowSVGCommand(String pageToShow)
     {
         super(pageToShow);
+
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
     {
         int orderID;
-        int carportLength;
-        int carportWidth;
-        int shedLength;
-        int shedWidth;
+        double carportLength;
+        double carportWidth;
+        double shedLength;
+        double shedWidth;
+
 
         try
         {
@@ -36,8 +44,8 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
             return "index";
         }
 
-        int outerSVGWidth = carportLength + 100;
-        int outerSVGHeight = carportWidth + 100;
+        double outerSVGWidth = carportLength + 100;
+        double outerSVGHeight = carportWidth + 100;
 
         String outerSVGWidthStr = String.valueOf(outerSVGWidth);
         String outerSVGHeightStr = String.valueOf(outerSVGHeight);
@@ -75,22 +83,63 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         double constructionLength = carportLength-xTotalHang;
         double constructionWidth = carportWidth-yTotalHang;
 
+        int sparAmount = (int) (carportLength/sparDistance);
+        double exactSparDistance = carportLength/sparAmount;
+        DecimalFormat df = new DecimalFormat("####0.0");
+
 
         //midlertidige
+
         double stolpeTykkelse = 9.7;
         double spærbredde = 5;
         double remTykkelse = 5;
-        int sparAmount = (int) (carportLength/sparDistance);
 
-        // tegner ende spær
-        for (int x = 0; x < 2; x++)
-        {
-                innerSVG.addRect(x*(carportLength-spærbredde),0,carportWidth,spærbredde);
-        }
+
+
         // tegner mellem spær
-        for (int x = 0; x < sparAmount-1; x++)
-        {
-                innerSVG.addRect(sparDistance + x*(carportLength/sparAmount),0,carportWidth,5/*spær bredde*/);
+        for (int x = 0; x <= sparAmount; x++) {
+            String sparDistanceStr = String.valueOf(5+(x*exactSparDistance)+0.5*exactSparDistance);
+
+            // tegner ende spær og streg
+            if(x == sparAmount){
+
+                // spær
+                innerSVG.addRect((x*exactSparDistance)-spærbredde,0,carportWidth,spærbredde);
+
+                // streg
+                innerSVG.addLine(x*(exactSparDistance)-spærbredde+(spærbredde*0.5), 0,x*(exactSparDistance)-spærbredde+(spærbredde*0.5), 15);
+            }
+
+            else if(x == sparAmount-1){
+
+                //pil
+                innerSVG.addArrow(x * exactSparDistance + spærbredde * 0.5, 5, (x+1)*(exactSparDistance)-spærbredde+(spærbredde*0.5), 5);
+
+                // spær
+                innerSVG.addRect(x * exactSparDistance, 0, carportWidth, 5/*spær bredde*/);
+
+                // afstands streger
+                innerSVG.addLine(x * exactSparDistance + spærbredde * 0.5, 0, x * exactSparDistance + spærbredde * 0.5, 15);
+
+                // afstands tekst
+                innerSVG.addText(0, 0, "small", "translate(" + sparDistanceStr + ", " + 60 + ")",  df.format(exactSparDistance) + "cm");
+            }
+
+            else {
+
+                // spær
+                innerSVG.addRect(x * exactSparDistance, 0, carportWidth, 5/*spær bredde*/);
+
+                // afstands streger
+                innerSVG.addLine(x * exactSparDistance + spærbredde * 0.5, 0, x * exactSparDistance + spærbredde * 0.5, 15);
+
+                // afstands pile
+                innerSVG.addArrow(x * exactSparDistance + spærbredde * 0.5, 5, (x * exactSparDistance + spærbredde * 0.5) + exactSparDistance, 5);
+
+                // afstands tekst
+                innerSVG.addText(0, 0, "small", "translate(" + sparDistanceStr + ", " + 60 + ")",  df.format(exactSparDistance) + "cm");
+            }
+
         }
 
         //tegner rem
