@@ -3,6 +3,7 @@ package web;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.persistence.Database;
+import business.services.MaterialFacade;
 import web.commands.*;
 
 import java.io.IOException;
@@ -38,6 +39,16 @@ public class FrontController extends HttpServlet
             {
                 Logger.getLogger("web").log(Level.SEVERE, ex.getMessage(), ex);
             }
+        }
+        
+        MaterialFacade materialFacade = new MaterialFacade(database);
+        try
+        {
+            getServletContext().setAttribute("materialsList", materialFacade.getAllMaterials());
+        }
+        catch (UserException | DatabaseConnectionException e)
+        {
+            Logger.getLogger("web").log(Level.SEVERE, e.getMessage(), e);
         }
 
         // Initialize whatever global datastructures needed here:
