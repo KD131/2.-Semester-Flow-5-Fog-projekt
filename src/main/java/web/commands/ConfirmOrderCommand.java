@@ -1,6 +1,7 @@
 package web.commands;
 
 import business.entities.Order;
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.services.OrderFacade;
 
@@ -18,7 +19,7 @@ public class ConfirmOrderCommand extends CommandProtectedPage
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
         int orderID;
 
@@ -29,9 +30,11 @@ public class ConfirmOrderCommand extends CommandProtectedPage
         catch (NumberFormatException ex)
         {
             request.setAttribute("Error", "Wrong input");
-            return "index";
+            return pageToShow;
         }
         orderFacade.confirmOrder(orderID);
-        return "index";
+    
+        request.setAttribute("orderListings", orderFacade.getAllOrders());
+        return pageToShow;
     }
 }
