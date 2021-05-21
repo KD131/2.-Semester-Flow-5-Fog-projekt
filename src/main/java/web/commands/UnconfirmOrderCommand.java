@@ -22,15 +22,15 @@ public class UnconfirmOrderCommand extends CommandProtectedPage
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
         int orderID;
-
-
+        
         try
         {
             orderID = Integer.parseInt(request.getParameter("orderID"));
         }
         catch (NumberFormatException ex)
         {
-            request.setAttribute("Error", "Wrong input");
+            request.setAttribute("error", "Wrong input");
+            request.setAttribute("orderListings", orderFacade.getAllOrders());
             return pageToShow;
         }
         orderFacade.unconfirmOrder(orderID);

@@ -37,11 +37,21 @@ public class UpdateDimensionsCommand extends CommandProtectedPage {
         }
         catch (NumberFormatException ex)
         {
-            request.setAttribute("Error", "Wrong Input");
+            request.setAttribute("error", "Wrong Input");
+            request.setAttribute("orderListings", orderFacade.getAllOrders());
+            return pageToShow;
+        }
+        if (shedLength > carportLength || shedWidth > carportWidth)
+        {
+            request.setAttribute("error", "Skur kan ikke være større en carport.");
+            request.setAttribute("orderListings", orderFacade.getAllOrders());
             return pageToShow;
         }
         orderFacade.updateDimensions(orderID, carportLength, carportWidth, shedLength, shedWidth);
     
+        //TODO
+        // not very elegant with this line everywhere, including all other OrderList Commands, and all error handling that returns to that page.
+        // in general, a lot of duplicate error handling.
         request.setAttribute("orderListings", orderFacade.getAllOrders());
         return pageToShow;
     }

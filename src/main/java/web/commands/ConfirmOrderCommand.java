@@ -29,7 +29,8 @@ public class ConfirmOrderCommand extends CommandProtectedPage
         }
         catch (NumberFormatException ex)
         {
-            request.setAttribute("Error", "Wrong input");
+            request.setAttribute("error", "Wrong input");
+            request.setAttribute("orderListings", orderFacade.getAllOrders());
             return pageToShow;
         }
         orderFacade.confirmOrder(orderID);
