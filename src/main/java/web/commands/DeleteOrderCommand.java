@@ -29,7 +29,8 @@ public class DeleteOrderCommand extends CommandProtectedPage
         }
         catch (NumberFormatException ex)
         {
-            request.setAttribute("Error", "Wrong input");
+            request.setAttribute("error", "Wrong input");
+            request.setAttribute("orderListings", orderFacade.getAllOrders());
             return pageToShow;
         }
         orderFacade.deleteOrder(orderID);

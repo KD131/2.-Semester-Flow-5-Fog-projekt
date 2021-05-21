@@ -31,6 +31,20 @@ public class MaterialsCalculator {
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
     public void calcUnderstern(List<OrderLine> materialList, int carportLength, int carportWidth) {
+        for (int x = 0; x < allMaterials.size(); x++) {
+            if(allMaterials.get(x).getFunctionality().contains("understern")){
+                if(carportLength / allMaterials.get(x).getLength() < 1){
+                    materialList.add(new OrderLine(allMaterials.get(x), 1, "Understernbrædder til siderne"));
+                }else{
+                    for (int i = 0; i < allMaterials.size(); i++) {
+                        if(carportLength / (allMaterials.get(x).getLength() + allMaterials.get(i).getLength()) < 1){
+                            materialList.add(new OrderLine(allMaterials.get(x), 1, "Understernbrædder til siderne"));
+                            materialList.add(new OrderLine(allMaterials.get(i), 1, "Understernbrædder til siderne"));
+                        }
+                    }
+                }
+            }
+        }
 
         materialList.add(new OrderLine(allMaterials.get(1), 0, "Understernbrædder til for & bag ende"));
         materialList.add(new OrderLine(allMaterials.get(2), 0, "Understernbrædder til for & bag ende"));

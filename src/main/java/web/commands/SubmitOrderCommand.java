@@ -45,13 +45,18 @@ public class SubmitOrderCommand extends CommandProtectedPage
             {
                 shedLength = Integer.parseInt(request.getParameter("shedLength"));
                 shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
-                
             }
             catch (NumberFormatException ex)
             {
                 request.setAttribute("error", "Du har indtasted forkert input!");
                 return "index";
             }
+            if (shedLength > carportLength || shedWidth > carportWidth)
+            {
+                request.setAttribute("error", "Skur kan ikke være større en carport.");
+                return "index";
+            }
+            
             Order order = new Order(user, carportLength, carportWidth, shedLength, shedWidth);
             orderFacade.insertOrder(order);
         }
@@ -60,7 +65,6 @@ public class SubmitOrderCommand extends CommandProtectedPage
             Order order = new Order(user, carportLength, carportWidth);
             orderFacade.insertOrder(order);
         }
-        
         
         return "index";
     }
