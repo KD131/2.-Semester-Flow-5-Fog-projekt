@@ -63,7 +63,7 @@ CREATE TABLE `material_functionalities` (
 
 LOCK TABLES `material_functionalities` WRITE;
 /*!40000 ALTER TABLE `material_functionalities` DISABLE KEYS */;
-INSERT INTO `material_functionalities` VALUES (11,'Beklædning'),(24,'Beklædning'),(25,'Beklædning'),(6,'Dør'),(26,'Dør'),(27,'Dør'),(7,'Løsholter'),(8,'Løsholter'),(28,'Løsholter'),(3,'Overstern'),(4,'Overstern'),(20,'Overstern'),(8,'Rem'),(9,'Rem'),(18,'Rem'),(19,'Rem'),(22,'Rem'),(23,'Rem'),(8,'Spær'),(18,'Spær'),(19,'Spær'),(10,'Stolpe'),(22,'Stolpe'),(23,'Stolpe'),(14,'Tagplade'),(15,'Tagplade'),(16,'Tagplade'),(1,'Understern'),(2,'Understern'),(20,'Understern'),(12,'Vandbrædt'),(13,'Vandbrædt'),(20,'Vandbrædt'),(17,'Vindkryds'),(21,'Vindkryds');
+INSERT INTO `material_functionalities` VALUES (11,'Beklædning'),(24,'Beklædning'),(25,'Beklædning'),(5,'Dør'),(26,'Dør'),(27,'Dør'),(6,'Løsholter'),(7,'Løsholter'),(28,'Løsholter'),(3,'Overstern'),(4,'Overstern'),(20,'Overstern'),(8,'Rem'),(9,'Rem'),(18,'Rem'),(19,'Rem'),(22,'Rem'),(23,'Rem'),(8,'Spær'),(18,'Spær'),(19,'Spær'),(10,'Stolpe'),(22,'Stolpe'),(23,'Stolpe'),(14,'Tagplade'),(15,'Tagplade'),(16,'Tagplade'),(1,'Understern'),(2,'Understern'),(20,'Understern'),(12,'Vandbrædt'),(13,'Vandbrædt'),(20,'Vandbrædt'),(17,'Vindkryds'),(21,'Vindkryds');
 /*!40000 ALTER TABLE `material_functionalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-21 16:33:09
+-- Dump completed on 2021-05-21 16:57:11
