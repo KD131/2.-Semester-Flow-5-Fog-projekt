@@ -1,10 +1,10 @@
 ﻿CREATE DATABASE  IF NOT EXISTS `carport` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `carport`;
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: carport
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	8.0.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `functionalities` (
 
 LOCK TABLES `functionalities` WRITE;
 /*!40000 ALTER TABLE `functionalities` DISABLE KEYS */;
-INSERT INTO `functionalities` VALUES ('overstern'),('rem'),('spær'),('stolpe'),('tagplade'),('understern'),('vandbrædt');
+INSERT INTO `functionalities` VALUES ('beklædning'),('dør'),('løsholter'),('overstern'),('rem'),('spær'),('stolpe'),('tagplade'),('understern'),('vandbrædt'),('vindkryds');
 /*!40000 ALTER TABLE `functionalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `material_functionalities` (
 
 LOCK TABLES `material_functionalities` WRITE;
 /*!40000 ALTER TABLE `material_functionalities` DISABLE KEYS */;
-INSERT INTO `material_functionalities` VALUES (3,'overstern'),(4,'overstern'),(1,'understern'),(2,'understern');
+INSERT INTO `material_functionalities` VALUES (11,'Beklædning'),(24,'Beklædning'),(25,'Beklædning'),(6,'Dør'),(26,'Dør'),(27,'Dør'),(7,'Løsholter'),(8,'Løsholter'),(28,'Løsholter'),(3,'Overstern'),(4,'Overstern'),(20,'Overstern'),(8,'Rem'),(9,'Rem'),(18,'Rem'),(19,'Rem'),(22,'Rem'),(23,'Rem'),(8,'Spær'),(18,'Spær'),(19,'Spær'),(10,'Stolpe'),(22,'Stolpe'),(23,'Stolpe'),(14,'Tagplade'),(15,'Tagplade'),(16,'Tagplade'),(1,'Understern'),(2,'Understern'),(20,'Understern'),(12,'Vandbrædt'),(13,'Vandbrædt'),(20,'Vandbrædt'),(17,'Vindkryds'),(21,'Vindkryds');
 /*!40000 ALTER TABLE `material_functionalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `materials` (
 
 LOCK TABLES `materials` WRITE;
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
-INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt','Stk',0,0,3600,200,25),(2,'25x200 mm. trykimp. Brædt','Stk',0,0,5400,200,25),(3,'25x125mm. trykimp. Brædt','Stk',0,0,3600,125,25),(4,'25x125mm. trykimp. Brædt','Stk',0,0,5400,125,25),(5,'38x73 mm. Lægte ubh.','Stk',0,0,4200,73,38),(6,'45x95 mm. Reglar ub.','Stk',0,0,2700,95,45),(7,'45x95 mm. Reglar ub.','Stk',0,0,2400,95,45),(8,'45x195 mm. spærtræ ubh.','Stk',0,0,6000,195,45),(9,'45x195 mm. spærtræ ubh.','Stk',0,0,4800,195,45),(10,'97x97 mm. trykimp. Stolpe','Stk',0,0,300,97,97),(11,'19x100 mm. trykimp. Brædt','Stk',0,0,2100,100,19),(12,'19x100 mm. trykimp. Brædt','Stk',0,0,5400,100,19),(13,'19x100 mm. trykimp. Brædt','Stk',0,0,3600,100,19),(14,'Plastmo Ecolite blåtonet','Stk',0,0,6000,0,0),(15,'Plastmo Ecolite blåtonet','Stk',0,0,3600,0,0),(16,'Plastmo bundskruer 200 stk.','Pakke',0,0,0,0,0),(17,'Hulbånd 1x20 mm. 10 mtr.','Rulle',0,0,0,0,0),(18,'Universal 190 mm højre','Stk',0,0,190,0,0),(19,'Universal 190 mm venstre','Stk',0,0,190,0,0),(20,'4,5 x 60 mm. skruer 200 stk.','Pakke',0,0,60,0,0),(21,'4,0 x 50 mm. beslagskruer 250\nstk.','Pakke',0,0,50,0,0),(22,'Bræddebolt 10 x 120 mm.','Stk',0,0,120,10,0),(23,'Firkantskiver 40x40x11mm','Stk',0,0,11,40,40),(24,'4,5 x 70 mm. Skruer 400 stk.','Pakke',0,0,70,0,0),(25,'4,5 x 50 mm. Skruer 300 stk.','Pakke',0,0,50,0,0),(26,'Stalddørsgreb 50x75','Sæt',0,0,75,50,0),(27,'T hængsel 390 mm','Stk',0,0,390,0,0),(28,'Vinkelbeslag 35','Stk',0,0,0,0,0);
+INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt','Stk',0,0,3600,200,25),(2,'25x200 mm. trykimp. Brædt','Stk',0,0,5400,200,25),(3,'25x125mm. trykimp. Brædt','Stk',0,0,3600,125,25),(4,'25x125mm. trykimp. Brædt','Stk',0,0,5400,125,25),(5,'38x73 mm. Lægte \n\nubh.','Stk',0,0,4200,73,38),(6,'45x95 mm. Reglar ub.','Stk',0,0,2700,95,45),(7,'45x95 mm. Reglar ub.','Stk',0,0,2400,95,45),(8,'45x195 mm. \n\nspærtræ ubh.','Stk',0,0,6000,195,45),(9,'45x195 mm. spærtræ ubh.','Stk',0,0,4800,195,45),(10,'97x97 mm. trykimp. \n\nStolpe','Stk',0,0,300,97,97),(11,'19x100 mm. trykimp. Brædt','Stk',0,0,2100,100,19),(12,'19x100 mm. trykimp. Brædt','Stk',0,0,5400,100,19),(13,'19x100 mm. trykimp. Brædt','Stk',0,0,3600,100,19),(14,'Plastmo Ecolite blåtonet','Stk',0,0,6000,0,0),(15,'Plastmo Ecolite \n\nblåtonet','Stk',0,0,3600,0,0),(16,'Plastmo bundskruer 200 stk.','Pakke',0,0,0,0,0),(17,'Hulbånd 1x20 mm. 10 mtr.','Rulle',0,0,0,0,0),(18,'Universal 190 mm højre','Stk',0,0,190,0,0),(19,'Universal 190 mm venstre','Stk',0,0,190,0,0),(20,'4,5 x 60 mm. skruer 200 \n\nstk.','Pakke',0,0,60,0,0),(21,'4,0 x 50 mm. beslagskruer 250\nstk.','Pakke',0,0,50,0,0),(22,'Bræddebolt 10 x 120 mm.','Stk',0,0,120,10,0),(23,'Firkantskiver 40x40x11mm','Stk',0,0,11,40,40),(24,'4,5 x 70 mm. Skruer 400 stk.','Pakke',0,0,70,0,0),(25,'4,5 x 50 mm. Skruer 300 \n\nstk.','Pakke',0,0,50,0,0),(26,'Stalddørsgreb 50x75','Sæt',0,0,75,50,0),(27,'T hængsel 390 mm','Stk',0,0,390,0,0),(28,'Vinkelbeslag \n\n35','Stk',0,0,0,0,0);
 /*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-19 15:05:32
+-- Dump completed on 2021-05-21 16:33:09
