@@ -41,9 +41,16 @@ public class UpdateDimensionsCommand extends CommandProtectedPage {
             request.setAttribute("orderListings", orderFacade.getAllOrders());
             return pageToShow;
         }
-        if (shedLength > carportLength || shedWidth > carportWidth)
+    
+        if (shedLength > carportLength)
         {
-            request.setAttribute("error", "Skur kan ikke være større en carport.");
+            request.setAttribute("error", "Skur kan ikke være længere en carport.");
+            request.setAttribute("orderListings", orderFacade.getAllOrders());
+            return pageToShow;
+        }
+        else if (shedWidth > carportWidth - 60)
+        {
+            request.setAttribute("error", "Skuret er for bredt. Den skal være mindst 60 cm smallere end carporten.");
             request.setAttribute("orderListings", orderFacade.getAllOrders());
             return pageToShow;
         }

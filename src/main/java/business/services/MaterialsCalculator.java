@@ -2,7 +2,6 @@ package business.services;
 
 import business.entities.Material;
 import business.entities.OrderLine;
-import business.persistence.MaterialMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ public class MaterialsCalculator {
     private int carportWidth;
     private int shedLength;
     private int shedWidth;
-    private List<OrderLine> orderLList = new ArrayList<>();
+    private List<OrderLine> BOM = new ArrayList<>();
     private List<Material> allMaterials;
 
     public MaterialsCalculator(List<Material> allMaterials, int carportLength, int carportWidth) {
@@ -28,6 +27,11 @@ public class MaterialsCalculator {
         this.carportWidth = carportWidth;
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
+    }
+    
+    public List<OrderLine> showBOM()
+    {
+        return BOM;
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
     public void calcUnderstern(List<OrderLine> materialList, int carportLength, int carportWidth) {

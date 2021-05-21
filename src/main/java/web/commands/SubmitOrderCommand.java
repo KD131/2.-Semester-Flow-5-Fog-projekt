@@ -51,9 +51,15 @@ public class SubmitOrderCommand extends CommandProtectedPage
                 request.setAttribute("error", "Du har indtasted forkert input!");
                 return "index";
             }
-            if (shedLength > carportLength || shedWidth > carportWidth)
+            
+            if (shedLength > carportLength)
             {
-                request.setAttribute("error", "Skur kan ikke være større en carport.");
+                request.setAttribute("error", "Skur kan ikke være længere en carport.");
+                return "index";
+            }
+            else if (shedWidth > carportWidth - 60)
+            {
+                request.setAttribute("error", "Skuret er for bredt. Den skal være mindst 60 cm smallere end carporten.");
                 return "index";
             }
             

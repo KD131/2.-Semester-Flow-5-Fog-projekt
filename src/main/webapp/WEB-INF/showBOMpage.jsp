@@ -25,7 +25,11 @@
                 <th>Rediger</th>
             </tr>
             </thead>
-            <c:forEach var="material" items="${requestScope.BOM}
+            <c:forEach var="material" items="${requestScope.BOM}">
+                <tr>
+                    <td>${material.material.name}</td>
+                </tr>
+            </c:forEach>
 
         </table>
 

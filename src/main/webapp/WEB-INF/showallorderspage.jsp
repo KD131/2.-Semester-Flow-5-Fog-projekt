@@ -101,8 +101,15 @@
                                     </option>
                                     </c:forEach>
                                 </select></td>
-                            <td><a href="${pageContext.request.contextPath}/fc/showBOM">Vis Stykliste
-                            </a></td>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/fc/showBOM" method="post">
+                                    <input type="hidden" name="carportWidth" value="${order.carportWidth}">
+                                    <input type="hidden" name="carportLength" value="${order.carportLength}">
+                                    <input type="hidden" name="shedWidth" value="${order.shedWidth}">
+                                    <input type="hidden" name="shedLength" value="${order.shedLength}">
+                                    <input type="submit" value="Vis stykliste">
+                                </form>
+                                </td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
