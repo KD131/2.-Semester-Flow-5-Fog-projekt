@@ -8,6 +8,8 @@ public abstract class GraphicalObject {
         y1 = newY1;
     }
 
+    // void rotate()
+
     abstract void draw();
 
 }
