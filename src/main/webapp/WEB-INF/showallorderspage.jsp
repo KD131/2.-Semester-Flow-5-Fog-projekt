@@ -101,7 +101,7 @@
                                     </option>
                                     </c:forEach>
                                 </select></td>
-                            <td><a href="${pageContext.request.contextPath}/fc/showBOM">
+                            <td><a href="${pageContext.request.contextPath}/fc/showBOM">Vis Stykliste
                             </a></td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">

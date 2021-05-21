@@ -24,6 +24,9 @@
                         <th>Carport bredde</th>
                         <th>Skur længde</th>
                         <th>Skur bredde</th>
+                        <th>pris</th>
+                        <th>tegning</th>
+                        <th>Stykliste</th>
 
                     </tr>
                     </thead>
@@ -38,9 +41,17 @@
                             <td>${order.carportWidth}</td>
                             <td>${order.shedLength}</td>
                             <td>${order.shedWidth}</td>
+                            <td>${order.total}</td> <!-- vises kun hvis ordrestatus er godkendt -->
+                <!-- vises kun hvis ordrestatus er bestilt -->
+                <td><a href="${pageContext.request.contextPath}/fc/showSVGcustomer">Vis Tegning
+                </a></td>
+                <!-- vises kun hvis ordrestatus er betalt -->
+                <td><a href="${pageContext.request.contextPath}/fc/showBOMcustomer">Vis Stykliste
+                </a></td>
                         </tr>
                     </c:forEach>
                 </table>
+
             </c:when>
             <c:otherwise>
                 <p>No orders in database.</p>

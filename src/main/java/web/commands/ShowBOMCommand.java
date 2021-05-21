@@ -21,7 +21,7 @@ public class ShowBOMCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
         List<OrderLine> BOM;
-        request.setAttribute("BOM", BOM);
+       // request.setAttribute("BOM", BOM);
 
         try
         {
