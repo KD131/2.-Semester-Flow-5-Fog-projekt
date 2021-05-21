@@ -75,28 +75,35 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         svg.addText( 0, 0, "small", "translate("+ xAxisMid +", " + yAxisMax+")",carportLengthStr + " cm");
 
         double sparDistance = 55;
-        double xFrontHang = sparDistance*2;
-        double xBackHang = sparDistance*0.5;
+        int sparAmount = (int) (carportLength/sparDistance);
+        double exactSparDistance = carportLength/sparAmount;
+
+        double xFrontHang = 0;
+
+        if(carportLength > 300){
+            xFrontHang = exactSparDistance*2;
+        }
+        if(carportLength <= 300){
+            xFrontHang = exactSparDistance;
+        }
+
+        double xBackHang = exactSparDistance*0.5;
         double xTotalHang = xBackHang + xFrontHang;
         double ySideHang = 35;
         double yTotalHang = ySideHang*2;
         double constructionLength = carportLength-xTotalHang;
         double constructionWidth = carportWidth-yTotalHang;
 
-        int sparAmount = (int) (carportLength/sparDistance);
-        double exactSparDistance = carportLength/sparAmount;
+
         DecimalFormat df = new DecimalFormat("####0.0");
 
 
         //midlertidige
 
         double stolpeTykkelse = 9.7;
-        double spærbredde = 5;
-        double remTykkelse = 5;
+        double spærbredde = 4.5;
+        double remTykkelse = 4.5;
 
-
-
-        // tegner mellem spær
         for (int x = 0; x <= sparAmount; x++) {
             String sparDistanceStr = String.valueOf(5+(x*exactSparDistance)+0.5*exactSparDistance);
 
@@ -109,7 +116,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                 // streg
                 innerSVG.addLine(x*(exactSparDistance)-spærbredde+(spærbredde*0.5), 0,x*(exactSparDistance)-spærbredde+(spærbredde*0.5), 15);
             }
-
+            //tegner sidste pil og næstsidst resten.
             else if(x == sparAmount-1){
 
                 //pil
@@ -124,7 +131,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                 // afstands tekst
                 innerSVG.addText(0, 0, "small", "translate(" + sparDistanceStr + ", " + 60 + ")",  df.format(exactSparDistance) + "cm");
             }
-
+            // tegner mellem spær
             else {
 
                 // spær
