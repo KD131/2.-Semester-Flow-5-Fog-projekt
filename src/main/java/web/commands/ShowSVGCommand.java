@@ -103,6 +103,9 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         double stolpeTykkelse = 9.7;
         double spærbredde = 4.5;
         double remTykkelse = 4.5;
+        double loeshoelterTykkelse = 4.5;
+        double beklaedningTykkelse = 1.9;
+        double beklaedningBredde = 10.0;
 
         for (int x = 0; x <= sparAmount; x++) {
             String sparDistanceStr = String.valueOf(5+(x*exactSparDistance)+0.5*exactSparDistance);
@@ -132,6 +135,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                 innerSVG.addText(0, 0, "small", "translate(" + sparDistanceStr + ", " + 60 + ")",  df.format(exactSparDistance) + "cm");
             }
             // tegner mellem spær
+
             else {
 
                 // spær
@@ -159,9 +163,58 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         for (int y = 0; y < 2; y++)
         {
             for (int x = 0; x < 3; x++) {
-                innerSVG.addRect(xFrontHang+(x*constructionLength/2), ySideHang+(y*constructionWidth), 9.7/*stolpe dimensioner*/, 9.7/*stolpe dimensioner*/);
+                innerSVG.addRect(xFrontHang+(x*constructionLength/2), ySideHang+(y*constructionWidth), stolpeTykkelse/*stolpe dimensioner*/, stolpeTykkelse/*stolpe dimensioner*/);
             }
         }
+
+        //tegner skur
+            //stolper
+        for (int x = 0; x < 2; x++)
+        {
+            for(int y = 0; y <3; y++)
+            {
+                innerSVG.addRect(xFrontHang+constructionLength-(x*shedLength), ySideHang+(y*((shedWidth /* -10 */)*0.5)),stolpeTykkelse,stolpeTykkelse);
+            }
+
+        }
+
+            //tegner løsholter
+        for (int x=0; x<2; x++)
+        {
+            innerSVG.addRect(xFrontHang+constructionLength-(x*shedLength)+0.25*stolpeTykkelse,ySideHang, shedWidth, loeshoelterTykkelse);
+        }
+
+            //tegner beklædning
+        int xWallAmount = (int)  (shedLength/beklaedningBredde);
+        int yWallAmount = (int) (shedWidth/beklaedningBredde);
+
+        //x wall
+        for (int x=0; x<=xWallAmount;x++)
+        {
+            for (int y = 0; y<2;y++)
+            {
+             innerSVG.addRect(xFrontHang+constructionLength-(x*beklaedningBredde),ySideHang - beklaedningTykkelse + ((y*shedWidth+beklaedningTykkelse)+(y*stolpeTykkelse)),beklaedningTykkelse,beklaedningBredde);
+            }
+        }
+
+        //y wall
+        for (int x=0; x<=yWallAmount;x++)
+        {
+            for(int y=0; y<2;y++)
+            {
+                innerSVG.addRect(xFrontHang+constructionLength + stolpeTykkelse - ((y*shedLength)+y*stolpeTykkelse),ySideHang+(x*beklaedningBredde), beklaedningBredde, beklaedningTykkelse );
+            }
+
+        }
+
+        //hulbånd
+
+//         <line stroke-dasharray="5, 5" x1="40" y1="20" x2="365" y2="369"
+//        style="stroke:#000000"/>
+//
+//        <line stroke-dasharray="5, 5" x1="40" y1="369" x2="365" y2="20"
+//        style="stroke:#000000"/>
+
 
         svg.addSvg(innerSVG);
         request.setAttribute("svgdrawing", svg.toString());

@@ -43,6 +43,7 @@ public abstract class Command
         commands.put("showsvg", new ShowSVGCommand("svgpage"));
 
         commands.put("materialslist", new ShowMaterialsListCommand("materialslistpage", "employee"));
+        commands.put("showBOM", new ShowBOMCommand("showBOMpage", "employee"));
 
     }
 

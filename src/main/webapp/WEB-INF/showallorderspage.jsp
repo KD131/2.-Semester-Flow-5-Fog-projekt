@@ -101,7 +101,8 @@
                                     </option>
                                     </c:forEach>
                                 </select></td>
-                            <td><a href="${pageContext.request.contextPath}/fc/materialslist">IKKE LAVET</a></td>
+                            <td><a href="${pageContext.request.contextPath}/fc/showBOM">
+                            </a></td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
@@ -109,19 +110,20 @@
                                 </form>
                                 <form action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" class="btn btn-danger" value="Confirm ordre">
+                                    <input type="submit" class="btn btn-danger" value="bekræft ordre">
                                 </form>
                                 <form action="${pageContext.request.contextPath}/fc/unconfirmorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" class="btn btn-danger" value="Unconfirm ordre">
+                                    <input type="submit" class="btn btn-danger" value="af-bekræft ordre">
                                 </form>
 
                                 <form id="update${status.count}" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/updatedimensions" class="btn btn-danger" value="Update dimensions">
-                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/showsvg" class="btn btn-danger" value="Show svg drawing">
+                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/updatedimensions" class="btn btn-danger" value="Opdater Ordre">
+                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/showsvg" class="btn btn-danger" value="Vis Tegning">
                                 </form>
                             </td>
+
                         </tr>
                     </c:forEach>
                 </table>
