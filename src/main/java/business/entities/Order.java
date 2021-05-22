@@ -91,7 +91,7 @@ public class Order
     {
         if (shedLength > carportLength)
         {
-            throw new IllegalDimensionsException("Skur kan ikke være længere en carport.");
+            throw new IllegalDimensionsException("Skur kan ikke være længere end carport.");
         }
         int widthHang = 60;
         int maxWidth = carportWidth - widthHang;
