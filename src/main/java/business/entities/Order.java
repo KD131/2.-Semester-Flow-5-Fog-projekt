@@ -1,5 +1,7 @@
 package business.entities;
 
+import business.exceptions.IllegalDimensionsException;
+
 public class Order
 {
     int orderID;
@@ -84,5 +86,18 @@ public class Order
     }
 
     public int getOrderID() { return orderID;}
+    
+    public static void validateShed(int carportWidth, int carportLength, int shedWidth, int shedLength) throws IllegalDimensionsException
+    {
+        if (shedLength > carportLength)
+        {
+            throw new IllegalDimensionsException("Skur kan ikke være længere en carport.");
+        }
+        int widthHang = 60;
+        if (shedWidth > carportWidth - widthHang)
+        {
+            throw new IllegalDimensionsException("Skuret er for bredt. Den skal være mindst " + widthHang + " cm smallere end carporten.");
+        }
+    }
 
 }

@@ -2,6 +2,7 @@ package web.commands;
 
 import business.entities.Order;
 import business.entities.User;
+import business.exceptions.IllegalDimensionsException;
 import business.exceptions.UserException;
 import business.services.OrderFacade;
 
@@ -52,14 +53,14 @@ public class SubmitOrderCommand extends CommandProtectedPage
                 return "index";
             }
             
-            if (shedLength > carportLength)
+            // validates dimensions of the shed against the carport and sets and error message
+            try
             {
-                request.setAttribute("error", "Skur kan ikke være længere en carport.");
-                return "index";
+                Order.validateShed(carportWidth, carportLength, shedWidth, shedLength);
             }
-            else if (shedWidth > carportWidth - 60)
+            catch (IllegalDimensionsException e)
             {
-                request.setAttribute("error", "Skuret er for bredt. Den skal være mindst 60 cm smallere end carporten.");
+                request.setAttribute("error", e.getMessage());
                 return "index";
             }
             

@@ -1,21 +1,17 @@
 package web.commands;
 
-import business.entities.Order;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
-import business.services.OrderFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DeleteOrderCommand extends CommandProtectedPage
+public class DeleteOrderCommand extends OrderListCommand
 {
-    private OrderFacade orderFacade;
 
     public DeleteOrderCommand(String pageToShow, String role)
     {
         super(pageToShow, role);
-        this.orderFacade = new OrderFacade(database);
     }
 
     @Override
@@ -30,12 +26,12 @@ public class DeleteOrderCommand extends CommandProtectedPage
         catch (NumberFormatException ex)
         {
             request.setAttribute("error", "Wrong input");
-            request.setAttribute("orderListings", orderFacade.getAllOrders());
+            refreshList(request);
             return pageToShow;
         }
         orderFacade.deleteOrder(orderID);
     
-        request.setAttribute("orderListings", orderFacade.getAllOrders());
+        refreshList(request);
         return pageToShow;
     }
 }

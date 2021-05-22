@@ -2,20 +2,17 @@ package web.commands;
 
 import business.entities.Order;
 import business.exceptions.DatabaseConnectionException;
+import business.exceptions.IllegalDimensionsException;
 import business.exceptions.UserException;
-import business.services.OrderFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UpdateDimensionsCommand extends CommandProtectedPage {
-
-    private OrderFacade orderFacade;
+public class UpdateDimensionsCommand extends OrderListCommand {
 
     public UpdateDimensionsCommand(String pageToShow, String role)
     {
         super(pageToShow, role);
-        this.orderFacade = new OrderFacade(database);
     }
 
     @Override
@@ -38,28 +35,24 @@ public class UpdateDimensionsCommand extends CommandProtectedPage {
         catch (NumberFormatException ex)
         {
             request.setAttribute("error", "Wrong Input");
-            request.setAttribute("orderListings", orderFacade.getAllOrders());
+            refreshList(request);
             return pageToShow;
         }
-    
-        if (shedLength > carportLength)
+        
+        // validates dimensions of the shed against the carport and sets and error message
+        try
         {
-            request.setAttribute("error", "Skur kan ikke være længere en carport.");
-            request.setAttribute("orderListings", orderFacade.getAllOrders());
-            return pageToShow;
+            Order.validateShed(carportWidth, carportLength, shedWidth, shedLength);
         }
-        else if (shedWidth > carportWidth - 60)
+        catch (IllegalDimensionsException e)
         {
-            request.setAttribute("error", "Skuret er for bredt. Den skal være mindst 60 cm smallere end carporten.");
-            request.setAttribute("orderListings", orderFacade.getAllOrders());
+            request.setAttribute("error", e.getMessage());
+            refreshList(request);
             return pageToShow;
         }
         orderFacade.updateDimensions(orderID, carportLength, carportWidth, shedLength, shedWidth);
     
-        //TODO
-        // not very elegant with this line everywhere, including all other OrderList Commands, and all error handling that returns to that page.
-        // in general, a lot of duplicate error handling.
-        request.setAttribute("orderListings", orderFacade.getAllOrders());
+        refreshList(request);
         return pageToShow;
     }
 }
