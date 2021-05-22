@@ -33,6 +33,7 @@ public class MaterialsCalculator {
     
     public List<OrderLine> showBOM()
     {
+        calcRemme(carportLength);
         calcUnderstern(carportLength, carportWidth);
         calcOverstern(carportLength, carportWidth);
         return BOM; //bom = bill of materials
@@ -237,6 +238,62 @@ public class MaterialsCalculator {
                             }
                         }
                         widthFlag = false; //stops the loop from adding more pieces
+                    }
+                }
+            }
+        }
+    }
+
+    //Remme til siderne
+    public void calcRemme(double carportLength) {
+        List<Integer> lengthList = new ArrayList<>();
+        List<Material> remmeList = new ArrayList<>();
+
+        for (int x = 0; x < allMaterials.size(); x++) {
+            if (allMaterials.get(x).getFunctionality().toLowerCase().contains("rem")) {
+                lengthList.add(allMaterials.get(x).getLength());
+                remmeList.add(allMaterials.get(x));
+            }
+        }
+
+        lengthList.sort(Comparator.naturalOrder());
+
+        boolean lengthFlag = true;
+
+        for (int x = 0; x < lengthList.size(); x++) {
+            //this is what checks if the length of a material is long enough (<1 = yes / >1 = no)
+            if (carportLength / lengthList.get(x) <= 1.0 && lengthFlag) {
+                for (int i = 0; i < remmeList.size(); i++) {
+                    //compares the length that was long enough to the materials and adds the one that matches its length
+                    if (remmeList.get(i).getLength() == lengthList.get(x)) {
+                        BOM.add(new OrderLine(remmeList.get(i), 2, "Remme til siderne"));
+                    }
+                }
+                lengthFlag = false;
+            } else {
+                for (int i = 0; i < lengthList.size(); i++) {
+                    //this is what checks if the length of a material is long enough (<1 = yes / >1 = no), with the addition
+                    //of the longest piece from the list, which, because it is sorted, is always the last piece
+                    if (carportLength / (lengthList.get(lengthList.size() - 1) + lengthList.get(i)) <= 1.0 && lengthFlag) {
+                        //compares the length that was long enough to the materials and adds the one that matches its length
+                        //just does it twice: once for the longest piece and once for whichever piece added with that achieved
+                        //the best length
+                        for (int j = 0; j < remmeList.size(); j++) {
+                            //if the 2nd piece is as long as the first piece, then both are added in the same orderLine
+                            if (lengthList.get(lengthList.size() - 1).equals(lengthList.get(i))) {
+                                if (remmeList.get(j).getLength() == lengthList.get(lengthList.size() - 1)) {
+                                    BOM.add(new OrderLine(remmeList.get(j), 4, "Remme til siderne"));
+                                }
+                            } else {
+                                if (remmeList.get(j).getLength() == lengthList.get(lengthList.size() - 1)) {
+                                    BOM.add(new OrderLine(remmeList.get(j), 2, "Remme til siderne"));
+                                }
+                                if (remmeList.get(j).getLength() == lengthList.get(i)) {
+                                    BOM.add(new OrderLine(remmeList.get(j), 2, "Remme til siderne"));
+                                }
+                            }
+                        }
+                        lengthFlag = false; //stops the loop from adding more pieces
                     }
                 }
             }
