@@ -22,6 +22,7 @@ public class ShowBOMCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
+        int orderID = Integer.parseInt(request.getParameter("orderID"));
         int carportLength = Integer.parseInt(request.getParameter("carportLength"));
         int carportWidth = Integer.parseInt(request.getParameter("carportWidth"));
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
@@ -34,6 +35,7 @@ public class ShowBOMCommand extends CommandProtectedPage {
         
         List<OrderLine> BOM = calculator.showBOM();
         request.setAttribute("BOM", BOM);
+        request.setAttribute("orderID", orderID);
 
         try
         {
