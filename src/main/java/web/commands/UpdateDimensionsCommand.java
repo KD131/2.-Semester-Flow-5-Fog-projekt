@@ -1,6 +1,8 @@
 package web.commands;
 
+import business.entities.Order;
 import business.exceptions.DatabaseConnectionException;
+import business.exceptions.IllegalDimensionsException;
 import business.exceptions.UserException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,24 +38,20 @@ public class UpdateDimensionsCommand extends OrderListCommand {
             refreshList(request);
             return pageToShow;
         }
-    
-        if (shedLength > carportLength)
+        
+        // validates dimensions of the shed against the carport and sets and error message
+        try
         {
-            request.setAttribute("error", "Skur kan ikke være længere en carport.");
-            refreshList(request);
-            return pageToShow;
+            Order.validateShed(carportWidth, carportLength, shedWidth, shedLength);
         }
-        else if (shedWidth > carportWidth - 60)
+        catch (IllegalDimensionsException e)
         {
-            request.setAttribute("error", "Skuret er for bredt. Den skal være mindst 60 cm smallere end carporten.");
+            request.setAttribute("error", e.getMessage());
             refreshList(request);
             return pageToShow;
         }
         orderFacade.updateDimensions(orderID, carportLength, carportWidth, shedLength, shedWidth);
     
-        //TODO
-        // not very elegant with this line everywhere, including all other OrderList Commands, and all error handling that returns to that page.
-        // in general, a lot of duplicate error handling.
         refreshList(request);
         return pageToShow;
     }
