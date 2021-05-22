@@ -37,6 +37,7 @@ public class MaterialsCalculator {
         calcOverstern(carportLength, carportWidth);
         calcRemme(carportLength);
         calcSpær(carportLength,carportWidth);
+        calcStolper(shedLength,shedWidth);
         return BOM; //bom = bill of materials
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
@@ -387,6 +388,23 @@ public class MaterialsCalculator {
                 }
                 widthFlag = false;
             }
+        }
+    }
+
+    public void calcStolper(double shedLength, double shedWidth) {
+        List<Material> stolpeList = new ArrayList<>();
+
+        for (int x = 0; x < allMaterials.size(); x++) {
+            if (allMaterials.get(x).getFunctionality().toLowerCase().contains("stolpe")) {
+                stolpeList.add(allMaterials.get(x));
+            }
+        }
+
+        if(shedLength == 0 || shedWidth == 0){
+            BOM.add(new OrderLine(stolpeList.get(0), 6, "Stolper nedgraves 90 cm. i jord"));
+        }
+        else{
+            BOM.add(new OrderLine(stolpeList.get(0), 10, "Stolper nedgraves 90 cm. i jord"));
         }
     }
 
