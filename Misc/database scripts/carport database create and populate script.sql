@@ -36,7 +36,7 @@ CREATE TABLE `functionalities` (
 
 LOCK TABLES `functionalities` WRITE;
 /*!40000 ALTER TABLE `functionalities` DISABLE KEYS */;
-INSERT INTO `functionalities` VALUES ('beklædning'),('dør'),('løsholter'),('overstern'),('rem'),('spær'),('stolpe'),('tagplade'),('understern'),('vandbrædt'),('vindkryds');
+INSERT INTO `functionalities` VALUES ('beklædning'),('dør'),('løsholter'),('overstern'),('rem'),('spær'),('stolpe'),('tagplade'),('tilbehør'),('understern'),('vandbrædt'),('vindkryds');
 /*!40000 ALTER TABLE `functionalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `material_functionalities` (
 
 LOCK TABLES `material_functionalities` WRITE;
 /*!40000 ALTER TABLE `material_functionalities` DISABLE KEYS */;
-INSERT INTO `material_functionalities` VALUES (11,'Beklædning'),(24,'Beklædning'),(25,'Beklædning'),(5,'Dør'),(26,'Dør'),(27,'Dør'),(6,'Løsholter'),(7,'Løsholter'),(28,'Løsholter'),(3,'Overstern'),(4,'Overstern'),(8,'Rem'),(9,'Rem'),(18,'Rem'),(19,'Rem'),(22,'Rem'),(23,'Rem'),(8,'Spær'),(18,'Spær'),(19,'Spær'),(10,'Stolpe'),(22,'Stolpe'),(23,'Stolpe'),(14,'Tagplade'),(15,'Tagplade'),(16,'Tagplade'),(1,'Understern'),(2,'Understern'),(12,'Vandbrædt'),(13,'Vandbrædt'),(20,'Vandbrædt'),(17,'Vindkryds'),(21,'Vindkryds');
+INSERT INTO `material_functionalities` VALUES (11,'Beklædning'),(5,'Dør'),(6,'Løsholter'),(7,'Løsholter'),(3,'Overstern'),(4,'Overstern'),(8,'Rem'),(9,'Rem'),(8,'Spær'),(9,'Spær'),(10,'Stolpe'),(14,'Tagplade'),(15,'Tagplade'),(16,'Tilbehør'),(17,'Tilbehør'),(18,'Tilbehør'),(19,'Tilbehør'),(20,'Tilbehør'),(21,'Tilbehør'),(22,'Tilbehør'),(23,'Tilbehør'),(24,'Tilbehør'),(25,'Tilbehør'),(26,'Tilbehør'),(27,'Tilbehør'),(28,'Tilbehør'),(1,'Understern'),(2,'Understern'),(12,'Vandbrædt'),(13,'Vandbrædt');
 /*!40000 ALTER TABLE `material_functionalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,NULL,'2021-05-07 09:40:40',NULL,1,'Godkendt',360,360,150,150),(2,NULL,'2021-05-07 09:41:31',NULL,1,'Bestilt',630,630,270,240),(3,NULL,'2021-05-10 09:19:08',NULL,1,'Bestilt',510,510,0,0),(4,NULL,'2021-05-10 09:19:56',NULL,1,'Bestilt',360,240,0,150),(6,NULL,'2021-05-11 08:42:24',NULL,1,'Bestilt',300,720,0,0),(7,NULL,'2021-05-11 08:42:31',NULL,1,'Bestilt',780,360,240,240),(8,NULL,'2021-05-11 21:19:38',NULL,1,'Bestilt',600,540,0,0),(9,NULL,'2021-05-18 08:26:51',NULL,1,'Bestilt',600,390,240,540),(10,NULL,'2021-05-18 08:27:02',NULL,1,'Bestilt',660,570,0,0),(11,NULL,'2021-05-22 14:32:03',NULL,1,'Bestilt',630,750,270,690),(12,NULL,'2021-05-22 14:37:32',NULL,6,'Bestilt',360,300,0,0),(13,NULL,'2021-05-22 14:38:15',NULL,6,'Bestilt',600,600,0,0),(14,NULL,'2021-05-22 14:38:29',NULL,6,'Bestilt',600,600,540,540);
+INSERT INTO `orders` VALUES (1,NULL,'2021-05-07 09:40:40',NULL,1,'Godkendt',360,360,150,150),(2,NULL,'2021-05-07 09:41:31',NULL,1,'Bestilt',630,630,270,240),(3,NULL,'2021-05-10 09:19:08',NULL,1,'Bestilt',510,510,0,0),(4,NULL,'2021-05-10 09:19:56',NULL,1,'Bestilt',360,240,0,150),(6,NULL,'2021-05-11 08:42:24',NULL,1,'Bestilt',300,720,0,0),(7,NULL,'2021-05-11 08:42:31',NULL,1,'Bestilt',780,660,240,240),(8,NULL,'2021-05-11 21:19:38',NULL,1,'Bestilt',600,540,0,0),(9,NULL,'2021-05-18 08:26:51',NULL,1,'Bestilt',600,390,240,540),(10,NULL,'2021-05-18 08:27:02',NULL,1,'Bestilt',660,600,0,0),(11,NULL,'2021-05-22 14:32:03',NULL,1,'Bestilt',630,750,270,690),(12,NULL,'2021-05-22 14:37:32',NULL,6,'Bestilt',360,300,0,0),(13,NULL,'2021-05-22 14:38:15',NULL,6,'Bestilt',600,600,0,0),(14,NULL,'2021-05-22 14:38:29',NULL,6,'Bestilt',480,600,270,540);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-22 18:05:22
+-- Dump completed on 2021-05-22 21:00:00

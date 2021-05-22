@@ -36,11 +36,12 @@ public class MaterialsCalculator {
         calcUnderstern(carportLength, carportWidth);
         calcOverstern(carportLength, carportWidth);
         calcRemme(carportLength);
+        calcSpær(carportLength,carportWidth);
         return BOM; //bom = bill of materials
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
 
-    //Understern
+//--Understern
     public void calcUnderstern(double carportLength, double carportWidth) {
 
 //------!!!!!!!!!.getWidth() IS LITERAL WIDTH; YOU NEED TO USE .getLength() PLEASE FFS!!!!!!!!!!----------------------//
@@ -166,7 +167,7 @@ public class MaterialsCalculator {
         }
     }
 
-    //Overstern
+//--Overstern
     public void calcOverstern(double carportLength, double carportWidth) {
         List<Integer> lengthList = new ArrayList<>();
         List<Integer> widthList = new ArrayList<>();
@@ -288,7 +289,7 @@ public class MaterialsCalculator {
         }
     }
 
-    //Remme til siderne
+//--Remme til siderne
     public void calcRemme(double carportLength) {
         List<Integer> lengthList = new ArrayList<>();
         List<Material> remmeList = new ArrayList<>();
@@ -347,6 +348,47 @@ public class MaterialsCalculator {
         }
     }
 
+    public void calcSpær(double carportLength, double carportWidth) {
+        List<Integer> widthList = new ArrayList<>();
+        List<Material> spærList = new ArrayList<>();
+
+        //takes the rounded-up result of carport length divided by 55cm and returns it as an int used to determine how
+        //many spær are required
+        //NOTE: spær cannot be combined, so 6m (aka 6000mm) is the utmost length possible, hence why this section is shorter
+        //than the similar code above
+        int spærNumber = (int) Math.ceil(carportLength / 550); //all our numbers are mm (very important!)
+
+        for (int x = 0; x < allMaterials.size(); x++) {
+            if (allMaterials.get(x).getFunctionality().toLowerCase().contains("spær")) {
+                widthList.add(allMaterials.get(x).getLength());
+                spærList.add(allMaterials.get(x));
+            }
+        }
+
+        widthList.sort(Comparator.naturalOrder());
+
+        boolean widthFlag = true;
+
+        //---width-wise---//
+        for (int x = 0; x < widthList.size(); x++) {
+            if (carportWidth / widthList.get(x) <= 1.0 && widthFlag) {
+                for (int i = 0; i < spærList.size(); i++) {
+                    if (spærList.get(i).getLength() == widthList.get(x)) {
+                        BOM.add(new OrderLine(spærList.get(i), spærNumber, "Spær, monteres på rem"));
+                    }
+                }
+                widthFlag = false;
+            }
+            else if(widthFlag){ //if the width is bigger than the possible lengths, it automatically picks the longest piece anyway
+                for (int i = 0; i < spærList.size(); i++) {
+                    if (spærList.get(i).getLength() == widthList.get(widthList.size()-1)) {
+                        BOM.add(new OrderLine(spærList.get(i), spærNumber, "Spær, monteres på rem"));
+                    }
+                }
+                widthFlag = false;
+            }
+        }
+    }
 
     /*
     Liste af koder til funktioner (til carport):
