@@ -94,9 +94,10 @@ public class Order
             throw new IllegalDimensionsException("Skur kan ikke være længere en carport.");
         }
         int widthHang = 60;
-        if (shedWidth > carportWidth - widthHang)
+        int maxWidth = carportWidth - widthHang;
+        if (shedWidth > maxWidth)
         {
-            throw new IllegalDimensionsException("Skuret er for bredt. Den skal være mindst " + widthHang + " cm smallere end carporten.");
+            throw new IllegalDimensionsException("Skuret er for bredt. Det kan max være " + maxWidth + " cm ("+ widthHang + " cm smallere end carporten).");
         }
     }
 
