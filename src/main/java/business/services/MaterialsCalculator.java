@@ -32,10 +32,11 @@ public class MaterialsCalculator {
     
     public List<OrderLine> showBOM()
     {
-        return BOM;
+        calcUnderstern(carportLength, carportWidth);
+        return BOM; //bom = bill of materials
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
-    public void calcUnderstern(List<OrderLine> materialList, int carportLength, int carportWidth) {
+    public void calcUnderstern(int carportLength, int carportWidth) {
         List<Integer> lengthList = new ArrayList<>(); //list to contain all the various lengths from our materials list
         List<Integer> widthList = new ArrayList<>();
 
@@ -52,21 +53,23 @@ public class MaterialsCalculator {
 
         boolean lengthFlag = true;
         boolean widthFlag = true;
+
         //---length-wise---//
         for (int x = 0; x < lengthList.size(); x++) {
             //this is what checks if the length of a material is long enough (<1 = yes / >1 = no)
-            if(carportLength / lengthList.get(x) < 1){
+            if(carportLength / lengthList.get(x) < 1 && lengthFlag){
                 for (int i = 0; i < allMaterials.size(); i++) {
                     //compares the length that was long enough to the materials and adds the one that matches its length
                     if(allMaterials.get(i).getLength() == lengthList.get(x)){
-                       materialList.add(new OrderLine(allMaterials.get(x), 1, "Understernbrædder til siderne"));
+                       BOM.add(new OrderLine(allMaterials.get(i), 1, "Understernbrædder til siderne"));
                     }
                 }
+                lengthFlag = false;
             }else{
                 for (int i = 0; i < lengthList.size(); i++) {
                     //this is what checks if the length of a material is long enough (<1 = yes / >1 = no), with the addition
                     //of the longest piece from the list, which, because it is sorted, is always the last piece
-                    if(carportLength / (lengthList.get(lengthList.size()-1) + lengthList.get(x)) < 1 && lengthFlag){
+                    if(carportLength / (lengthList.get(lengthList.size()-1) + lengthList.get(i)) < 1 && lengthFlag){
                         //compares the length that was long enough to the materials and adds the one that matches its length
                         //just does it twice: once for the longest piece and once for whichever piece added with that achieved
                         //the best length
@@ -74,16 +77,17 @@ public class MaterialsCalculator {
                             //if the 2nd piece is as long as the first piece, then both are added in the same orderLine
                             if(lengthList.get(lengthList.size()-1).equals(lengthList.get(i))){
                                 if(allMaterials.get(j).getLength() == lengthList.get(lengthList.size()-1)){
-                                    materialList.add(new OrderLine(allMaterials.get(j), 2, "Understernbrædder til siderne"));
+                                    BOM.add(new OrderLine(allMaterials.get(j), 2, "Understernbrædder til siderne"));
                                 }
                             }else {
                                 if (allMaterials.get(j).getLength() == lengthList.get(lengthList.size() - 1)) {
-                                    materialList.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til siderne"));
+                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til siderne"));
                                 }
                                 if (allMaterials.get(j).getLength() == lengthList.get(i)) {
-                                    materialList.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til siderne"));
+                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til siderne"));
                                 }
                             }
+                            return;
                         }
                         lengthFlag = false; //stops the loop from adding more pieces
                     }
@@ -97,9 +101,10 @@ public class MaterialsCalculator {
                 for (int i = 0; i < allMaterials.size(); i++) {
                     //compares the length that was long enough to the materials and adds the one that matches its length
                     if(allMaterials.get(i).getWidth() == widthList.get(x)){
-                        materialList.add(new OrderLine(allMaterials.get(x), 1, "Understernbrædder til for & bag ende"));
+                        BOM.add(new OrderLine(allMaterials.get(i), 1, "Understernbrædder til for & bag ende"));
                     }
                 }
+                widthFlag = false;
             }else{
                 for (int i = 0; i < widthList.size(); i++) {
                     //this is what checks if the length of a material is long enough (<1 = yes / >1 = no), with the addition
@@ -112,29 +117,23 @@ public class MaterialsCalculator {
                             //if the 2nd piece is as long as the first piece, then both are added in the same orderLine
                             if(widthList.get(widthList.size()-1).equals(widthList.get(i))){
                                 if(allMaterials.get(j).getWidth() == widthList.get(widthList.size()-1)){
-                                    materialList.add(new OrderLine(allMaterials.get(j), 2, "Understernbrædder til for & bag ende"));
+                                    BOM.add(new OrderLine(allMaterials.get(j), 2, "Understernbrædder til for & bag ende"));
                                 }
                             }else {
                                 if (allMaterials.get(j).getWidth() == widthList.get(widthList.size() - 1)) {
-                                    materialList.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til for & bag ende"));
+                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til for & bag ende"));
                                 }
                                 if (allMaterials.get(j).getWidth() == widthList.get(i)) {
-                                    materialList.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til for & bag ende"));
+                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til for & bag ende"));
                                 }
                             }
+                            return;
                         }
                         widthFlag = false; //stops the loop from adding more pieces
                     }
                 }
             }
         }
-
-        /*
-        materialList.add(new OrderLine(allMaterials.get(1), 0, "Understernbrædder til for & bag ende"));
-        materialList.add(new OrderLine(allMaterials.get(2), 0, "Understernbrædder til for & bag ende"));
-        materialList.add(new OrderLine(allMaterials.get(1), 0, "Understernbrædder til siderne"));
-        materialList.add(new OrderLine(allMaterials.get(2), 0, "Understernbrædder til siderne"));
-        */
     }
 
     /*
