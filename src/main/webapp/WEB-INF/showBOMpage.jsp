@@ -9,28 +9,26 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>Stykliste til ordre #</h1>
-        <table class="table-striped table-hover">
+        <h1>Stykliste til ordre #${requestScope.orderID}</h1>
+        <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Materiale ID</th>
                 <th>Navn</th>
-                <th>Enhed</th>
-                <th>Købspris per Enhed</th>
-                <th>Pris per Enhed</th>
                 <th>Længde</th>
-                <th>Bredde</th>
-                <th>Højde</th>
-                <th>Funktion</th>
-                <th>Rediger</th>
+                <th>Antal</th>
+                <th>Enhed</th>
+                <th>Beskrivelse</th>
             </tr>
             </thead>
             <c:forEach var="material" items="${requestScope.BOM}">
                 <tr>
                     <td>${material.material.name}</td>
+                    <td>${material.material.length}</td>
+                    <td>${material.quantity}</td>
+                    <td>${material.material.unit}</td>
+                    <td>${material.description}</td>
                 </tr>
             </c:forEach>
-
         </table>
 
 
