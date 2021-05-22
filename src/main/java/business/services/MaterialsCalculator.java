@@ -6,28 +6,29 @@ import business.entities.OrderLine;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class MaterialsCalculator {
 
-    private int carportLength;
-    private int carportWidth;
-    private int shedLength;
-    private int shedWidth;
+    private double carportLength;
+    private double carportWidth;
+    private double shedLength;
+    private double shedWidth;
     private List<OrderLine> BOM = new ArrayList<>();
     private List<Material> allMaterials;
 
     public MaterialsCalculator(List<Material> allMaterials, int carportLength, int carportWidth) {
         this.allMaterials = allMaterials;
-        this.carportLength = carportLength;
-        this.carportWidth = carportWidth;
+        this.carportLength = carportLength*10;
+        this.carportWidth = carportWidth*10;
     }
 
     public MaterialsCalculator(List<Material> allMaterials, int carportLength, int carportWidth, int shedLength, int shedWidth) {
         this.allMaterials = allMaterials;
-        this.carportLength = carportLength;
-        this.carportWidth = carportWidth;
-        this.shedLength = shedLength;
-        this.shedWidth = shedWidth;
+        this.carportLength = carportLength*10;
+        this.carportWidth = carportWidth*10;
+        this.shedLength = shedLength*10;
+        this.shedWidth = shedWidth*10;
     }
     
     public List<OrderLine> showBOM()
@@ -36,15 +37,25 @@ public class MaterialsCalculator {
         return BOM; //bom = bill of materials
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
-    public void calcUnderstern(int carportLength, int carportWidth) {
+    public void calcUnderstern(double carportLength, double carportWidth) {
+
+//------!!!!!!!!!.getWidth() IS LITERAL WIDTH; YOU NEED TO USE .getLength() PLEASE FFS!!!!!!!!!!----------------------//
+
         List<Integer> lengthList = new ArrayList<>(); //list to contain all the various lengths from our materials list
         List<Integer> widthList = new ArrayList<>();
+        List<Material> understernList = new ArrayList<>();
 
         for (int x = 0; x < allMaterials.size(); x++) {
-            if(allMaterials.get(x).getFunctionality().contains("understern")){
+            if (allMaterials.get(x).getFunctionality().toLowerCase().contains("understern")) {
                 lengthList.add(allMaterials.get(x).getLength());
-                widthList.add(allMaterials.get(x).getWidth());
+                widthList.add(allMaterials.get(x).getLength());
+                understernList.add(allMaterials.get(x));
             }
+        }
+        for (int i = 0; i < understernList.size(); i++) {
+            System.out.println("lengthList("+i+"):"+lengthList.get(i));
+            System.out.println("widthList("+i+"):"+widthList.get(i));
+            System.out.println("understernList("+i+"):"+understernList.get(i).getLength());
         }
 
         lengthList.sort(Comparator.naturalOrder()); //sorts through the list of material lengths and arranges them in the
@@ -57,11 +68,11 @@ public class MaterialsCalculator {
         //---length-wise---//
         for (int x = 0; x < lengthList.size(); x++) {
             //this is what checks if the length of a material is long enough (<1 = yes / >1 = no)
-            if(carportLength / lengthList.get(x) < 1 && lengthFlag){
-                for (int i = 0; i < allMaterials.size(); i++) {
+            if(carportLength / lengthList.get(x) <= 1.0 && lengthFlag){
+                for (int i = 0; i < understernList.size(); i++) {
                     //compares the length that was long enough to the materials and adds the one that matches its length
-                    if(allMaterials.get(i).getLength() == lengthList.get(x)){
-                       BOM.add(new OrderLine(allMaterials.get(i), 1, "Understernbrædder til siderne"));
+                    if(understernList.get(i).getLength() == lengthList.get(x)){
+                       BOM.add(new OrderLine(understernList.get(i), 2, "Understernbrædder til siderne"));
                     }
                 }
                 lengthFlag = false;
@@ -69,25 +80,24 @@ public class MaterialsCalculator {
                 for (int i = 0; i < lengthList.size(); i++) {
                     //this is what checks if the length of a material is long enough (<1 = yes / >1 = no), with the addition
                     //of the longest piece from the list, which, because it is sorted, is always the last piece
-                    if(carportLength / (lengthList.get(lengthList.size()-1) + lengthList.get(i)) < 1 && lengthFlag){
+                    if(carportLength / (lengthList.get(lengthList.size()-1) + lengthList.get(i)) <= 1.0 && lengthFlag){
                         //compares the length that was long enough to the materials and adds the one that matches its length
                         //just does it twice: once for the longest piece and once for whichever piece added with that achieved
                         //the best length
-                        for (int j = 0; j < allMaterials.size(); j++) {
+                        for (int j = 0; j < understernList.size(); j++) {
                             //if the 2nd piece is as long as the first piece, then both are added in the same orderLine
                             if(lengthList.get(lengthList.size()-1).equals(lengthList.get(i))){
-                                if(allMaterials.get(j).getLength() == lengthList.get(lengthList.size()-1)){
-                                    BOM.add(new OrderLine(allMaterials.get(j), 2, "Understernbrædder til siderne"));
+                                if(understernList.get(j).getLength() == lengthList.get(lengthList.size()-1)){
+                                    BOM.add(new OrderLine(understernList.get(j), 4, "Understernbrædder til siderne"));
                                 }
                             }else {
-                                if (allMaterials.get(j).getLength() == lengthList.get(lengthList.size() - 1)) {
-                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til siderne"));
+                                if (understernList.get(j).getLength() == lengthList.get(lengthList.size() - 1)) {
+                                    BOM.add(new OrderLine(understernList.get(j), 2, "Understernbrædder til siderne"));
                                 }
-                                if (allMaterials.get(j).getLength() == lengthList.get(i)) {
-                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til siderne"));
+                                if (understernList.get(j).getLength() == lengthList.get(i)) {
+                                    BOM.add(new OrderLine(understernList.get(j), 2, "Understernbrædder til siderne"));
                                 }
                             }
-                            return;
                         }
                         lengthFlag = false; //stops the loop from adding more pieces
                     }
@@ -97,11 +107,11 @@ public class MaterialsCalculator {
         //---width-wise---//
         for (int x = 0; x < widthList.size(); x++) {
             //this is what checks if the length of a material is long enough (<1 = yes / >1 = no)
-            if(carportWidth / widthList.get(x) < 1){
-                for (int i = 0; i < allMaterials.size(); i++) {
+            if(carportWidth / widthList.get(x) <= 1.0 && widthFlag){
+                for (int i = 0; i < understernList.size(); i++) {
                     //compares the length that was long enough to the materials and adds the one that matches its length
-                    if(allMaterials.get(i).getWidth() == widthList.get(x)){
-                        BOM.add(new OrderLine(allMaterials.get(i), 1, "Understernbrædder til for & bag ende"));
+                    if(understernList.get(i).getLength() == widthList.get(x)){
+                        BOM.add(new OrderLine(understernList.get(i), 2, "Understernbrædder til for & bag ende"));
                     }
                 }
                 widthFlag = false;
@@ -109,25 +119,24 @@ public class MaterialsCalculator {
                 for (int i = 0; i < widthList.size(); i++) {
                     //this is what checks if the length of a material is long enough (<1 = yes / >1 = no), with the addition
                     //of the longest piece from the list, which, because it is sorted, is always the last piece
-                    if(carportWidth / (widthList.get(widthList.size()-1) + widthList.get(x)) < 1 && widthFlag){
+                    if(carportWidth / (widthList.get(widthList.size()-1) + widthList.get(i)) <= 1.0 && widthFlag){
                         //compares the length that was long enough to the materials and adds the one that matches its length
                         //just does it twice: once for the longest piece and once for whichever piece added with that achieved
                         //the best length
-                        for (int j = 0; j < allMaterials.size(); j++) {
+                        for (int j = 0; j < understernList.size(); j++) {
                             //if the 2nd piece is as long as the first piece, then both are added in the same orderLine
                             if(widthList.get(widthList.size()-1).equals(widthList.get(i))){
-                                if(allMaterials.get(j).getWidth() == widthList.get(widthList.size()-1)){
-                                    BOM.add(new OrderLine(allMaterials.get(j), 2, "Understernbrædder til for & bag ende"));
+                                if(understernList.get(j).getLength() == widthList.get(widthList.size()-1)){
+                                    BOM.add(new OrderLine(understernList.get(j), 4, "Understernbrædder til for & bag ende"));
                                 }
                             }else {
-                                if (allMaterials.get(j).getWidth() == widthList.get(widthList.size() - 1)) {
-                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til for & bag ende"));
+                                if (understernList.get(j).getLength() == widthList.get(widthList.size() - 1)) {
+                                    BOM.add(new OrderLine(understernList.get(j), 2, "Understernbrædder til for & bag ende"));
                                 }
-                                if (allMaterials.get(j).getWidth() == widthList.get(i)) {
-                                    BOM.add(new OrderLine(allMaterials.get(j), 1, "Understernbrædder til for & bag ende"));
+                                if (understernList.get(j).getLength() == widthList.get(i)) {
+                                    BOM.add(new OrderLine(understernList.get(j), 2, "Understernbrædder til for & bag ende"));
                                 }
                             }
-                            return;
                         }
                         widthFlag = false; //stops the loop from adding more pieces
                     }
