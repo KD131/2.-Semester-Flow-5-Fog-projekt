@@ -89,10 +89,16 @@ public class Order
     
     public static void validateShed(int carportWidth, int carportLength, int shedWidth, int shedLength) throws IllegalDimensionsException
     {
+        if ((shedLength == 0 || shedWidth == 0) && (shedLength != 0 || shedWidth != 0))
+        {
+            throw new IllegalDimensionsException("Skuret kan ikke være 0 cm på kun én side.");
+        }
+        
         if (shedLength > carportLength)
         {
             throw new IllegalDimensionsException("Skur kan ikke være længere end carport.");
         }
+        
         int widthHang = 60;
         int maxWidth = carportWidth - widthHang;
         if (shedWidth > maxWidth)
