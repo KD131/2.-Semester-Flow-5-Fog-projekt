@@ -33,7 +33,7 @@ public class MaterialsCalculator {
     
     public List<OrderLine> showBOM()
     {
-        //carport
+    //--carport
         calcUnderstern(carportLength, carportWidth);
         calcOverstern(carportLength, carportWidth);
         calcRemme(carportLength);
@@ -41,10 +41,15 @@ public class MaterialsCalculator {
         calcStolper(shedLength,shedWidth);
         calcVandbrædt(carportLength,carportWidth);
         calcTagplader(carportLength,carportWidth);
-        //shed
 
-        //misc (like screws and stuff)
-        calcSkruer(carportLength,carportWidth);
+    //--shed (these all have individual controllers that checks if the shed actually exist, but it could be made a common if-statement instead)
+        calcDørBagside();
+        calcLøsholter(shedLength,shedWidth);
+        calcBeklædning(shedLength,shedWidth);
+
+    //--misc (like screws and stuff)
+        calcMisc(carportLength,carportWidth);
+
         return BOM; //bom = bill of materials
     }
 //----------------------------------------Carport-----------------------------------------------------------------------
@@ -567,11 +572,149 @@ public class MaterialsCalculator {
     }
 //----------------------------------------Shed--------------------------------------------------------------------------
 
+//--Z-thingy on backside of shed door (only ever need one and its not like the door will ever change, at least not in a way we can control...)
+    public void calcDørBagside(){
+        if(shedLength != 0 || shedWidth != 0){
+            //we just need one so ¯\_(ツ)_/¯
+            for (int x = 0; x < allMaterials.size(); x++) {
+                if (allMaterials.get(x).getName().toLowerCase().contains("lægte")) {
+                    BOM.add(new OrderLine(allMaterials.get(x), 1, "Til z på bagside af dør"));
+                }
+            }
+        }
+    }
+
+//--Løsholter, need to go along the length and width of the shed at both the top and bottom of each wall
+    //the code here is identical to much of the stuff used above (no need to reinvent the wheel after all)
+    public void calcLøsholter(double shedLength, double shedWidth){
+        if(shedLength != 0 || shedWidth != 0){
+
+            List<Integer> lengthList = new ArrayList<>();
+            List<Integer> widthList = new ArrayList<>();
+            List<Material> løsholterList = new ArrayList<>();
+
+            for (int x = 0; x < allMaterials.size(); x++) {
+                if (allMaterials.get(x).getFunctionality().toLowerCase().contains("reglar")) { //what it's called apparently
+                    lengthList.add(allMaterials.get(x).getLength());
+                    widthList.add(allMaterials.get(x).getLength());
+                    løsholterList.add(allMaterials.get(x));
+                }
+            }
+
+            lengthList.sort(Comparator.naturalOrder());
+            widthList.sort(Comparator.naturalOrder());
+
+            boolean lengthFlag = true;
+            boolean widthFlag = true;
+
+            //---length-wise---// (side)
+            for (int x = 0; x < lengthList.size(); x++) {
+                if (shedLength / lengthList.get(x) <= 1.0 && lengthFlag) {
+                    for (int i = 0; i < løsholterList.size(); i++) {
+                        if (løsholterList.get(i).getLength() == lengthList.get(x)) {
+                            BOM.add(new OrderLine(løsholterList.get(i), 4, "Løsholter til skur sider"));
+                        }
+                    }
+                    lengthFlag = false;
+                }
+            }
+            for (int x = 0; x < widthList.size(); x++) {
+                if (shedLength / (lengthList.get(x) * 2) <= 1.0 && lengthFlag) {
+                    for (int i = 0; i < løsholterList.size(); i++) {
+                        if (løsholterList.get(i).getLength() == lengthList.get(x)) {
+                            BOM.add(new OrderLine(løsholterList.get(i), 8, "Løsholter til skur sider"));
+                        }
+                    }
+                    lengthFlag = false;
+                }
+                else if(lengthFlag){
+                    for (int i = 0; i < lengthList.size(); i++) {
+                        if(shedLength / (lengthList.get(lengthList.size()-1) + lengthList.get(i)) <= 1.0 && lengthFlag){
+                            for (int j = 0; j < løsholterList.size(); j++) {
+                                if(lengthList.get(lengthList.size()-1).equals(lengthList.get(i))){
+                                    if(løsholterList.get(j).getLength() == lengthList.get(lengthList.size()-1)){
+                                        BOM.add(new OrderLine(løsholterList.get(j), 8, "Løsholter til skur sider"));
+                                    }
+                                }else {
+                                    if (løsholterList.get(j).getLength() == lengthList.get(lengthList.size() - 1)) {
+                                        BOM.add(new OrderLine(løsholterList.get(j), 4, "Løsholter til skur sider"));
+                                    }
+                                    if (løsholterList.get(j).getLength() == lengthList.get(i)) {
+                                        BOM.add(new OrderLine(løsholterList.get(j), 4, "Løsholter til skur sider"));
+                                    }
+                                }
+                            }
+                            lengthFlag = false;
+                        }
+                    }
+                }
+            }
+            //---width-wise---// (gavl)
+            for (int x = 0; x < widthList.size(); x++) {
+                if (shedWidth / widthList.get(x) <= 1.0 && widthFlag) {
+                    for (int i = 0; i < løsholterList.size(); i++) {
+                        if (løsholterList.get(i).getLength() == widthList.get(x)) {
+                            BOM.add(new OrderLine(løsholterList.get(i), 4, "Løsholter til skur gavle"));
+                        }
+                    }
+                    widthFlag = false;
+                }
+            }
+            for (int x = 0; x < widthList.size(); x++) {
+                if (shedWidth / (widthList.get(x) * 2) <= 1.0 && widthFlag) {
+                    for (int i = 0; i < løsholterList.size(); i++) {
+                        if (løsholterList.get(i).getLength() == widthList.get(x)) {
+                            BOM.add(new OrderLine(løsholterList.get(i), 8, "Løsholter til skur gavle"));
+                        }
+                    }
+                    widthFlag = false;
+                }
+                else if(widthFlag){
+                    for (int i = 0; i < widthList.size(); i++) {
+                        if(shedWidth / (widthList.get(widthList.size()-1) + widthList.get(i)) <= 1.0 && widthFlag){
+                            for (int j = 0; j < løsholterList.size(); j++) {
+                                if(widthList.get(widthList.size()-1).equals(widthList.get(i))){
+                                    if(løsholterList.get(j).getLength() == widthList.get(widthList.size()-1)){
+                                        BOM.add(new OrderLine(løsholterList.get(j), 8, "Løsholter til skur gavle"));
+                                    }
+                                }else {
+                                    if (løsholterList.get(j).getLength() == widthList.get(widthList.size() - 1)) {
+                                        BOM.add(new OrderLine(løsholterList.get(j), 4, "Løsholter til skur gavle"));
+                                    }
+                                    if (løsholterList.get(j).getLength() == widthList.get(i)) {
+                                        BOM.add(new OrderLine(løsholterList.get(j), 4, "Løsholter til skur gavle"));
+                                    }
+                                }
+                            }
+                            widthFlag = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+//--Beklædning
+    public void calcBeklædning(double shedLength, double shedWidth){
+        if(shedLength != 0 || shedWidth != 0) {
+            //we need two layers, with the outermost one having 1 less on each side so that it can be offset from the innermost layer
+            double totalLength = shedLength * 2 + shedWidth * 2;
+            //the amount needed is the total length divided by the width of the panels (100mm), then doubled and minu 4 to account for the 1 less on each side
+            int amountNeeded = (int) Math.ceil((totalLength / 100) * 2) - 4;
+
+            for (int x = 0; x < allMaterials.size(); x++) {
+                //this search isn't very dynamic, but this is also one of those instances where you as admin are very unlikely to get panels of longer or
+                //shorter lengths, due to the fact that sheds on this type of carport are always the same height
+                if (allMaterials.get(x).getName().toLowerCase().contains("19x100 mm.") && allMaterials.get(x).getLength() == 2100) {
+                    BOM.add(new OrderLine(allMaterials.get(x), amountNeeded, "Til beklædning af skur 1 på 2"));
+                }
+            }
+        }
+    }
 
 //----------------------------------------Misc--------------------------------------------------------------------------
 
-//--Skruer
-    public void calcSkruer(double carportLength, double carportWidth){
+    public void calcMisc(double carportLength, double carportWidth){
 
     //--Tagplade screws
         int tagpladeScrewsNum = (int)Math.ceil((carportWidth/1000)/2); //we need half the number of packs of screws per amount of tagplader
@@ -624,7 +767,7 @@ public class MaterialsCalculator {
         }
 
     //--Rem & Stolpe stuff (don't understand how this is calculated in the pdf, but I'll just go according to where Rem and Stolpe meets)
-        int stuffNeeded = 0;
+        int stuffNeeded;
 
         if(shedLength == 0 || shedWidth == 0) {
             stuffNeeded = 6;
@@ -642,5 +785,39 @@ public class MaterialsCalculator {
             }
         }
 
+    //If there is a shed included:
+        if(shedLength != 0 || shedWidth != 0) {
+
+        //--Beklædning screws (yet another instance of not really containing much logic behind amounts, hence the static result)
+            for (int x = 0; x < allMaterials.size(); x++) {
+                if (allMaterials.get(x).getName().toLowerCase().contains("4,5 x 70 mm. skruer")) {
+                    BOM.add(new OrderLine(allMaterials.get(x), 2, "Til montering af yderste beklædning"));
+                }
+                if (allMaterials.get(x).getName().toLowerCase().contains("4,5 x 50 mm. skruer")) {
+                    BOM.add(new OrderLine(allMaterials.get(x), 2, "Til montering af inderste beklædning"));
+                }
+            }
+
+        //--Stalddørsgreb (we just need the one, because there is just one door)
+            for (int x = 0; x < allMaterials.size(); x++) {
+                if (allMaterials.get(x).getName().toLowerCase().contains("stalddørsgreb")) {
+                    BOM.add(new OrderLine(allMaterials.get(x), 1, "Til lås på dør i skur"));
+                }
+            }
+
+        //--Stalddørsgreb (we just need one for each side of the one door, so: two)
+            for (int x = 0; x < allMaterials.size(); x++) {
+                if (allMaterials.get(x).getName().toLowerCase().contains("t hængsel")) {
+                    BOM.add(new OrderLine(allMaterials.get(x), 2, "Til skurdør"));
+                }
+            }
+
+        //--Vinkelbeslag til løsholter (it could be double that of løsholter, but it's just going to be a static amount)
+            for (int x = 0; x < allMaterials.size(); x++) {
+                if (allMaterials.get(x).getName().toLowerCase().contains("vinkelbeslag")) {
+                    BOM.add(new OrderLine(allMaterials.get(x), 32, "Til montering af løsholter i skur"));
+                }
+            }
+        }
     }
 }
