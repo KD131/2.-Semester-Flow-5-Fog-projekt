@@ -58,6 +58,8 @@ public class SVG {
 
     private final String textTemplate = "<text x=\"%f\" y=\"%f\" text-anchor=\"middle\" class=\"%s\" transform=\"%s\">%s</text>";
 
+    private final String rotoRectTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" transform=\"rotate(%f)\" style=\"stroke: black; fill: white\" />";
+
     public SVG(int x, int y, String viewBox, int width, int height)
     {
         this.x = x;
@@ -92,17 +94,10 @@ public class SVG {
         svg.append(String.format(l, rectTemplate, x, y, height, width));
     }
 
-    // SEUDO CODE FOR DRAWING DIFFERENT SPECIFIC MATERIALS
-
-    private final String sternTemplate =  "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke: black; fill: white\" />";
-
-    public void addStern(double x, double y, double height, double width)
+    public void addRotoRect(double x, double y, double height, double width, double rotate)
     {
-        svg.append((String.format(l, sternTemplate,x, y, height, width)));
+        svg.append(String.format(l, rotoRectTemplate,x,y,height,width,rotate));
     }
-
-    // SEUDE CODE FOR DRAWING DIFFERENT SPECIFIC COMPONENTS
-
 
     public void addLine(double x1, double y1, double x2, double y2 )
     {

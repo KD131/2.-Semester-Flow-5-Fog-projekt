@@ -67,6 +67,37 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         double constructionWidth = carportWidth-yTotalHang;
         double middleDistance = (constructionLength/2) - shedLength;
 
+        //flyt til stkliste beregner
+        double sparDistance = 55;
+        double sparRounded = Math.round(carportLength/sparDistance);
+        int sparAmount = (int) sparRounded;
+        double exactSparDistance = carportLength/sparAmount;
+
+        //calculate slope degree on roof
+        //a=(y2−y1)/(x2−x1)
+        double roofSlope = Math.toDegrees(((carportHeight-(carportHeight-10))/(carportLength)));
+        double roofSlopePercent = ((carportHeight-(carportHeight-10))/(carportLength));
+
+        //materiale specifikke dimensioner
+        double stolpeTykkelse = 9.7;
+        double spærbredde = 4.5;
+        double remTykkelse = 4.5;
+        double loeshoelterTykkelse = 4.5;
+        double beklaedningTykkelse = 1.9;
+        double beklaedningBredde = 10.0;
+        double beklaedningLaengde = 210;
+        double spærhøjde = 19.5;
+        double remhøjde = 19.5;
+        double sternhøjde = 20;
+        double sparReduction = 5;
+        double underStern = 2.5;
+        double overStern = 2.5;
+
+
+        //udregner beklædning antal
+        int xWallAmount = (int)  (shedLength/beklaedningBredde);
+        int yWallAmount = (int) (shedWidth/beklaedningBredde);
+
 
         String SVGWidthStr = String.valueOf(SVGWidth);
         String topSVGHeightStr = String.valueOf(topSVGHeight);
@@ -82,7 +113,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
 
         //adds svg for side view
         SVG sideSVG = new SVG(0,0, sideViewBoxStr,100,100);
-        SVG sideViewSVG = new SVG(30,0, sideViewBoxStr, 100, 100);
+        SVG sideViewSVG = new SVG(40,0, sideViewBoxStr, 100, 100);
 
         //adds style and arrow devs
         topSVG.addDevsTemplate();
@@ -111,120 +142,109 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         String ySideAxisMid = String.valueOf((carportHeight/2)+50);
         String xFrontHangMid = String.valueOf(xFrontHang);
 
-        //tegner pile og tekst
-            //top view text + arrows
-                //top svg y axis arrow and dimension.
-                topSVG.addArrow(15,150,15,150+carportWidth);
-                topSVG.addText( 0, 0, "small", "translate(10,"+ yTopAxisMid +") rotate(-90)",carportWidthStr + " cm");
+        //side svg height x axis arrow and dimension
+        sideSVG.addArrow(15, 0, 15, carportHeight);
+        sideSVG.addText(0, 0, "small", "translate(10, " + ySideAxisMid + ") rotate(-90)", carportFrontHeightStr + " cm");
 
-                //top svg x axis arrow and dimension
-                topSVG.addArrow(30,150+15+carportWidth, 30+carportLength, 150+15+carportWidth);
-                topSVG.addText( 0, 150, "small", "translate("+ xAxisMid +", " + yAxisMax+")",carportLengthStr + " cm");
+        sideSVG.addArrow(30, carportHeight-carportInnerHeight, 30, carportHeight);
+        sideSVG.addText(0, 0, "small", "translate(25, " + ySideAxisMid + ") rotate(-90)", carportInnerHeightStr + " cm");
 
-                //side view text + arrows
+        sideSVG.addArrow(carportLength+55, 10, carportLength+55, carportHeight);
+        sideSVG.addText(0, 0, "small", "translate("+ (carportLength+70) + ", " + ySideAxisMid + ") rotate(-90)", carportBackHeightStr + " cm");
+
+
+                       //side view text + arrows
                 if(constructionLength/2 > shedLength) {
-                    //side svg height x axis arrow and dimension
-                    sideSVG.addArrow(15, 0, 15, carportHeight);
-                    sideSVG.addText(0, 0, "small", "translate(10, " + ySideAxisMid + ") rotate(-90)", carportFrontHeightStr + " cm");
-
                     //sideSVG start - fronthang dimension and arrow.
-                    sideSVG.addArrow(30, 50 + carportHeight, 30 + xFrontHang, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + xFrontHangMid + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
+                    sideSVG.addArrow(40, 50 + carportHeight, 40 + xFrontHang, 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + xFrontHangMid + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
 
                     //side svg 1st pole - 2nd pole length dimension and arrow
-                    sideSVG.addArrow(30 + xFrontHang, 50 + carportHeight, 30 + xFrontHang + (constructionLength / 2), 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength - shedWidth) / 2 + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse, 50 + carportHeight, 40 + xFrontHang + (constructionLength / 2), 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + (30 + xFrontHang + constructionLength - shedWidth) / 2 + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
 
                     //side svg middledistance arrow and dimension
-                    sideSVG.addArrow(30 + xFrontHang + (constructionLength / 2), 50 + carportHeight, 30 + xFrontHang + constructionLength - shedLength, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + (constructionLength / 2) + middleDistance / 2) + "," + carportFrontHeightStr + ")", middleDistanceStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse + (constructionLength / 2), 50 + carportHeight, 40 + xFrontHang + constructionLength - shedLength, 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + (30 + xFrontHang + (constructionLength / 2) + middleDistance / 2) + "," + carportFrontHeightStr + ")", middleDistanceStr + " cm");
 
                     //side svg shed width arrow and dimension
-                    sideSVG.addArrow(30 + xFrontHang + constructionLength - shedWidth, 50 + carportHeight, 30 + xFrontHang + constructionLength, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse + constructionLength - shedWidth, 50 + carportHeight, 40 + xFrontHang + constructionLength, 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + (30 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
 
                     //side svg xBackHang arrow and dimension
-                    sideSVG.addArrow(30 + xFrontHang + constructionLength, 50 + carportHeight, 30 + carportLength, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse + constructionLength, 50 + carportHeight, 40 + carportLength, 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + (30 + xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
                 }
 
                 if(constructionLength/2 < shedLength) {
-                    //side svg height x axis arrow and dimension
-                    sideSVG.addArrow(15, 0, 15, carportHeight);
-                    sideSVG.addText(0, 0, "small", "translate(10, " + ySideAxisMid + ") rotate(-90)", carportFrontHeightStr + " cm");
-
                     //sideSVG start - fronthang dimension and arrow.
-                    sideSVG.addArrow(30, 50 + carportHeight, 30 + xFrontHang, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + xFrontHangMid + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
+                    sideSVG.addArrow(40, 50 + carportHeight, 40 + xFrontHang, 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + xFrontHangMid + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
 
                     //side svg 1st pole - shed pole length dimension and arrow
-                    sideSVG.addArrow(30 + xFrontHang, 50 + carportHeight, 30 + xFrontHang + (constructionLength -shedLength), 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength - shedWidth) / 2 + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse, 50 + carportHeight, 40 + xFrontHang + (constructionLength -shedLength), 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + (30 + xFrontHang + constructionLength - shedWidth) / 2 + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
 
                     //side svg shed width arrow and dimension
-                    sideSVG.addArrow(30 + xFrontHang + constructionLength - shedWidth, 50 + carportHeight, 30 + xFrontHang + constructionLength, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse + constructionLength - shedWidth, 50 + carportHeight, 40 + xFrontHang + constructionLength, 50 + carportHeight);
+                    sideSVG.addText(0, 65, "small", "translate(" + (30 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
 
                     //side svg xBackHang arrow and dimension
-                    sideSVG.addArrow(30 + xFrontHang + constructionLength, 50 + carportHeight, 30 + carportLength, 50 + carportHeight);
-                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
+                    sideSVG.addArrow(40 + xFrontHang + stolpeTykkelse + constructionLength, 50 + carportHeight, 40 + carportLength, 50 + carportHeight);
+                    sideSVG.addText(0, 65 , "small", "translate(" + (30 + xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
                 }
 
-        //flyt til stkliste beregner
-        double sparDistance = 55;
-        double sparRounded = Math.round(carportLength/sparDistance);
-        int sparAmount = (int) sparRounded;
-        double exactSparDistance = carportLength/sparAmount;
-
-
-        //materiale specifikke dimensioner
-        double stolpeTykkelse = 9.7;
-        double spærbredde = 4.5;
-        double remTykkelse = 4.5;
-        double loeshoelterTykkelse = 4.5;
-        double beklaedningTykkelse = 1.9;
-        double beklaedningBredde = 10.0;
-        double beklaedningLaengde = 210;
-        double spærhøjde = 19.5;
-        double remhøjde = 19.5;
-        double sternhøjde = 20;
-        double sparReduction = 5;
-        double underStern = 2.5;
-        double overStern = 2.5;
-
-
-        //udregner beklædning antal
-        int xWallAmount = (int)  (shedLength/beklaedningBredde);
-        int yWallAmount = (int) (shedWidth/beklaedningBredde);
 
 
         //side view
         //stolper
+        sideViewSVG.addRect(xFrontHang+constructionLength-shedLength, 20, carportInnerHeight+5, stolpeTykkelse);
         for (int x = 0; x< 3; x++)
         {
             sideViewSVG.addRect(xFrontHang+(x*(constructionLength/2)), 20, carportInnerHeight+5, stolpeTykkelse);
         }
+
+
+        //calculate height difference per rafter because of slope.
+        //rise = pitch/run
+        double rise = roofSlopePercent*exactSparDistance;
+
+
         //spær
         for (int x = 0; x<sparAmount; x++)
         {
-            sideViewSVG.addRect(x*exactSparDistance,carportHeight-carportInnerHeight-spærhøjde, spærhøjde, spærbredde);
+            sideViewSVG.addRotoRect(x*exactSparDistance, x*rise + carportHeight-carportInnerHeight-spærhøjde, spærhøjde, spærbredde, roofSlope);
+
         }
 
+
+
+
         //rem - skal tiltes
-        sideViewSVG.addRect(0,carportHeight-carportInnerHeight, remhøjde,carportLength);
+        sideViewSVG.addRotoRect(0,carportHeight-carportInnerHeight, remhøjde,carportLength,roofSlope);
 
         //side stern - skal tiltes
-        sideViewSVG.addRect(0,0, sternhøjde,carportLength);
-
+        sideViewSVG.addRotoRect(0,0, sternhøjde,carportLength,roofSlope);
 
         //beklædning
         for (int x = 0; x<xWallAmount; x++)
         {
-            sideViewSVG.addRect(xFrontHang+constructionLength-shedLength+(x*beklaedningBredde),carportHeight-carportInnerHeight,beklaedningLaengde,beklaedningBredde);
+            sideViewSVG.addRect(0.5*stolpeTykkelse + xFrontHang+constructionLength-shedLength+(x*beklaedningBredde),carportHeight-carportInnerHeight,beklaedningLaengde-3,beklaedningBredde);
         }
 
 
         //top view
+
+        //tegner pile og tekst
+        //top view text + arrows
+        //top svg y axis arrow and dimension.
+        topSVG.addArrow(15,150,15,150+carportWidth);
+        topSVG.addText( 0, 0, "small", "translate(10,"+ yTopAxisMid +") rotate(-90)",carportWidthStr + " cm");
+
+        //top svg x axis arrow and dimension
+        topSVG.addArrow(30,150+15+carportWidth, 30+carportLength, 150+15+carportWidth);
+        topSVG.addText( 0, 150, "small", "translate("+ xAxisMid +", " + yAxisMax+")",carportLengthStr + " cm");
+
         //tegner skur
         //stolper
         for (int x = 0; x < 2; x++)
