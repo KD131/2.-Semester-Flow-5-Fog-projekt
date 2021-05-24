@@ -121,30 +121,54 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                 topSVG.addArrow(30,150+15+carportWidth, 30+carportLength, 150+15+carportWidth);
                 topSVG.addText( 0, 150, "small", "translate("+ xAxisMid +", " + yAxisMax+")",carportLengthStr + " cm");
 
-            //side view text + arrows
-                //side svg height x axis arrow and dimension
-                sideSVG.addArrow(15, 0, 15, carportHeight);
-                sideSVG.addText(0,0,"small","translate(10, "+ ySideAxisMid +") rotate(-90)", carportFrontHeightStr + " cm");
+                //side view text + arrows
+                if(constructionLength/2 > shedLength) {
+                    //side svg height x axis arrow and dimension
+                    sideSVG.addArrow(15, 0, 15, carportHeight);
+                    sideSVG.addText(0, 0, "small", "translate(10, " + ySideAxisMid + ") rotate(-90)", carportFrontHeightStr + " cm");
 
-                //sideSVG start - fronthang dimension and arrow.
-                sideSVG.addArrow(30,50+carportHeight, 30+xFrontHang,50+carportHeight);
-                sideSVG.addText(0,50,"small","translate("+ xFrontHangMid +","+ carportFrontHeightStr+")", xFrontHangStr + " cm");
+                    //sideSVG start - fronthang dimension and arrow.
+                    sideSVG.addArrow(30, 50 + carportHeight, 30 + xFrontHang, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + xFrontHangMid + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
 
-                //side svg 1st pole - 2nd pole length dimension and arrow
-                sideSVG.addArrow(30+xFrontHang, 50+carportHeight,30+xFrontHang+(constructionLength/2),50+carportHeight);
-                sideSVG.addText(0,50,"small","translate("+(30+xFrontHang+constructionLength-shedWidth)/2+","+carportFrontHeightStr+")", halfConstructionLengthStr + " cm");
+                    //side svg 1st pole - 2nd pole length dimension and arrow
+                    sideSVG.addArrow(30 + xFrontHang, 50 + carportHeight, 30 + xFrontHang + (constructionLength / 2), 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength - shedWidth) / 2 + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
 
-                //side svg middledistance arrow and dimension
-                sideSVG.addArrow(30+xFrontHang+(constructionLength/2), 50+carportHeight, 30+xFrontHang+constructionLength-shedLength, 50+carportHeight);
-                sideSVG.addText(0,50,"small", "translate("+(30+xFrontHang+(constructionLength/2)+middleDistance/2) + "," + carportFrontHeightStr + ")",middleDistanceStr + " cm");
+                    //side svg middledistance arrow and dimension
+                    sideSVG.addArrow(30 + xFrontHang + (constructionLength / 2), 50 + carportHeight, 30 + xFrontHang + constructionLength - shedLength, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + (constructionLength / 2) + middleDistance / 2) + "," + carportFrontHeightStr + ")", middleDistanceStr + " cm");
 
-                //side svg shed width arrow and dimension
-                sideSVG.addArrow(30+xFrontHang+constructionLength-shedWidth, 50+carportHeight, 30+xFrontHang+constructionLength, 50+carportHeight);
-                sideSVG.addText(0,50,"small","translate("+(30+xFrontHang+(constructionLength-0.5*shedLength)) +"," + carportFrontHeightStr + ")",shedLengthStr + " cm");
+                    //side svg shed width arrow and dimension
+                    sideSVG.addArrow(30 + xFrontHang + constructionLength - shedWidth, 50 + carportHeight, 30 + xFrontHang + constructionLength, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
 
-                //side svg xBackHang arrow and dimension
-                sideSVG.addArrow(30+xFrontHang + constructionLength, 50 + carportHeight, 30+ carportLength, 50 + carportHeight);
-                sideSVG.addText(0,50,"small", "translate("+(30+xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")",xBackHangStr + " cm");
+                    //side svg xBackHang arrow and dimension
+                    sideSVG.addArrow(30 + xFrontHang + constructionLength, 50 + carportHeight, 30 + carportLength, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
+                }
+
+                if(constructionLength/2 < shedLength) {
+                    //side svg height x axis arrow and dimension
+                    sideSVG.addArrow(15, 0, 15, carportHeight);
+                    sideSVG.addText(0, 0, "small", "translate(10, " + ySideAxisMid + ") rotate(-90)", carportFrontHeightStr + " cm");
+
+                    //sideSVG start - fronthang dimension and arrow.
+                    sideSVG.addArrow(30, 50 + carportHeight, 30 + xFrontHang, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + xFrontHangMid + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
+
+                    //side svg 1st pole - shed pole length dimension and arrow
+                    sideSVG.addArrow(30 + xFrontHang, 50 + carportHeight, 30 + xFrontHang + (constructionLength -shedLength), 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength - shedWidth) / 2 + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
+
+                    //side svg shed width arrow and dimension
+                    sideSVG.addArrow(30 + xFrontHang + constructionLength - shedWidth, 50 + carportHeight, 30 + xFrontHang + constructionLength, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
+
+                    //side svg xBackHang arrow and dimension
+                    sideSVG.addArrow(30 + xFrontHang + constructionLength, 50 + carportHeight, 30 + carportLength, 50 + carportHeight);
+                    sideSVG.addText(0, 50, "small", "translate(" + (30 + xFrontHang + constructionLength) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
+                }
 
         //flyt til stkliste beregner
         double sparDistance = 55;
