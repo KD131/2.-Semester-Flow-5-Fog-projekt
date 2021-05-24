@@ -1,4 +1,4 @@
-﻿CREATE DATABASE  IF NOT EXISTS `carport` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `carport` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `carport`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
@@ -96,7 +96,7 @@ CREATE TABLE `materials` (
 
 LOCK TABLES `materials` WRITE;
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
-INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt','Stk',0,0,3600,200,25),(2,'25x200 mm. trykimp. Brædt','Stk',0,0,5400,200,25),(3,'25x125mm. trykimp. Brædt','Stk',0,0,3600,125,25),(4,'25x125mm. trykimp. Brædt','Stk',0,0,5400,125,25),(5,'38x73 mm. Lægte \n\nubh.','Stk',0,0,4200,73,38),(6,'45x95 mm. Reglar ub.','Stk',0,0,2700,95,45),(7,'45x95 mm. Reglar ub.','Stk',0,0,2400,95,45),(8,'45x195 mm. \n\nspærtræ ubh.','Stk',0,0,6000,195,45),(9,'45x195 mm. spærtræ ubh.','Stk',0,0,4800,195,45),(10,'97x97 mm. trykimp. \n\nStolpe','Stk',0,0,3000,97,97),(11,'19x100 mm. trykimp. Brædt','Stk',0,0,2100,100,19),(12,'19x100 mm. trykimp. Brædt','Stk',0,0,5400,100,19),(13,'19x100 mm. trykimp. Brædt','Stk',0,0,3600,100,19),(14,'Plastmo Ecolite blåtonet','Stk',0,0,6000,0,0),(15,'Plastmo Ecolite \r\rblåtonet','Stk',0,0,3600,0,0),(16,'Plastmo bundskruer 200 stk.','Pakke',0,0,0,0,0),(17,'Hulbånd 1x20 mm. 10 mtr.','Rulle',0,0,0,0,0),(18,'Universal 190 mm højre','Stk',0,0,190,0,0),(19,'Universal 190 mm venstre','Stk',0,0,190,0,0),(20,'4,5 x 60 mm. skruer 200 \n\nstk.','Pakke',0,0,60,0,0),(21,'4,0 x 50 mm. beslagskruer 250\nstk.','Pakke',0,0,50,0,0),(22,'Bræddebolt 10 x 120 mm.','Stk',0,0,120,10,0),(23,'Firkantskiver 40x40x11mm','Stk',0,0,11,40,40),(24,'4,5 x 70 mm. Skruer 400 stk.','Pakke',0,0,70,0,0),(25,'4,5 x 50 mm. Skruer 300 \n\nstk.','Pakke',0,0,50,0,0),(26,'Stalddørsgreb 50x75','Sæt',0,0,75,50,0),(27,'T hængsel 390 mm','Stk',0,0,390,0,0),(28,'Vinkelbeslag \n\n35','Stk',0,0,0,0,0);
+INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt','Stk',0,0,3600,200,25),(2,'25x200 mm. trykimp. Brædt','Stk',0,0,5400,200,25),(3,'25x125mm. trykimp. Brædt','Stk',0,0,3600,125,25),(4,'25x125mm. trykimp. Brædt','Stk',0,0,5400,125,25),(5,'38x73 mm. Lægte ubh.','Stk',0,0,4200,73,38),(6,'45x95 mm. Reglar ubh.','Stk',0,0,2700,95,45),(7,'45x95 mm. Reglar ubh.','Stk',0,0,2400,95,45),(8,'45x195 mm. \rspærtræ ubh.','Stk',0,0,6000,195,45),(9,'45x195 mm. spærtræ ubh.','Stk',0,0,4800,195,45),(10,'97x97 mm. trykimp. \rStolpe','Stk',0,0,3000,97,97),(11,'19x100 mm. trykimp. Brædt','Stk',0,0,2100,100,19),(12,'19x100 mm. trykimp. Brædt','Stk',0,0,5400,100,19),(13,'19x100 mm. trykimp. Brædt','Stk',0,0,3600,100,19),(14,'Plastmo Ecolite blåtonet','Stk',0,0,6000,0,0),(15,'Plastmo Ecolite \r\rblåtonet','Stk',0,0,3600,0,0),(16,'Plastmo bundskruer 200 stk.','Pakke',0,0,0,0,0),(17,'Hulbånd 1x20 mm. 10 mtr.','Rulle',0,0,10000,0,0),(18,'Universal 190 mm højre','Stk',0,0,190,0,0),(19,'Universal 190 mm venstre','Stk',0,0,190,0,0),(20,'4,5 x 60 mm. skruer 200 \rstk.','Pakke',0,0,60,0,0),(21,'4,0 x 50 mm. beslagskruer 250\nstk.','Pakke',0,0,50,0,0),(22,'Bræddebolt 10 x 120 mm.','Stk',0,0,120,10,0),(23,'Firkantskiver 40x40x11mm','Stk',0,0,11,40,40),(24,'4,5 x 70 mm. Skruer 400 stk.','Pakke',0,0,70,0,0),(25,'4,5 x 50 mm. Skruer 300 stk.','Pakke',0,0,50,0,0),(26,'Stalddørsgreb 50x75 mm.','Sæt',0,0,75,50,0),(27,'T hængsel 390 mm.','Stk',0,0,390,0,0),(28,'Vinkelbeslag \r35 mm.','Stk',0,0,0,0,0);
 /*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,NULL,'2021-05-07 09:40:40',NULL,1,'Godkendt',360,360,150,150),(2,NULL,'2021-05-07 09:41:31',NULL,1,'Bestilt',630,630,270,240),(3,NULL,'2021-05-10 09:19:08',NULL,1,'Bestilt',510,510,0,0),(4,NULL,'2021-05-10 09:19:56',NULL,1,'Bestilt',360,240,0,150),(6,NULL,'2021-05-11 08:42:24',NULL,1,'Bestilt',300,720,0,0),(7,NULL,'2021-05-11 08:42:31',NULL,1,'Bestilt',780,660,240,240),(8,NULL,'2021-05-11 21:19:38',NULL,1,'Bestilt',600,540,0,0),(9,NULL,'2021-05-18 08:26:51',NULL,1,'Bestilt',600,390,240,540),(10,NULL,'2021-05-18 08:27:02',NULL,1,'Bestilt',660,600,0,0),(11,NULL,'2021-05-22 14:32:03',NULL,1,'Bestilt',630,750,270,690),(12,NULL,'2021-05-22 14:37:32',NULL,6,'Bestilt',360,300,0,0),(13,NULL,'2021-05-22 14:38:15',NULL,6,'Bestilt',600,600,0,0),(14,NULL,'2021-05-22 14:38:29',NULL,6,'Bestilt',480,600,270,540);
+INSERT INTO `orders` VALUES (1,NULL,'2021-05-07 09:40:40',NULL,1,'Godkendt',360,360,150,150),(2,NULL,'2021-05-07 09:41:31',NULL,1,'Bestilt',630,630,270,240),(3,NULL,'2021-05-10 09:19:08',NULL,1,'Bestilt',780,600,210,540),(4,NULL,'2021-05-10 09:19:56',NULL,1,'Bestilt',360,240,0,150),(6,NULL,'2021-05-11 08:42:24',NULL,1,'Bestilt',300,720,0,0),(7,NULL,'2021-05-11 08:42:31',NULL,1,'Bestilt',780,660,240,240),(8,NULL,'2021-05-11 21:19:38',NULL,1,'Bestilt',600,540,0,0),(9,NULL,'2021-05-18 08:26:51',NULL,1,'Bestilt',600,390,240,540),(10,NULL,'2021-05-18 08:27:02',NULL,1,'Bestilt',660,600,0,0),(11,NULL,'2021-05-22 14:32:03',NULL,1,'Bestilt',630,750,270,690),(12,NULL,'2021-05-22 14:37:32',NULL,6,'Bestilt',360,300,0,0),(13,NULL,'2021-05-22 14:38:15',NULL,6,'Bestilt',600,600,0,0),(14,NULL,'2021-05-22 14:38:29',NULL,6,'Bestilt',480,600,270,540);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-22 21:08:04
+-- Dump completed on 2021-05-24 17:23:38
