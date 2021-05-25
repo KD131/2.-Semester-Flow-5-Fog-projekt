@@ -1,12 +1,15 @@
 package web.commands;
 
+import business.entities.Material;
 import business.entities.Order;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.IllegalDimensionsException;
 import business.exceptions.UserException;
+import business.services.MaterialsCalculator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class UpdateDimensionsCommand extends OrderListCommand {
 
@@ -50,7 +53,9 @@ public class UpdateDimensionsCommand extends OrderListCommand {
             refreshList(request);
             return pageToShow;
         }
+        MaterialsCalculator calculator = new MaterialsCalculator((List<Material>) request.getServletContext().getAttribute("materialsList"), carportLength, carportWidth, shedLength, shedWidth);
         orderFacade.updateDimensions(orderID, carportLength, carportWidth, shedLength, shedWidth);
+        orderFacade.updateBOM(orderID, calculator.showBOM());
     
         refreshList(request);
         return pageToShow;
