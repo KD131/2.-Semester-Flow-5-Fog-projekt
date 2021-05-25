@@ -196,7 +196,7 @@ public class OrderMapper {
         }
     }
     
-    public void insertOrderLine(int orderID, OrderLine ol) throws DatabaseConnectionException
+    public void insertOrderLine(int orderID, OrderLine ol) throws DatabaseConnectionException, UserException
     {
         try (Connection connection = database.connect())
         {
@@ -216,7 +216,7 @@ public class OrderMapper {
                 throw new UserException(ex.getMessage());
             }
         }
-        catch (SQLException | UserException ex)
+        catch (SQLException ex)
         {
             throw new DatabaseConnectionException("Connection to database could not be established");
         }
