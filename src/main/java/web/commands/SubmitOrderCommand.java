@@ -1,13 +1,16 @@
 package web.commands;
 
+import business.entities.Material;
 import business.entities.Order;
 import business.entities.User;
 import business.exceptions.IllegalDimensionsException;
 import business.exceptions.UserException;
+import business.services.MaterialsCalculator;
 import business.services.OrderFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class SubmitOrderCommand extends CommandProtectedPage
 {
@@ -28,6 +31,7 @@ public class SubmitOrderCommand extends CommandProtectedPage
         int shedLength;
         int shedWidth;
         User user = (User) request.getSession().getAttribute("user");
+        List<Material> materialsList = (List<Material>) request.getServletContext().getAttribute("materialsList");
         
         try
         {
@@ -63,13 +67,17 @@ public class SubmitOrderCommand extends CommandProtectedPage
                 request.setAttribute("error", e.getMessage());
                 return "index";
             }
+    
+            MaterialsCalculator calculator = new MaterialsCalculator(materialsList, carportLength, carportWidth, shedLength, shedWidth);
             
-            Order order = new Order(user, carportLength, carportWidth, shedLength, shedWidth);
+            Order order = new Order(user, carportLength, carportWidth, shedLength, shedWidth, calculator.showBOM());
             orderFacade.insertOrder(order);
         }
         else
         {
-            Order order = new Order(user, carportLength, carportWidth);
+            MaterialsCalculator calculator = new MaterialsCalculator(materialsList, carportLength, carportWidth);
+            
+            Order order = new Order(user, carportLength, carportWidth, calculator.showBOM());
             orderFacade.insertOrder(order);
         }
         
