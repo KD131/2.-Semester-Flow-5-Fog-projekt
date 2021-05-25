@@ -52,4 +52,40 @@ public class MaterialMapper {
             throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
+    
+    public Material getMaterialById(int materialId) throws DatabaseConnectionException, UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "SELECT * FROM materials WHERE material_id = ?";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next())
+                {
+                    int materialID = rs.getInt("material_id");
+                    String name = rs.getString("name");
+                    String unit = rs.getString("unit");
+                    double buyPricePerUnit = rs.getDouble("buy_price_per_unit");
+                    double pricePerUnit = rs.getDouble("price_per_unit");
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    String functionality = rs.getString("functionality");
+                    
+                    return new Material(materialID, name, unit, buyPricePerUnit, pricePerUnit, length, width, height, functionality);
+                }
+                else
+                {
+                    throw new UserException("Material could not be found");
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
+        }
+    }
 }

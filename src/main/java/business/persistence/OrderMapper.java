@@ -1,6 +1,8 @@
 package business.persistence;
 
+import business.entities.Material;
 import business.entities.Order;
+import business.entities.OrderLine;
 import business.entities.OrderListing;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
@@ -182,7 +184,70 @@ public class OrderMapper {
             throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
-
-
+    
+    public void insertOrderLine(int orderID, OrderLine ol) throws DatabaseConnectionException
+    {
+        try (Connection connection = database.connect())
+        {
+            String sql = "INSERT INTO orderline (order_id, material_id, quantity, description) VALUES (?, ?, ?, ?)";
+        
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setInt(1, orderID);
+                ps.setInt(2, ol.getMaterial().getMaterialID());
+                ps.setInt(3, ol.getQuantity());
+                ps.setString(4, ol.getDescription());
+            
+                ps.executeUpdate();
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException | UserException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
+        }
+    }
+    
+    public List<OrderLine> getOrderLinesByOrderId(int orderId) throws DatabaseConnectionException, UserException
+    {
+        try (Connection connection = database.connect())
+        {
+            String sql = "SELECT * FROM orderline WHERE order_id = ?";
+            
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setInt(1, orderId);
+                
+                List<OrderLine> BOM = new ArrayList<>();
+                MaterialMapper materialMapper = new MaterialMapper(database);
+                
+                ResultSet rs = ps.executeQuery();
+                while (rs.next())
+                {
+                    int materialId = rs.getInt("material_id");
+                    Material material = materialMapper.getMaterialById(materialId);
+                    int quantity = rs.getInt("quantity");
+                    String description = rs.getString("description");
+                    
+                    BOM.add(new OrderLine(material, quantity, description));
+                }
+                return BOM;
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
+        }
+    }
+    
+    
+    
 }
 
