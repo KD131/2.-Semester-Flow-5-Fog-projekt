@@ -41,13 +41,32 @@
                             <td>${order.carportWidth}</td>
                             <td>${order.shedLength}</td>
                             <td>${order.shedWidth}</td>
-                            <td>${order.total}</td> <!-- vises kun hvis ordrestatus er godkendt -->
-                <!-- vises kun hvis ordrestatus er bestilt -->
-                <td><a href="${pageContext.request.contextPath}/fc/showSVGcustomer">Vis Tegning
-                </a></td>
-                <!-- vises kun hvis ordrestatus er betalt -->
-                <td><a href="${pageContext.request.contextPath}/fc/showBOMcustomer">Vis Stykliste
-                </a></td>
+                            <!-- vises kun hvis ordrestatus er godkendt eller højere-->
+                            <td>
+                                <c:set var="permitTotal" value="${{'Godkendt', 'Betalt', 'Afsluttet'}}"/>
+                                <c:choose>
+                                    <c:when test="${permitTotal.contains(order.status)}">
+                                        ${order.total}
+                                    </c:when>
+                                    <c:otherwise>
+                                        Venter behandling
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <!-- vises kun hvis ordrestatus er bestilt eller højere-->
+                            <td>
+                                <c:set var="permitSVG" value="${{'Bestilt', 'Godkendt', 'Betalt', 'Afsluttet'}}"/>
+                                <c:if test="${permitSVG.contains(order.status)}">
+                                    <a href="${pageContext.request.contextPath}/fc/showSVGcustomer">Vis Tegning</a>
+                                </c:if>
+                            </td>
+                            <!-- vises kun hvis ordrestatus er betalt eller højere-->
+                            <td>
+                                <c:set var="permitBOM" value="${{'Betalt', 'Afsluttet'}}"/>
+                                <c:if test="${permitBOM.contains(order.status)}">
+                                    <a href="${pageContext.request.contextPath}/fc/showBOMcustomer">Vis Stykliste</a>
+                                </c:if>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

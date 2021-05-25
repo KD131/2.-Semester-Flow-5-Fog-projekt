@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.Order;
+import business.entities.OrderLine;
 import business.entities.OrderListing;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
@@ -37,6 +38,16 @@ public class OrderFacade
     public void updateDimensions(int OrderID, int carportLength, int carportWidth, int shedLength, int shedWidth) throws UserException
     {
         orderMapper.updateDimensions(OrderID, carportLength, carportWidth, shedLength, shedWidth);
+    }
+    
+    public void updateBOM(int orderId, List<OrderLine> BOM) throws DatabaseConnectionException, UserException
+    {
+        orderMapper.updateBOM(orderId, BOM);
+    }
+    
+    public List<OrderLine> getOrderLinesByOrderId(int orderId) throws DatabaseConnectionException, UserException
+    {
+        return orderMapper.getOrderLinesByOrderId(orderId);
     }
 
     public void deleteOrder(int OrderID) throws UserException

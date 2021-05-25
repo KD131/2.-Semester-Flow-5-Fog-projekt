@@ -1,0 +1,20 @@
+overstern: fyr (25x200) - købspris = 12kr. /mtr -- salgspris = 18kr. /mtr 
+understern: fyr (25x125) - købspris = 10kr. /mtr -- salgspris = 16kr. /mtr 
+dør bagside: lægte (38x73) - købspris = 6kr. /mtr -- salgspris = 10kr. /mtr 
+løsholter: reglar(45x95) - købspris = 10kr. /mtr -- salgspris = 16kr. /mtr
+remme/spær: spærtræ(45x95) - købspris = 15kr. /mtr -- salgspris = 20kr. /mtr 
+stolper: fyr (97x97)- købspris = 28kr. /mtr -- salgspris = 35kr. /mtr
+beklædning/vandbrædt: fyr (19x100) - købspris = 5kr. /mtr -- salgspris = 8kr. /mtr 
+tagplader: ecolite (6 og 3,6 meter) - købspris (6m):175kr. (3,6m):75kr. -- salgspris (6m):240kr. (3,6m):125kr.
+tagplade skruer: købspris:110kr. -- salgspris:185kr.
+hulbånd til vindkryds: købspris: 100kr. -- salgspris: 130kr.
+universal skruer: købspris: 125kr. -- salgspris: 150kr.
+skruer små (200stk): købspris: 80kr. -- salgspris: 110kr.
+beslagskruer (250stk): købspris: 75kr. -- salgspris: 100kr.
+bræddebolt: købspris: 30kr. -- salgspris: 35kr.
+firkantskiver: købspris: 25kr. -- salgspris: 30kr.
+skruer små (400stk): købspris: 185kr. -- salgspris: 210kr.
+skruer små (300stk): købspris: 155kr. -- salgspris: 175kr.
+stalddørsgreb: købspris: 110kr. -- salgspris: 130kr.
+t hængsel: købspris: 55kr. -- salgspris: 70kr.
+vinkelbeslag: købspris: 7kr. -- salgspris: 11kr.

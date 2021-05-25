@@ -1,9 +1,6 @@
 package business.persistence;
 
-import business.entities.Material;
-import business.entities.Order;
-import business.entities.OrderLine;
-import business.entities.OrderListing;
+import business.entities.*;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 
@@ -250,6 +247,30 @@ public class OrderMapper {
             catch (SQLException ex)
             {
                 throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
+        }
+    }
+    
+    public void updateBOM(int orderId, List<OrderLine> BOM) throws DatabaseConnectionException, UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "DELETE FROM orderline WHERE order_id = ?";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ps.setInt(1, orderId);
+                
+                ps.executeUpdate();
+                
+                for (OrderLine ol : BOM)
+                {
+                    insertOrderLine(orderId, ol);
+                }
             }
         }
         catch (SQLException ex)
