@@ -38,6 +38,11 @@ public class OrderFacade
     {
         orderMapper.unconfirmOrder(OrderID);
     }
+    
+    public void payOrder(int OrderID) throws UserException, DatabaseConnectionException
+    {
+        orderMapper.payOrder(OrderID);
+    }
 
     public void updateDimensions(int OrderID, int carportLength, int carportWidth, int shedLength, int shedWidth) throws UserException
     {
