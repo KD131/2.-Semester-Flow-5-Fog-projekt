@@ -3,6 +3,7 @@ package web.commands;
 import business.entities.Material;
 import business.entities.Order;
 import business.entities.User;
+import business.exceptions.DatabaseConnectionException;
 import business.exceptions.IllegalDimensionsException;
 import business.exceptions.UserException;
 import business.services.MaterialsCalculator;
@@ -23,7 +24,7 @@ public class SubmitOrderCommand extends CommandProtectedPage
     }
     
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
         int carportLength;
         int carportWidth;
