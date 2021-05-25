@@ -1,15 +1,15 @@
 package business.entities;
 
 public class Material {
-    int materialID;
-    String name;
-    String unit;
-    double buyPricePerUnit;
-    double pricePerUnit;
-    int length;
-    int width;
-    int height;
-    String functionality;
+    private int materialID;
+    private String name;
+    private String unit;
+    private double buyPricePerUnit;
+    private double pricePerUnit;
+    private int length;
+    private int width;
+    private int height;
+    private String functionality;
 
     public Material(int materialID, String name, String unit, double buyPricePerUnit, double pricePerUnit, int length, int width, int height, String functionality) {
         this.materialID = materialID;

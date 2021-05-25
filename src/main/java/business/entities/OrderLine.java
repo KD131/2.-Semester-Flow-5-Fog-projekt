@@ -1,9 +1,9 @@
 package business.entities;
 
 public class OrderLine {
-    Material material;
-    int quantity;
-    String description;
+    private Material material;
+    private int quantity;
+    private String description;
 
     public OrderLine(Material material, int quantity, String description) {
         this.material = material;
@@ -37,6 +37,6 @@ public class OrderLine {
     
     public double getSellTotal()
     {
-        return material.pricePerUnit*quantity;
+        return material.getPricePerUnit() * quantity;
     }
 }
