@@ -5,6 +5,7 @@ import business.entities.OrderLine;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.services.MaterialsCalculator;
+import business.services.OrderFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,8 @@ public class ShowBOMCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
         int orderID = Integer.parseInt(request.getParameter("orderID"));
+        
+        /* TEST FROM BEFORE BOM WAS IN DATABASE
         int carportLength = Integer.parseInt(request.getParameter("carportLength"));
         int carportWidth = Integer.parseInt(request.getParameter("carportWidth"));
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
@@ -32,20 +35,14 @@ public class ShowBOMCommand extends CommandProtectedPage {
         
         calculator = new MaterialsCalculator(materialsList, carportLength, carportWidth, shedLength, shedWidth);
         
-        
         List<OrderLine> BOM = calculator.showBOM();
+         */
+        
+        OrderFacade orderFacade = new OrderFacade(database);
+        List<OrderLine> BOM = orderFacade.getOrderLinesByOrderId(orderID);
+        
         request.setAttribute("BOM", BOM);
         request.setAttribute("orderID", orderID);
-
-        try
-        {
-            BOM = (List<OrderLine>) request.getServletContext().getAttribute("BOM");
-        }
-        catch (ClassCastException ex)
-        {
-            request.setAttribute("Error", "Wrong Input");
-            return "index";
-        }
 
         return pageToShow;
     }

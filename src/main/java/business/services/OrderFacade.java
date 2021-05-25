@@ -44,6 +44,11 @@ public class OrderFacade
     {
         orderMapper.updateBOM(orderId, BOM);
     }
+    
+    public List<OrderLine> getOrderLinesByOrderId(int orderId) throws DatabaseConnectionException, UserException
+    {
+        return orderMapper.getOrderLinesByOrderId(orderId);
+    }
 
     public void deleteOrder(int OrderID) throws UserException
     {

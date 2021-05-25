@@ -57,10 +57,12 @@ public class MaterialMapper {
     {
         try (Connection con = database.connect())
         {
-            String sql = "SELECT * FROM materials WHERE material_id = ?";
+            String sql = "SELECT * FROM materials m LEFT JOIN material_functionalities mf USING (material_id) WHERE material_id = ?";
             
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
+                ps.setInt(1, materialId);
+                
                 ResultSet rs = ps.executeQuery();
                 
                 if (rs.next())
