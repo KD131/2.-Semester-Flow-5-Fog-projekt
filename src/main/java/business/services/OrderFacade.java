@@ -23,8 +23,12 @@ public class OrderFacade
     {
         orderMapper.insertOrder(order);
     }
-
-
+    
+    public void setTotal(int OrderID, double total) throws UserException, DatabaseConnectionException
+    {
+        orderMapper.setTotal(OrderID, total);
+    }
+    
     public void confirmOrder(int OrderID) throws UserException
     {
         orderMapper.confirmOrder(OrderID);
