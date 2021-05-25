@@ -34,4 +34,9 @@ public class OrderLine {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public double getSellTotal()
+    {
+        return material.pricePerUnit*quantity;
+    }
 }
