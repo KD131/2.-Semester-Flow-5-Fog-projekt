@@ -28,21 +28,21 @@ public class SVG {
             "<defs> \n" +
                 "<marker \n" +
                     "id=\"beginArrow\" \n" +
-                    "markerWidth=\"12\" \n" +
-                    "markerHeight=\"12\" \n"+
+                    "markerWidth=\"6\" \n" +
+                    "markerHeight=\"6\" \n"+
                     "refX=\"0\" \n" +
-                    "refY=\"6\" \n" +
+                    "refY=\"3\" \n" +
                     "orient=\"auto\"> \n" +
-                   "<path d=\"M0,6 L12,0 L12,12 L0,6\" style=\"fill: black;\" /> \n" +
+                   "<path d=\"M0,3 L6,0 L6,6 L0,3\" style=\"fill: black;\" /> \n" +
                  "</marker> \n" +
                  "<marker \n" +
                     "id=\"endArrow\" \n" +
-                    "markerWidth=\"12\" \n" +
-                    "markerHeight=\"12\" \n" +
-                    "refX=\"12\" \n" +
-                    "refY=\"6\" \n" +
+                    "markerWidth=\"6\" \n" +
+                    "markerHeight=\"6\" \n" +
+                    "refX=\"6\" \n" +
+                    "refY=\"3\" \n" +
                     "orient=\"auto\"> \n" +
-                   "<path d=\"M0,0 L12,6 L0,12 L0,0\" style=\"fill: black;\" /> \n" +
+                   "<path d=\"M0,0 L6,3 L0,6 L0,0\" style=\"fill: black;\" /> \n" +
                  "</marker> \n" +
                 "</defs>";
 
@@ -59,6 +59,9 @@ public class SVG {
     private final String textTemplate = "<text x=\"%f\" y=\"%f\" text-anchor=\"middle\" class=\"%s\" transform=\"%s\">%s</text>";
 
     private final String rotoRectTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" transform=\"rotate(%f)\" style=\"stroke: black; fill: white\" />";
+
+    private final String dashTemplate = "<line stroke-dasharray=\"5, 5\" x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" style=\"stroke: black\" />";
+
 
     public SVG(int x, int y, String viewBox, int width, int height)
     {
@@ -104,9 +107,9 @@ public class SVG {
         svg.append(String.format(l, lineTemplate, x1, y1, x2, y2));
     }
 
-    public void addStippledLine(int x1, int y1, int x2, int y2 )
+    public void addStippledLine(double x1, double y1, double x2, double y2)
     {
-        svg.append(String.format(l, lineStippledTemplate, x, y, height, width));
+        svg.append(String.format(l, dashTemplate, x1, y1, x2, y2));
     }
 
     public void addSvg(SVG innerSVG)
