@@ -18,11 +18,12 @@ public class OrderMapper {
         this.database = database;
     }
 
-    public void insertOrder(Order order) throws UserException {
+    public void insertOrder(Order order) throws UserException, DatabaseConnectionException
+    {
         try (Connection connection = database.connect()) {
             String sql = "INSERT INTO orders (User_id, Status, Carport_length, Carport_width, Shed_length, Shed_width) VALUES (?, ?, ?, ?, ?, ?)";
 
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, order.getUser().getId());
                 ps.setString(2, "Bestilt");
                 ps.setInt(3, order.getCarportLength());
@@ -31,11 +32,21 @@ public class OrderMapper {
                 ps.setInt(6, order.getShedWidth());
 
                 ps.executeUpdate();
+                
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int orderId = ids.getInt(1);
+                
+                for (OrderLine ol : order.getBOM())
+                {
+                    insertOrderLine(orderId, ol);
+                }
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
             }
-        } catch (SQLException ex) {
-            throw new UserException(ex.getMessage());
+        } catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
 

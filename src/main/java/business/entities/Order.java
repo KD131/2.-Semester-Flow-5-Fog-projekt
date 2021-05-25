@@ -39,6 +39,11 @@ public class Order
         this.total = calcTotal();
     }
     
+    public List<OrderLine> getBOM()
+    {
+        return BOM;
+    }
+    
     public double getTotal()
     {
         return total;
