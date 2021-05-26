@@ -25,7 +25,7 @@ public class ManageMaterialCommand extends CommandProtectedPage
         request.getServletContext().setAttribute("materialsList", materialsList);
     }
     
-    private Material getMaterialFromParameters(HttpServletRequest request) throws DatabaseConnectionException, UserException
+    private Material getMaterialFromParameters(HttpServletRequest request)
     {
         int materialID;
         String name;
