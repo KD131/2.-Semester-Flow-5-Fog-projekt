@@ -45,7 +45,8 @@ public abstract class Command
 
         commands.put("materialslist", new ShowMaterialsListCommand("materialslistpage", "employee"));
         commands.put("managematerial", new ManageMaterialCommand("materialslistpage", "employee"));
-        commands.put("showBOM", new ShowBOMCommand("showBOMpage", "employee"));
+        commands.put("showbom", new ShowBOMCommand("showBOMpage", "employee"));
+        commands.put("showbomcustomer", new ShowBOMCommand("showBOMpage", "customer"));
 
     }
 

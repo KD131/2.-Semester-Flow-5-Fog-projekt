@@ -102,7 +102,7 @@
                                     </c:forEach>
                                 </select></td>
                             <td>
-                                <form action="${pageContext.request.contextPath}/fc/showBOM" method="post">
+                                <form action="${pageContext.request.contextPath}/fc/showbom" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
 <%--                                    <input type="hidden" name="carportWidth" value="${order.carportWidth}">--%>
 <%--                                    <input type="hidden" name="carportLength" value="${order.carportLength}">--%>
