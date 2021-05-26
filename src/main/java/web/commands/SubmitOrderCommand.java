@@ -82,6 +82,6 @@ public class SubmitOrderCommand extends CommandProtectedPage
             orderFacade.insertOrder(order);
         }
         
-        return "index";
+        return pageToShow;
     }
 }
