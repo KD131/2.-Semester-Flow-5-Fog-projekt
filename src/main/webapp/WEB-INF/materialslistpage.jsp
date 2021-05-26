@@ -10,6 +10,14 @@
     </jsp:attribute>
     <jsp:body>
         <h1>All materials</h1>
+
+        <c:if test="${requestScope.error != null}">
+            <p style="color:red">${requestScope.error}</p>
+        </c:if>
+
+        <p style="color: red">Editing a material will replace ALL of its functionalities with the new one.</p>
+        <p style="color: red">Deleting a material will delete ALL of its functionalities, not just the one selected.</p>
+
         <c:choose>
             <c:when test="${not empty applicationScope.materialsList}">
                 <table class="table table-striped table-hover">
@@ -24,7 +32,11 @@
                         <th>Bredde</th>
                         <th>Højde</th>
                         <th>Funktion</th>
-                        <th>Rediger</th>
+                        <th>
+                            <form action="${pageContext.request.contextPath}/fc/managematerial" method="post">
+                                <button type="submit" class="btn btn-success" name="action" value="create">Tilføj</button>
+                            </form>
+                        </th>
                     </tr>
                     </thead>
                     <c:forEach var="material" items="${applicationScope.materialsList}">
@@ -38,7 +50,13 @@
                             <td>${material.width}</td>
                             <td>${material.height}</td>
                             <td>${material.functionality}</td>
-                            <td><a href="#">IKKE LAVET</a></td>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/fc/managematerial" method="post">
+                                    <input type="hidden" name="materialID" value="${material.materialID}">
+                                    <button type="submit" class="btn btn-warning" name="action" value="edit">Rediger</button>
+                                    <button type="submit" class="btn btn-danger" name="action" value="delete">Slet</button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
