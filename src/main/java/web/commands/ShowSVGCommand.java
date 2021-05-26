@@ -44,7 +44,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         catch (NumberFormatException ex)
         {
             request.setAttribute("Error", "Wrong Input");
-            return "index";
+            return "index"; // fix
         }
 
         //-------------- SVG DIMENSIONS --------------//
@@ -141,7 +141,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
         //DA: Beklædning
         double claddingDepth = 1.9;
         double claddingWidth = 10.0;
-        double claddingHeight = 210;
+        double claddingHeight = 190;
 
         //DA: Stern
         double sternHeight = 20;
@@ -175,7 +175,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
 
         //------------DRAWING FROM SIDE: Arrows and Dimensions------------------------//
 
-            //-Vertical (y axis) arrows and dimensions//
+            //Vertical (y axis) arrows and dimensions//
             //carport height (y axis) arrow and dimension
             sideSVG.addArrow(10+15, 0, 10+15, carportHeight);
             sideSVG.addText(0, 0, "small", "translate(23, " + ySideAxisMid + ") rotate(-90)", carportFrontHeightStr + " cm");
@@ -188,23 +188,23 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
             sideSVG.addArrow(10+carportLength+55, 10, 10+carportLength+55, carportHeight);
             sideSVG.addText(0, 0, "small", "translate("+ (10+carportLength+70) + ", " + ySideAxisMid + ") rotate(-90)", carportBackHeightStr + " cm");
 
-            //-Horizontal (x axis) arrows and dimensions//
+            //Horizontal (x axis) arrows and dimensions//
             //draws following if there is no shed.
             if(shedLength == 0)
             {
-                    //start -> 1st pole (front hang) dimension and arrow.
+                    //start -> 1st pole (xFrontHang) dimension and arrow.
                     sideSVG.addArrow(10+45, 50 + carportHeight, 10+45 + xFrontHang, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (55 + xFrontHang/2) + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
 
-                    //1st pole -> 2nd pole length dimension and arrow
+                    //1st pole -> 2nd (Half construction length) pole length dimension and arrow
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth, 50 + carportHeight, 10+45 + xFrontHang + (constructionLength / 2), 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+45 + xFrontHang + constructionLength/4) + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
 
-                    //2nd pole -> 3rd pole length dimension and arrow
+                    //2nd pole -> 3rd pole (Half construction length) length dimension and arrow
                     sideSVG.addArrow(10+45 + xFrontHang + (constructionLength / 2) + poleWidth, 50 + carportHeight,10+45 + xFrontHang + constructionLength, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+45 + poleWidth + xFrontHang + (constructionLength / 2) + constructionLength/4 + "," + carportFrontHeightStr + ")"),  halfConstructionLengthStr + " cm");
 
-                    //xBackHang length dimension and arrow
+                    //3rd pole -> end (xBackHang) length dimension and arrow
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth + constructionLength, 50 + carportHeight, 10+45 + carportLength, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+35 + carportLength + xBackHang) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
                 }
@@ -215,7 +215,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                     sideSVG.addArrow(10+45, 50 + carportHeight, 10+45 + xFrontHang, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (55 + xFrontHang/2) + "," + carportFrontHeightStr + ")", xFrontHangStr + " cm");
 
-                    //1st pole -> 2nd pole length dimension and arrow
+                    //1st pole -> 2nd pole (Half construction length) length dimension and arrow
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth, 50 + carportHeight, 10+45 + xFrontHang + (constructionLength / 2), 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+45 + xFrontHang + (constructionLength / 4 )) + "," + carportFrontHeightStr + ")", halfConstructionLengthStr + " cm");
 
@@ -227,7 +227,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth + constructionLength - shedLength, 50 + carportHeight, 10+45 + xFrontHang + constructionLength, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+45 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
 
-                    //xBackHang length dimension and arrow
+                    //3rd pole -> end (xBackHang) length dimension and arrow
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth + constructionLength, 50 + carportHeight, 10+45 + carportLength, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+35 + carportLength + xBackHang) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
                 }
@@ -250,7 +250,7 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth + constructionLength - shedLength, 50 + carportHeight, 10+45 + xFrontHang + constructionLength, 50 + carportHeight);
                     sideSVG.addText(0, 65, "small", "translate(" + (10+45 + xFrontHang + (constructionLength - 0.5 * shedLength)) + "," + carportFrontHeightStr + ")", shedLengthStr + " cm");
 
-                    //xBackHang length dimension and arrow
+                    //3rd pole -> end (xBackHang) length dimension and arrow
                     sideSVG.addArrow(10+45 + xFrontHang + poleWidth + constructionLength, 50 + carportHeight, 10+45 + carportLength, 50 + carportHeight);
                     sideSVG.addText(0, 65 , "small", "translate(" + (10+35 + carportLength + xBackHang) + "," + carportFrontHeightStr + ")", xBackHangStr + " cm");
                 }
@@ -271,25 +271,23 @@ public class ShowSVGCommand  extends CommandUnprotectedPage {
 
         }
 
+        //draws cladding. 1st layer.
+        for (int x = 0; x<xWallAmount; x++)
+        {
+            sideViewSVG.addRect(10+0.5*poleWidth + xFrontHang+constructionLength-shedLength+(x*claddingWidth),carportHeight-195,claddingHeight-3,claddingWidth);
+        }
+
         //drwas plates. tilted.
         sideViewSVG.addRotoRect(10,carportHeight-carportInnerHeight, plateHeight,carportLength,roofSlopeDegrees);
 
         //draws side stern. tilted
         sideViewSVG.addRotoRect(10,0, sternHeight,carportLength,roofSlopeDegrees);
 
-
         //draws front stern. tilted
         sideViewSVG.addRotoRect(10-underStern,roofSlopePercent*underStern, sternHeight,underStern,roofSlopeDegrees);
 
         //draws end stern. tilted
         sideViewSVG.addRotoRect(10+carportLength,roofSlopePercent*carportLength-sternHeight*0.5, sternHeight,underStern,roofSlopeDegrees);
-
-        //draws cladding. 1st layer.
-        for (int x = 0; x<xWallAmount; x++)
-        {
-            sideViewSVG.addRect(10+0.5*poleWidth + xFrontHang+constructionLength-shedLength+(x*claddingWidth),carportHeight-carportInnerHeight,claddingHeight-3,claddingWidth);
-        }
-
 
         //------------DRAWING FROM TOP: Arrows and Dimensions------------------------//
         //carport width (y axis) arrow and dimension.

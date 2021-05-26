@@ -57,7 +57,15 @@
                             <td>
                                 <c:set var="permitSVG" value="${{'Bestilt', 'Godkendt', 'Betalt', 'Afsluttet'}}"/>
                                 <c:if test="${permitSVG.contains(order.status)}">
-                                    <a href="${pageContext.request.contextPath}/fc/showSVGcustomer">Vis Tegning</a>
+                                    <form action="${pageContext.request.contextPath}/fc/showsvg" method="post">
+                                        <input type="hidden" name="orderID" value="${order.orderId}">
+                                        <input type="hidden" name="carportWidth" value="${order.carportWidth}">
+                                        <input type="hidden" name="carportLength" value="${order.carportLength}">
+                                        <input type="hidden" name="shedWidth" value="${order.shedWidth}">
+                                        <input type="hidden" name="shedLength" value="${order.shedLength}">
+                                        <input type="submit" value="Vis tegning">
+                                    </form>
+
                                 </c:if>
                             </td>
                             <!-- vises kun hvis ordrestatus er betalt eller højere-->
