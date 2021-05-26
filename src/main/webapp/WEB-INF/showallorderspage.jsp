@@ -104,11 +104,11 @@
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/showBOM" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="hidden" name="carportWidth" value="${order.carportWidth}">
-                                    <input type="hidden" name="carportLength" value="${order.carportLength}">
-                                    <input type="hidden" name="shedWidth" value="${order.shedWidth}">
-                                    <input type="hidden" name="shedLength" value="${order.shedLength}">
-                                    <input type="submit" value="Vis stykliste">
+<%--                                    <input type="hidden" name="carportWidth" value="${order.carportWidth}">--%>
+<%--                                    <input type="hidden" name="carportLength" value="${order.carportLength}">--%>
+<%--                                    <input type="hidden" name="shedWidth" value="${order.shedWidth}">--%>
+<%--                                    <input type="hidden" name="shedLength" value="${order.shedLength}">--%>
+                                    <input type="submit" class="btn btn-primary" value="Vis stykliste">
                                 </form>
                                 </td>
                             <td>
@@ -118,7 +118,8 @@
                                 </form>
                                 <form action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" class="btn btn-danger" value="bekræft ordre">
+                                    <input type="hidden" name="total" value="${order.total}">
+                                    <button type="submit" class="btn btn-danger" name="action" value="setprice">Bekræft ordre</button>
                                 </form>
                                 <form action="${pageContext.request.contextPath}/fc/unconfirmorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">

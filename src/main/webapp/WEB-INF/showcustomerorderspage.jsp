@@ -17,15 +17,14 @@
                     <tr>
                         <th>Ordre ID</th>
                         <th>Email</th>
-                        <th>Total</th>
                         <th>Status</th>
+                        <th>Pris</th>
                         <th>Dato</th>
                         <th>Carport længde</th>
                         <th>Carport bredde</th>
                         <th>Skur længde</th>
                         <th>Skur bredde</th>
-                        <th>pris</th>
-                        <th>tegning</th>
+                        <th>Tegning</th>
                         <th>Stykliste</th>
 
                     </tr>
@@ -34,13 +33,19 @@
                         <tr>
                             <td>${order.orderId}</td>
                             <td>${order.email}</td>
-                            <td>${order.total}</td>
-                            <td>${order.status}</td>
-                            <td>${order.date}</td>
-                            <td>${order.carportLength}</td>
-                            <td>${order.carportWidth}</td>
-                            <td>${order.shedLength}</td>
-                            <td>${order.shedWidth}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${order.status.equals('Godkendt')}">
+                                        <form action="${pageContext.request.contextPath}/fc/payorder" method="post">
+                                            <input type="hidden" name="orderID" value="${order.orderId}">
+                                            <input type="submit" class="btn btn-success" value="Betal ordre">
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${order.status}
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <!-- vises kun hvis ordrestatus er godkendt eller højere-->
                             <td>
                                 <c:set var="permitTotal" value="${{'Godkendt', 'Betalt', 'Afsluttet'}}"/>
@@ -53,6 +58,11 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
+                            <td>${order.date}</td>
+                            <td>${order.carportLength}</td>
+                            <td>${order.carportWidth}</td>
+                            <td>${order.shedLength}</td>
+                            <td>${order.shedWidth}</td>
                             <!-- vises kun hvis ordrestatus er bestilt eller højere-->
                             <td>
                                 <c:set var="permitSVG" value="${{'Bestilt', 'Godkendt', 'Betalt', 'Afsluttet'}}"/>

@@ -23,6 +23,17 @@ public class Material {
         this.functionality = functionality;
     }
 
+    public Material(String name, String unit, double buyPricePerUnit, double pricePerUnit, int length, int width, int height, String functionality) {
+        this.name = name;
+        this.unit = unit;
+        this.buyPricePerUnit = buyPricePerUnit;
+        this.pricePerUnit = pricePerUnit;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.functionality = functionality;
+    }
+
     public int getMaterialID() {
         return materialID;
     }

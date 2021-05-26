@@ -47,6 +47,25 @@ public class OrderMapper {
         }
     }
 
+    public void setTotal(int OrderID, double total) throws UserException, DatabaseConnectionException
+    {
+        try (Connection connection = database.connect()) {
+            String sql = "UPDATE orders SET total = ? WHERE Order_id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setDouble(1, total);
+                ps.setInt(2, OrderID);
+
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
+        }
+    }
+    
     public void confirmOrder(int OrderID) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "UPDATE orders SET status = ? WHERE Order_id = ?";
@@ -76,6 +95,29 @@ public class OrderMapper {
             }
         } catch (SQLException ex) {
             throw new UserException(ex.getMessage());
+        }
+    }
+    
+    public void payOrder(int OrderID) throws UserException, DatabaseConnectionException
+    {
+        try (Connection connection = database.connect())
+        {
+            String sql = "UPDATE orders SET status = ? WHERE Order_id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, "Betalt");
+                ps.setInt(2, OrderID);
+                
+                ps.executeUpdate();
+            }
+            catch (SQLException ex)
+            {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
 
@@ -278,8 +320,5 @@ public class OrderMapper {
             throw new DatabaseConnectionException("Connection to database could not be established");
         }
     }
-    
-    
-    
 }
 

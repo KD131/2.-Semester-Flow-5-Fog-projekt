@@ -33,6 +33,7 @@ public abstract class Command
 
         commands.put("confirmorder", new ConfirmOrderCommand("showallorderspage", "employee"));
         commands.put("unconfirmorder", new UnconfirmOrderCommand("showallorderspage", "employee"));
+        commands.put("payorder", new PayOrderCommand("showcustomerorderspage", "customer"));
         commands.put("deleteorder", new DeleteOrderCommand("showallorderspage", "employee"));
 
         commands.put("updatedimensions", new UpdateDimensionsCommand("showallorderspage", "employee"));
@@ -43,6 +44,7 @@ public abstract class Command
         commands.put("showsvg", new ShowSVGCommand("svgpage"));
 
         commands.put("materialslist", new ShowMaterialsListCommand("materialslistpage", "employee"));
+        commands.put("managematerial", new ManageMaterialCommand("materialslistpage", "employee"));
         commands.put("showBOM", new ShowBOMCommand("showBOMpage", "employee"));
 
     }

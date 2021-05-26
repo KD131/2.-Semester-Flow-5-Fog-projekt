@@ -16,19 +16,6 @@ public class ShowMaterialsListCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
-
-        List<Material> materialsList;
-
-        try
-        {
-            materialsList = (List<Material>) request.getServletContext().getAttribute("materialsList");
-        }
-        catch (ClassCastException ex)
-        {
-            request.setAttribute("Error", "Wrong Input");
-            return "index";
-        }
-
         return pageToShow;
     }
 }

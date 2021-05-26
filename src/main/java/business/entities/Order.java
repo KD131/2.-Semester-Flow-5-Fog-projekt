@@ -23,8 +23,6 @@ public class Order
         this.carportLength = carportLength;
         this.carportWidth = carportWidth;
         this.BOM = BOM;
-        
-        this.total = calcTotal();
     }
     
     public Order(User user, int carportLength, int carportWidth, int shedLength, int shedWidth, List<OrderLine> BOM)
@@ -35,8 +33,11 @@ public class Order
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
         this.BOM = BOM;
-        
-        this.total = calcTotal();
+    }
+    
+    public Order(List<OrderLine> BOM)
+    {
+        this.BOM = BOM;
     }
     
     public List<OrderLine> getBOM()
