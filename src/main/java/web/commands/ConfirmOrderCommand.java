@@ -2,6 +2,7 @@ package web.commands;
 
 import business.entities.Order;
 import business.entities.OrderLine;
+import business.entities.User;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 
@@ -32,11 +33,15 @@ public class ConfirmOrderCommand extends OrderListCommand
             return pageToShow;
         }
     
-        List<OrderLine> BOM = orderFacade.getOrderLinesByOrderId(orderID);
+        int userID = ((User) request.getSession().getAttribute("user")).getId();
+        List<OrderLine> BOM = orderFacade.getOrderLinesByOrderId(orderID, userID);
         Order order = new Order(BOM);
         request.setAttribute("orderID", orderID);
         request.setAttribute("currTotal", total);
-        request.setAttribute("BOMTotal", order.calcTotal());
+        if (BOM != null)    // it shouldn't be when logged in as employee
+        {
+            request.setAttribute("BOMTotal", order.calcTotal());
+        }
         return "setpricepage";
     }
     

@@ -2,6 +2,7 @@ package web.commands;
 
 import business.entities.Material;
 import business.entities.OrderLine;
+import business.entities.User;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
 import business.services.MaterialsCalculator;
@@ -23,6 +24,7 @@ public class ShowBOMCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException, DatabaseConnectionException
     {
+        int userID = ((User) request.getSession().getAttribute("user")).getId();
         int orderID = Integer.parseInt(request.getParameter("orderID"));
         
         /* TEST FROM BEFORE BOM WAS IN DATABASE
@@ -39,7 +41,7 @@ public class ShowBOMCommand extends CommandProtectedPage {
          */
         
         OrderFacade orderFacade = new OrderFacade(database);
-        List<OrderLine> BOM = orderFacade.getOrderLinesByOrderId(orderID);
+        List<OrderLine> BOM = orderFacade.getOrderLinesByOrderId(orderID, userID);
         
         request.setAttribute("BOM", BOM);
         request.setAttribute("orderID", orderID);

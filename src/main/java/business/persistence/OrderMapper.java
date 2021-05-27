@@ -6,6 +6,7 @@ import business.exceptions.UserException;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OrderMapper {
@@ -13,6 +14,41 @@ public class OrderMapper {
 
     public OrderMapper(Database database) {
         this.database = database;
+    }
+    
+    public boolean verifyBOMPermission(int orderId, int userId) throws DatabaseConnectionException, UserException
+    {
+        try (Connection con = database.connect())
+        {
+            String sql = "SELECT u.user_id, o.status, " +
+                    "(SELECT role FROM users WHERE user_id = ?) role " +
+                    "FROM orders o JOIN users u USING (user_id) WHERE o.order_id = ?";
+            
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ps.setInt(1, userId);
+                ps.setInt(2, orderId);
+                
+                ResultSet rs = ps.executeQuery();
+                if (rs.next())
+                {
+                    int DbUserId = rs.getInt("user_id");
+                    String DbRole = rs.getString("role");
+                    String DbStatus = rs.getString("status");
+                    
+                    List<String> permissions = new ArrayList<>(Arrays.asList("betalt", "afsluttet"));
+                    return DbRole.equals("employee") || (DbUserId == userId && permissions.contains(DbStatus.toLowerCase()));
+                }
+                return false;
+            }
+            catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseConnectionException("Connection to database could not be established");
+        }
     }
 
     public void insertOrder(Order order) throws UserException, DatabaseConnectionException
