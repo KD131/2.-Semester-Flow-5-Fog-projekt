@@ -73,16 +73,24 @@
                                         <input type="hidden" name="carportLength" value="${order.carportLength}">
                                         <input type="hidden" name="shedWidth" value="${order.shedWidth}">
                                         <input type="hidden" name="shedLength" value="${order.shedLength}">
+<<<<<<< HEAD
                                         <input type="submit" value="Vis tegning">
                                     </form>
 
+=======
+                                        <input type="submit" class="btn btn-primary" value="Vis tegning">
+                                    </form>
+>>>>>>> 5172ea160ec49bf0b8d098df613efeec7e7271fb
                                 </c:if>
                             </td>
                             <!-- vises kun hvis ordrestatus er betalt eller højere-->
                             <td>
                                 <c:set var="permitBOM" value="${{'Betalt', 'Afsluttet'}}"/>
                                 <c:if test="${permitBOM.contains(order.status)}">
-                                    <a href="${pageContext.request.contextPath}/fc/showBOMcustomer">Vis Stykliste</a>
+                                    <form action="${pageContext.request.contextPath}/fc/showbomcustomer" method="post">
+                                        <input type="hidden" name="orderID" value="${order.orderId}">
+                                        <input type="submit" class="btn btn-primary" value="Vis stykliste">
+                                    </form>
                                 </c:if>
                             </td>
                         </tr>
