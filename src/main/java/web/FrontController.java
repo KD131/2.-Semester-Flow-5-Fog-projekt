@@ -19,7 +19,28 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "FrontController", urlPatterns = {"/fc/*"})
 public class FrontController extends HttpServlet
 {
-
+    /*
+    LOCAL TEST ENV:
+        c5cp
+        c5cp
+        jdbc:mysql://localhost:3306/carport?serverTimezone=CET
+    
+    private final static String USER = "c5cp";
+    private final static String PASSWORD = "c5cp";
+    private final static String URL = "jdbc:mysql://localhost:3306/carport?serverTimezone=CET";
+     */
+    
+    /*
+    PROD ENV:
+        JDBC_USER
+        JDBC_PASSWORD
+        JDBC_CONNECTION_CONNECTION_STRING
+    
+    private final static String USER = System.getenv("JDBC_USER");
+    private final static String PASSWORD = System.getenv("JDBC_PASSWORD");
+    private final static String URL = System.getenv("JDBC_CONNECTION_STRING");
+     */
+    
     private final static String USER = "c5cp";
     private final static String PASSWORD = "c5cp";
     private final static String URL = "jdbc:mysql://localhost:3306/carport?serverTimezone=CET";
