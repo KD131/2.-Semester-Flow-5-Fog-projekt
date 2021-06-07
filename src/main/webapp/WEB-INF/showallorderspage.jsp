@@ -47,7 +47,7 @@
                                     <c:forEach var="var" begin="240" end="780" step="30">
                                         <option
                                                 <c:if test="${var == order.carportLength}">
-                                                    style="font-weight: bold" selected
+                                                    class="currentOption" selected
                                                 </c:if>
                                                 value="${var}">${var} cm
                                         </option>
@@ -58,7 +58,7 @@
                                     <c:forEach var="var" begin="240" end="750" step="30">
                                         <option
                                                 <c:if test="${var == order.carportWidth}">
-                                                    style="font-weight: bold" selected
+                                                    class="currentOption" selected
                                                 </c:if>
                                                 value="${var}">${var} cm
                                         </option>
@@ -70,14 +70,14 @@
                                 <select form="update${status.count}" name="shedLength" id="shedLength">
                                     <option
                                             <c:if test="${0 == order.shedLength}">
-                                                style="font-weight: bold" selected
+                                                class="currentOption" selected
                                             </c:if>
                                             value="0">0 cm
                                     </option>
                                     <c:forEach var="var" begin="150" end="690" step="30">
                                     <option
                                             <c:if test="${var == order.shedLength}">
-                                                style="font-weight: bold" selected
+                                                class="currentOption" selected
                                             </c:if>
                                             value="${var}">${var} cm
                                     </option>
@@ -88,14 +88,14 @@
                                 <select form="update${status.count}" name="shedWidth" id="shedWidth">
                                     <option
                                             <c:if test="${0 == order.shedWidth}">
-                                                style="font-weight: bold" selected
+                                                class="currentOption" selected
                                             </c:if>
                                             value="0">0 cm
                                     </option>
                                     <c:forEach var="var" begin="150" end="720" step="30">
                                     <option
                                             <c:if test="${var == order.shedWidth}">
-                                                style="font-weight: bold" selected
+                                                class="currentOption" selected
                                             </c:if>
                                             value="${var}">${var} cm
                                     </option>
