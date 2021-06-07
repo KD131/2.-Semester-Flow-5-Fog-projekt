@@ -4,12 +4,12 @@
 
 <t:genericpage>
     <jsp:attribute name="header">
-         All orders
+         Alle ordrer
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>All customer orders</h1>
+        <h1>Alle ordrer</h1>
 
         <c:if test="${requestScope.error != null}">
             <p class="error">${requestScope.error}</p>
@@ -123,7 +123,7 @@
                                 </form>
                                 <form action="${pageContext.request.contextPath}/fc/unconfirmorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" class="btn btn-danger" value="af-bekræft ordre">
+                                    <input type="submit" class="btn btn-danger" value="Af-bekræft ordre">
                                 </form>
 
                                 <form id="update${status.count}" method="post">
@@ -138,7 +138,7 @@
                 </table>
             </c:when>
             <c:otherwise>
-                <p>No orders in database.</p>
+                <p>Ingen ordrer i databasen.</p>
             </c:otherwise>
         </c:choose>
 

@@ -4,12 +4,12 @@
 
 <t:genericpage>
     <jsp:attribute name="header">
-         Materialslist
+         Materialeliste
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>All materials</h1>
+        <h1>Alle materialer</h1>
 
         <c:if test="${requestScope.error != null}">
             <p class="error">${requestScope.error}</p>
@@ -62,7 +62,7 @@
                 </table>
             </c:when>
             <c:otherwise>
-                <p>No materials in database.</p>
+                <p>Ingen materialer i databasen.</p>
             </c:otherwise>
         </c:choose>
 
