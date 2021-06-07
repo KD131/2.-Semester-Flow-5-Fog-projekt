@@ -33,7 +33,7 @@
                     <c:forEach var="unit" items="${requestScope.units}">
                         <option
                                 <c:if test="${requestScope.action.equals('edit') and requestScope.material.unit.equalsIgnoreCase(unit)}">
-                                    style="font-weight: bold" selected
+                                    class="currentOption" selected
                                 </c:if>
                                 value="${unit}">${unit}
                         </option>
@@ -78,7 +78,7 @@
                     <c:forEach var="functionality" items="${requestScope.functionalities}">
                     <option
                             <c:if test="${requestScope.action.equals('edit') and requestScope.material.functionality.equalsIgnoreCase(functionality)}">
-                                style="font-weight: bold" selected
+                                class="currentOption" selected
                             </c:if>
                             value="${functionality}">${functionality}
                     </option>
