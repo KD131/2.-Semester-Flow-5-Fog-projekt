@@ -17,7 +17,7 @@
         </h1>
 
         <c:if test="${requestScope.error != null}">
-            <p style="color:red">${requestScope.error}</p>
+            <p class="error">${requestScope.error}</p>
         </c:if>
 
         <form action="${pageContext.request.contextPath}/fc/managematerial" method="post">

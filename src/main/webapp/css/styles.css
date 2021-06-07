@@ -8,6 +8,11 @@
     font-size: smaller;
 }
 
+.error
+{
+    color: red;
+}
+
 .currentOption
 {
     font-weight: bold;

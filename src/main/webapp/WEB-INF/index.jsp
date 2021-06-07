@@ -97,7 +97,7 @@
             </form>
 
             <c:if test="${requestScope.error != null}">
-                <p style="color:red">${requestScope.error}</p>
+                <p class="error">${requestScope.error}</p>
             </c:if>
                 <p class="text-center mt-5"><a href="${pageContext.request.contextPath}/fc/customerpage">Kunde Side</a>
             </c:if>

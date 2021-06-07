@@ -12,7 +12,7 @@
         <h1>All materials</h1>
 
         <c:if test="${requestScope.error != null}">
-            <p style="color:red">${requestScope.error}</p>
+            <p class="error">${requestScope.error}</p>
         </c:if>
 
         <p style="color: red">Editing a material will replace ALL of its functionalities with the new one.</p>

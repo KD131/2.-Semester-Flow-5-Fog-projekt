@@ -12,7 +12,7 @@
         <h1>All customer orders</h1>
 
         <c:if test="${requestScope.error != null}">
-            <p style="color:red">${requestScope.error}</p>
+            <p class="error">${requestScope.error}</p>
         </c:if>
 
         <c:choose>

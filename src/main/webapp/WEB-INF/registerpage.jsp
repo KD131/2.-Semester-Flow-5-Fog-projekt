@@ -34,7 +34,7 @@
             </form>
 
             <c:if test="${requestScope.error != null }">
-                <p style="color:red">
+                <p class="error">
                         ${requestScope.error}
                 </p>
             </c:if>
