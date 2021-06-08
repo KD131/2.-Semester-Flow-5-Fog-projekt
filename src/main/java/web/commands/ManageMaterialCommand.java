@@ -123,7 +123,11 @@ public class ManageMaterialCommand extends CommandProtectedPage
     
     public String deleteMaterial(HttpServletRequest request, int materialID) throws DatabaseConnectionException, UserException
     {
-        materialFacade.deleteMaterialById(materialID);
+        int res = materialFacade.deleteMaterialById(materialID);
+        if (res <= 0)
+        {
+            request.setAttribute("error", "Du kan ikke slette et materiale, der bliver brugt i en eksisterende stykliste.");
+        }
         refreshList(request);
         return pageToShow;
     }
