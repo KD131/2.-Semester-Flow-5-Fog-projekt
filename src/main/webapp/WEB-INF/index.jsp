@@ -17,7 +17,7 @@
         <div>
             <h2 class="text-center">Carport Projekt</h2>
 
-            <div style="margin-top: 3em;margin-bottom: 3em;">
+            <div class="my-5">
                 <p class="text-center">Forside til Gruppe C5's Carport Projekt</p>
             </div>
 
@@ -28,10 +28,10 @@
 
              <!-- Customer frontpage -->
             <c:if test="${sessionScope.role == 'customer' }">
-                <p class="text-center" style="font-size: large">Bestil en carport:</p>
+                <p class="text-center h5">Bestil en carport:</p>
             <form action="${pageContext.request.contextPath}/fc/submitorder" method="post">
                 <div class="text-center mt-4">
-                    <label for="carportWidth">Carport bredde:</label>
+                    <label class="form-label" for="carportWidth">Carport bredde:</label>
                 </div>
                 <div class="form-group">
                     <select class="mx-auto form-control text-center indexDropdown"
@@ -43,7 +43,7 @@
                     </select>
                 </div>
                 <div class="text-center mt-2">
-                    <label for="carportLength">Carport længde:</label>
+                    <label class="form-label" for="carportLength">Carport længde:</label>
                 </div>
                 <div class="form-group">
                     <select class="mx-auto form-control text-center indexDropdown"
@@ -56,17 +56,19 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <p>Vil du have skur til?</p>
-                    <div class="mt-0">
-                        <input type="radio" id="yes" name="shed" value="yes">
-                        <label for="yes">Ja</label>
-                        <input type="radio" id="no" name="shed" value ="no" checked="checked">
-                        <label for="no">Nej</label>
+                    <p class="form-label">Vil du have skur til?</p>
+                    <div class="form-check form-check-inline mt-0">
+                        <input class="form-check-input" type="radio" id="yes" name="shed" value="yes">
+                        <label class="form-check-label" for="yes">Ja</label>
+                    </div>
+                    <div class="form-check form-check-inline mt-0">
+                        <input class="form-check-input" type="radio" id="no" name="shed" value ="no" checked="checked">
+                        <label class="form-check-label" for="no">Nej</label>
                     </div>
                 </div>
 
                 <div class="text-center mt-4">
-                    <label for="shedWidth">Skur bredde:</label>
+                    <label class="form-label" for="shedWidth">Skur bredde:</label>
                 </div>
                 <div class="form-group">
                     <select class="mx-auto form-control text-center indexDropdown"
@@ -79,7 +81,7 @@
                 </div>
 
                 <div class="text-center mt-2">
-                    <label for="shedLength">Skur længde:</label>
+                    <label class="form-label" for="shedLength">Skur længde:</label>
                 </div>
                 <div class="form-group">
                     <select class="mx-auto form-control text-center indexDropdown"
@@ -92,7 +94,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <input type="submit" value="Send ordre">
+                    <input class="btn btn-primary" type="submit" value="Send ordre">
                 </div>
             </form>
 
