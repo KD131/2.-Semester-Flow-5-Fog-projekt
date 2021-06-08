@@ -1,27 +1,34 @@
 package business.entities;
 
+import business.services.Formatter;
+
 import java.sql.Timestamp;
 
 public class OrderListing
 {
     int orderId;
-    double total;
-    double profitMargin;
+    String total;
+    String profitMargin;
     String status;
     String email;
     int carportLength;
     int carportWidth;
     int shedLength;
     int shedWidth;
-    Timestamp date;
+    String date;
+    
+    // total, profitmargin, and date are getting formatted to Strings.
+    // you can keep a copy of the original if you'd like.
+    // you might have to if you format numbers to comma decimal,
+    // because you need to parse them back to double in Commands.
     
     public OrderListing(int orderId, double total, double profitMargin, String status,Timestamp date, String email, int carportLength, int carportWidth, int shedLength, int shedWidth)
     {
         this.orderId = orderId;
-        this.total = total;
-        this.profitMargin = profitMargin;
+        this.total = Formatter.formatPrice(total);
+        this.profitMargin = Formatter.formatPrice(profitMargin);
         this.status = status;
-        this.date = date;
+        this.date = Formatter.formatTimestamp(date);
         this.email = email;
         this.carportLength = carportLength;
         this.carportWidth = carportWidth;
@@ -34,12 +41,12 @@ public class OrderListing
         return orderId;
     }
     
-    public double getTotal()
+    public String getTotal()
     {
         return total;
     }
     
-    public double getProfitMargin()
+    public String getProfitMargin()
     {
         return profitMargin;
     }
@@ -74,7 +81,7 @@ public class OrderListing
         return shedWidth;
     }
     
-    public Timestamp getDate()
+    public String getDate()
     {
         return date;
     }

@@ -44,8 +44,8 @@
                             <td>${material.materialID}</td>
                             <td>${material.name}</td>
                             <td>${material.unit}</td>
-                            <td>${material.buyPricePerUnit}</td>
-                            <td>${material.pricePerUnit}</td>
+                            <td>${material.buyPricePerUnitString}</td>
+                            <td>${material.pricePerUnitString}</td>
                             <td>${material.length}</td>
                             <td>${material.width}</td>
                             <td>${material.height}</td>

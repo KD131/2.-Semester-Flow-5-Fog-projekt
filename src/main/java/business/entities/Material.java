@@ -1,5 +1,7 @@
 package business.entities;
 
+import business.services.Formatter;
+
 public class Material {
     private int materialID;
     private String name;
@@ -104,5 +106,15 @@ public class Material {
 
     public void setFunctionality(String functionality) {
         this.functionality = functionality;
+    }
+    
+    public String getBuyPricePerUnitString()
+    {
+        return Formatter.formatPrice(buyPricePerUnit);
+    }
+    
+    public String getPricePerUnitString()
+    {
+        return Formatter.formatPrice(pricePerUnit);
     }
 }

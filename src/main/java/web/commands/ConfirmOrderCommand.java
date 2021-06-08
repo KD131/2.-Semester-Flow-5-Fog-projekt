@@ -5,6 +5,7 @@ import business.entities.OrderLine;
 import business.entities.User;
 import business.exceptions.DatabaseConnectionException;
 import business.exceptions.UserException;
+import business.services.Formatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,10 +21,13 @@ public class ConfirmOrderCommand extends OrderListCommand
     
     private String setPrice(HttpServletRequest request, int orderID) throws DatabaseConnectionException, UserException
     {
+        
         double total;
     
         try
         {
+            // since the input is now a formatted String to begin with, you don't have to save the parse.
+            // you can just verify it, and send on the parameter as is.
             total = Double.parseDouble(request.getParameter("total"));
         }
         catch (NumberFormatException ex)
@@ -37,10 +41,10 @@ public class ConfirmOrderCommand extends OrderListCommand
         List<OrderLine> BOM = orderFacade.getOrderLinesByOrderId(orderID, userID);
         Order order = new Order(BOM);
         request.setAttribute("orderID", orderID);
-        request.setAttribute("currTotal", total);
+        request.setAttribute("currTotal", Formatter.formatPrice(total));
         if (BOM != null)    // it shouldn't be when logged in as employee
         {
-            request.setAttribute("BOMTotal", order.calcTotal());
+            request.setAttribute("BOMTotal", Formatter.formatPrice(order.calcTotal()));
         }
         return "setpricepage";
     }

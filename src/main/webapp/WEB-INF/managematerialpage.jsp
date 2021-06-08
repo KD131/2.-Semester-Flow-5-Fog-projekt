@@ -37,6 +37,7 @@
                                 </c:if>
                                 value="${unit}">${unit}
                         </option>
+                        <!-- ignorecase not needed if database entries are converted to first upper-case letter but still a good check -->
                     </c:forEach>
                 </select>
             </div>
@@ -44,13 +45,13 @@
             <div class="form-group">
                 <label for="buyPricePerUnit" class="form-label">Købspris per Enhed:</label>
                 <input type="number" name="buyPricePerUnit" id="buyPricePerUnit" min="0" step="any"
-                       value="<c:if test="${requestScope.action.equals('edit')}">${requestScope.material.buyPricePerUnit}</c:if>">
+                       value="<c:if test="${requestScope.action.equals('edit')}">${requestScope.material.buyPricePerUnitString}</c:if>">
             </div>
 
             <div class="form-group">
                 <label for="pricePerUnit" class="form-label">Pris per Enhed:</label>
                 <input type="number" name="pricePerUnit" id="pricePerUnit" min="0" step="any"
-                       value="<c:if test="${requestScope.action.equals('edit')}">${requestScope.material.pricePerUnit}</c:if>">
+                       value="<c:if test="${requestScope.action.equals('edit')}">${requestScope.material.pricePerUnitString}</c:if>">
             </div>
 
             <div class="form-group">
