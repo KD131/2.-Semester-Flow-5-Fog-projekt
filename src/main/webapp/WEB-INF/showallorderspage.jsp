@@ -30,8 +30,8 @@
                         <th>Carport bredde</th>
                         <th>Skur længde</th>
                         <th>Skur bredde</th>
-                        <th>Stykliste</th>
-                        <th>Slet ordre</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <c:forEach var="order" items="${requestScope.orderListings}" varStatus="status">
@@ -43,7 +43,7 @@
                             <td>${order.status}</td>
                             <td>${order.date}</td>
                             <td>
-                                <select form="update${status.count}" name="carportLength" id="carportLength">
+                                <select class="form-select w-auto"  form="update${status.count}" name="carportLength" id="carportLength">
                                     <c:forEach var="var" begin="240" end="780" step="30">
                                         <option
                                                 <c:if test="${var == order.carportLength}">
@@ -54,7 +54,7 @@
                                     </c:forEach>
                                 </select></td>
                             <td>
-                                <select form="update${status.count}" name="carportWidth" id="carportWidth">
+                                <select class="form-select w-auto"  form="update${status.count}" name="carportWidth" id="carportWidth">
                                     <c:forEach var="var" begin="240" end="750" step="30">
                                         <option
                                                 <c:if test="${var == order.carportWidth}">
@@ -67,7 +67,7 @@
 
 
                             <td>
-                                <select form="update${status.count}" name="shedLength" id="shedLength">
+                                <select class="form-select w-auto"  form="update${status.count}" name="shedLength" id="shedLength">
                                     <option
                                             <c:if test="${0 == order.shedLength}">
                                                 class="currentOption" selected
@@ -85,7 +85,7 @@
                                 </select></td>
 
                             <td>
-                                <select form="update${status.count}" name="shedWidth" id="shedWidth">
+                                <select class="form-select w-auto" form="update${status.count}" name="shedWidth" id="shedWidth">
                                     <option
                                             <c:if test="${0 == order.shedWidth}">
                                                 class="currentOption" selected
@@ -100,9 +100,17 @@
                                             value="${var}">${var} cm
                                     </option>
                                     </c:forEach>
-                                </select></td>
+                                </select>
+                            </td>
+
                             <td>
-                                <form action="${pageContext.request.contextPath}/fc/showbom" method="post">
+                                <form class="mb-1" id="update${status.count}" method="post">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
+                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/updatedimensions" class="mb-1 btn btn-primary" value="Opdater ordre">
+                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/showsvg" class="btn btn-primary" value="Vis tegning">
+                                </form>
+
+                                <form class="mb-1" action="${pageContext.request.contextPath}/fc/showbom" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
 <%--                                    <input type="hidden" name="carportWidth" value="${order.carportWidth}">--%>
 <%--                                    <input type="hidden" name="carportLength" value="${order.carportLength}">--%>
@@ -110,29 +118,23 @@
 <%--                                    <input type="hidden" name="shedLength" value="${order.shedLength}">--%>
                                     <input type="submit" class="btn btn-primary" value="Vis stykliste">
                                 </form>
-                                </td>
+                            </td>
+
                             <td>
-                                <form action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
+                                <form class="mb-1" action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
+                                    <input type="hidden" name="total" value="${order.total}">
+                                    <button type="submit" class="btn btn-success" name="action" value="setprice">Bekræft ordre</button>
+                                </form>
+                                <form class="mb-1" action="${pageContext.request.contextPath}/fc/unconfirmorder" method="post">
+                                    <input type="hidden" name="orderID" value="${order.orderId}">
+                                    <input type="submit" class="btn btn-warning" value="Af-bekræft ordre">
+                                </form>
+                                <form class="mb-1" action="${pageContext.request.contextPath}/fc/deleteorder" method="post">
                                     <input type="hidden" name="orderID" value="${order.orderId}">
                                     <input type="submit" class="btn btn-danger" value="Slet ordre">
                                 </form>
-                                <form action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
-                                    <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="hidden" name="total" value="${order.total}">
-                                    <button type="submit" class="btn btn-danger" name="action" value="setprice">Bekræft ordre</button>
-                                </form>
-                                <form action="${pageContext.request.contextPath}/fc/unconfirmorder" method="post">
-                                    <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" class="btn btn-danger" value="Af-bekræft ordre">
-                                </form>
-
-                                <form id="update${status.count}" method="post">
-                                    <input type="hidden" name="orderID" value="${order.orderId}">
-                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/updatedimensions" class="btn btn-danger" value="Opdater Ordre">
-                                    <input type="submit" formaction="${pageContext.request.contextPath}/fc/showsvg" class="btn btn-danger" value="Vis Tegning">
-                                </form>
                             </td>
-
                         </tr>
                     </c:forEach>
                 </table>
