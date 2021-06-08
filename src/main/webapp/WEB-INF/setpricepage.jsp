@@ -9,14 +9,30 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>Sæt pris for ordre</h1>
-        <p>Nuværende pris: ${requestScope.currTotal}</p>
-        <p>Pris ud fra stykliste: ${requestScope.BOMTotal}</p>
-        <form action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
-            <label for="total">Sæt pris:</label>
-            <input type="number" name="total" id="total" min="0" step="any" value="${requestScope.BOMTotal}">
-            <input type="hidden" name="orderID" value="${requestScope.orderID}">
-            <button type="submit" class="btn btn-primary" name="action" value="confirm">Bekræft ordre</button>
-        </form>
+        <div class="row">
+            <div class="col-lg-4 mx-auto">
+                <h1>Sæt pris for ordre</h1>
+                <div class="row">
+                    <div class="col">
+                        <p class="col-form-label">Nuværende pris:</p>
+                        <p class="col-form-label">Pris ud fra stykliste:</p>
+                        <label class="col-form-label" for="total">Sæt pris:</label>
+                    </div>
+
+                    <div class="col">
+                        <form id="newTotal" action="${pageContext.request.contextPath}/fc/confirmorder" method="post">
+                            <p class="col-form-label">${requestScope.currTotal}</p>
+                            <p class="col-form-label">${requestScope.BOMTotal}</p>
+                            <input class="form-control" type="number" name="total" id="total" min="0" step="any" required
+                                   value="${requestScope.BOMTotal}">
+                            <input type="hidden" name="orderID" value="${requestScope.orderID}">
+                        </form>
+                    </div>
+                </div>
+                <button type="submit" form="newTotal" class="btn btn-primary mt-2 w-auto" name="action" value="confirm">
+                    Bekræft ordre
+                </button>
+            </div>
+        </div>
     </jsp:body>
 </t:genericpage>
