@@ -34,7 +34,7 @@
                     <label for="carportWidth">Carport bredde:</label>
                 </div>
                 <div class="form-group">
-                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                    <select class="mx-auto form-control text-center indexDropdown"
                             name="carportWidth" id="carportWidth">
                         <option value="noShed">Vælg bredde</option>
                         <c:forEach var="var" begin="240" end="750" step="30">
@@ -46,7 +46,7 @@
                     <label for="carportLength">Carport længde:</label>
                 </div>
                 <div class="form-group">
-                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                    <select class="mx-auto form-control text-center indexDropdown"
                             name="carportLength" id="carportLength">
                         <option value="noShed">Vælg længde</option>
                         <c:forEach var="var" begin="240" end="780" step="30">
@@ -69,7 +69,7 @@
                     <label for="shedWidth">Skur bredde:</label>
                 </div>
                 <div class="form-group">
-                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                    <select class="mx-auto form-control text-center indexDropdown"
                             name="shedWidth" id="shedWidth">
                         <option value="noShed">Ønsker ikke skur</option>
                         <c:forEach var="var" begin="210" end="720" step="30">
@@ -82,7 +82,7 @@
                     <label for="shedLength">Skur længde:</label>
                 </div>
                 <div class="form-group">
-                    <select class="mx-auto form-control text-center" style="padding-top: 0; font-size: 15px; height: 25px; width: 300px"
+                    <select class="mx-auto form-control text-center indexDropdown"
                             name="shedLength" id="shedLength">
                         <option value="noShed">Ønsker ikke skur</option>
                         <c:forEach var="var" begin="150" end="690" step="30">
